@@ -1,0 +1,10 @@
+{
+  "model_name": "ExampleModel",
+  "version": "1.0",
+  "description": "This is a sample metadata file for a machine learning model.",
+  "author": "Oleksandr812109",
+  "created_date": "2025-05-01",
+  "framework": "TensorFlow",
+  "input_shape": [224, 224, 3],
+  "output_classes": 10
+}
