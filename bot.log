@@ -1,0 +1,802 @@
+2025-05-01 14:08:11 | INFO | Starting Binance Futures Trading Bot...
+2025-05-01 14:08:11 | ERROR | Configuration file 'config.ini' not found!
+2025-05-01 14:08:11 | CRITICAL | An error occurred: Configuration file 'config.ini' not found!
+2025-05-01 14:08:11 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 96, in main
+    config = load_config()
+             ^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 47, in load_config
+    raise FileNotFoundError(f"Configuration file '{config_path}' not found!")
+FileNotFoundError: Configuration file 'config.ini' not found!
+
+2025-05-01 14:12:30 | INFO | Starting Binance Futures Trading Bot...
+2025-05-01 14:12:30 | INFO | Configuration file loaded successfully.
+2025-05-01 14:12:30 | ERROR | Error initializing components: No section: 'BINANCE'
+2025-05-01 14:12:30 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 66, in initialize_components
+    api_key = config.get('BINANCE', 'API_KEY')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 797, in get
+    d = self._unify_values(section, vars)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 1168, in _unify_values
+    raise NoSectionError(section) from None
+configparser.NoSectionError: No section: 'BINANCE'
+
+2025-05-01 14:12:30 | CRITICAL | An error occurred: No section: 'BINANCE'
+2025-05-01 14:12:30 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 98, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 66, in initialize_components
+    api_key = config.get('BINANCE', 'API_KEY')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 797, in get
+    d = self._unify_values(section, vars)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 1168, in _unify_values
+    raise NoSectionError(section) from None
+configparser.NoSectionError: No section: 'BINANCE'
+
+2025-05-02 07:23:47 | INFO | Starting Binance Futures Trading Bot...
+2025-05-02 07:23:47 | INFO | Configuration file loaded successfully.
+2025-05-02 07:23:47 | ERROR | Error initializing components: No section: 'BINANCE'
+2025-05-02 07:23:47 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 66, in initialize_components
+    api_key = config.get('BINANCE', 'API_KEY')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 797, in get
+    d = self._unify_values(section, vars)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 1168, in _unify_values
+    raise NoSectionError(section) from None
+configparser.NoSectionError: No section: 'BINANCE'
+
+2025-05-02 07:23:47 | CRITICAL | An error occurred: No section: 'BINANCE'
+2025-05-02 07:23:47 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 98, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 66, in initialize_components
+    api_key = config.get('BINANCE', 'API_KEY')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 797, in get
+    d = self._unify_values(section, vars)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 1168, in _unify_values
+    raise NoSectionError(section) from None
+configparser.NoSectionError: No section: 'BINANCE'
+
+2025-05-02 07:26:44 | INFO | Starting Binance Futures Trading Bot...
+2025-05-02 07:26:44 | INFO | Configuration file loaded successfully.
+2025-05-02 07:26:44 | ERROR | Error initializing components: No section: 'BINANCE'
+2025-05-02 07:26:44 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 66, in initialize_components
+    api_key = config.get('BINANCE', 'API_KEY')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 797, in get
+    d = self._unify_values(section, vars)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 1168, in _unify_values
+    raise NoSectionError(section) from None
+configparser.NoSectionError: No section: 'BINANCE'
+
+2025-05-02 07:26:44 | CRITICAL | An error occurred: No section: 'BINANCE'
+2025-05-02 07:26:44 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 98, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 66, in initialize_components
+    api_key = config.get('BINANCE', 'API_KEY')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 797, in get
+    d = self._unify_values(section, vars)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.11/configparser.py", line 1168, in _unify_values
+    raise NoSectionError(section) from None
+configparser.NoSectionError: No section: 'BINANCE'
+
+2025-05-02 07:27:50 | INFO | Starting Binance Futures Trading Bot...
+2025-05-02 07:27:50 | INFO | Configuration file loaded successfully.
+2025-05-02 07:27:50 | INFO | Binance client initialized (testnet=True)
+2025-05-02 07:27:50 | ERROR | Error initializing components: RiskManagement.__init__() missing 1 required positional argument: 'account_balance'
+2025-05-02 07:27:50 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 76, in initialize_components
+    risk_management = RiskManagement()
+                      ^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.__init__() missing 1 required positional argument: 'account_balance'
+
+2025-05-02 07:27:50 | CRITICAL | An error occurred: RiskManagement.__init__() missing 1 required positional argument: 'account_balance'
+2025-05-02 07:27:50 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 98, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 76, in initialize_components
+    risk_management = RiskManagement()
+                      ^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.__init__() missing 1 required positional argument: 'account_balance'
+
+2025-05-02 07:56:44 | INFO | Starting Binance Futures Trading Bot...
+2025-05-02 07:56:44 | ERROR | Configuration file 'config.ini' not found!
+2025-05-02 07:56:44 | CRITICAL | An error occurred: Configuration file 'config.ini' not found!
+2025-05-02 07:56:44 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 125, in main
+    config = load_config()
+             ^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 48, in load_config
+    raise FileNotFoundError(f"Configuration file '{config_path}' not found!")
+FileNotFoundError: Configuration file 'config.ini' not found!
+
+2025-05-02 07:58:06 | INFO | Starting Binance Futures Trading Bot...
+2025-05-02 07:58:06 | INFO | Configuration file loaded successfully.
+2025-05-02 07:58:07 | INFO | Binance client initialized (testnet=True)
+2025-05-02 07:58:07 | ERROR | Error fetching account balance: APIError(code=-5000): Path /fapi/v1/balance, Method GET is invalid
+2025-05-02 07:58:07 | ERROR | Error initializing components: APIError(code=-5000): Path /fapi/v1/balance, Method GET is invalid
+2025-05-02 07:58:07 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    account_balance = fetch_account_balance(client)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 107, in fetch_account_balance
+    account_info = client.futures_account_balance()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 6055, in futures_account_balance
+    return self._request_futures_api('get', 'balance', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 339, in _request_futures_api
+    return self._request(method, uri, signed, True, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-5000): Path /fapi/v1/balance, Method GET is invalid
+
+2025-05-02 07:58:07 | CRITICAL | An error occurred: APIError(code=-5000): Path /fapi/v1/balance, Method GET is invalid
+2025-05-02 07:58:07 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 128, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    account_balance = fetch_account_balance(client)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 107, in fetch_account_balance
+    account_info = client.futures_account_balance()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 6055, in futures_account_balance
+    return self._request_futures_api('get', 'balance', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 339, in _request_futures_api
+    return self._request(method, uri, signed, True, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-5000): Path /fapi/v1/balance, Method GET is invalid
+
+2025-05-02 08:06:00 | INFO | Starting Binance Futures Trading Bot...
+2025-05-02 08:06:00 | INFO | Configuration file loaded successfully.
+2025-05-02 08:06:01 | INFO | Binance client initialized (testnet=True)
+2025-05-02 08:06:01 | ERROR | Error fetching account balance: APIError(code=-5000): Path /fapi/v1/balance, Method GET is invalid
+2025-05-02 08:06:01 | ERROR | Error initializing components: APIError(code=-5000): Path /fapi/v1/balance, Method GET is invalid
+2025-05-02 08:06:01 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    account_balance = fetch_account_balance(client)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 107, in fetch_account_balance
+    account_info = client.futures_account_balance()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 6055, in futures_account_balance
+    return self._request_futures_api('get', 'balance', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 339, in _request_futures_api
+    return self._request(method, uri, signed, True, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-5000): Path /fapi/v1/balance, Method GET is invalid
+
+2025-05-02 08:06:01 | CRITICAL | An error occurred: APIError(code=-5000): Path /fapi/v1/balance, Method GET is invalid
+2025-05-02 08:06:01 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 128, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    account_balance = fetch_account_balance(client)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 107, in fetch_account_balance
+    account_info = client.futures_account_balance()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 6055, in futures_account_balance
+    return self._request_futures_api('get', 'balance', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 339, in _request_futures_api
+    return self._request(method, uri, signed, True, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-5000): Path /fapi/v1/balance, Method GET is invalid
+
+2025-05-02 08:13:06 | INFO | Starting Binance Futures Trading Bot...
+2025-05-02 08:13:06 | INFO | Configuration file loaded successfully.
+2025-05-02 08:13:06 | INFO | Binance client initialized (testnet=True)
+2025-05-02 08:13:07 | ERROR | Error fetching account balance: APIError(code=0): Invalid JSON error message from Binance: <!DOCTYPE html>
+<!-- saved from url=(0032)https://www.binance.com/en/error -->
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="format-detection" content="telephone=no,email=no,address=no">
+  <title>Binance</title>
+  <link rel="Shortcut Icon" href="https://www.binance.com/en/favicon.ico">
+  <style>
+    body {
+      margin: 0
+    }
+
+    .img {
+      width: 611px;
+      margin: 68px auto 0
+    }
+
+    .info {
+      width: 370px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    .info h3 {
+      margin: 0;
+      font-size: 25px;
+      color: #333;
+      font-weight: normal;
+    }
+
+    .info p {
+      font-size: 14px;
+      font-family: Arial;
+      color: #333;
+      line-height: 18px;
+      margin: 0
+    }
+
+    .info button {
+      margin-top: 20px;
+      width: 231px;
+      height: 34px;
+      background: #FFFFFF;
+      border: 1px solid #F0B90B;
+      box-sizing: border-box;
+      border-radius: 3px;
+      font-size: 14px;
+      line-height: 16px;
+      color: #F0B90B;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="img"><img alt="" src="/errorPages/404.jpg"></div>
+  <div class="info">
+    <h3>åºéå¦ï¼æ¨è®¿é®çç½é¡µä¸å­å¨ã</h3>
+    <p>Sorry! The page youâre looking for cannot be found.</p>
+    <a href="https://www.binance.com">
+      <button>Return to Binance home page</button>
+    </a>
+  </div>
+
+</body>
+
+</html>
+
+2025-05-02 08:13:07 | ERROR | Error initializing components: APIError(code=0): Invalid JSON error message from Binance: <!DOCTYPE html>
+<!-- saved from url=(0032)https://www.binance.com/en/error -->
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="format-detection" content="telephone=no,email=no,address=no">
+  <title>Binance</title>
+  <link rel="Shortcut Icon" href="https://www.binance.com/en/favicon.ico">
+  <style>
+    body {
+      margin: 0
+    }
+
+    .img {
+      width: 611px;
+      margin: 68px auto 0
+    }
+
+    .info {
+      width: 370px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    .info h3 {
+      margin: 0;
+      font-size: 25px;
+      color: #333;
+      font-weight: normal;
+    }
+
+    .info p {
+      font-size: 14px;
+      font-family: Arial;
+      color: #333;
+      line-height: 18px;
+      margin: 0
+    }
+
+    .info button {
+      margin-top: 20px;
+      width: 231px;
+      height: 34px;
+      background: #FFFFFF;
+      border: 1px solid #F0B90B;
+      box-sizing: border-box;
+      border-radius: 3px;
+      font-size: 14px;
+      line-height: 16px;
+      color: #F0B90B;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="img"><img alt="" src="/errorPages/404.jpg"></div>
+  <div class="info">
+    <h3>åºéå¦ï¼æ¨è®¿é®çç½é¡µä¸å­å¨ã</h3>
+    <p>Sorry! The page youâre looking for cannot be found.</p>
+    <a href="https://www.binance.com">
+      <button>Return to Binance home page</button>
+    </a>
+  </div>
+
+</body>
+
+</html>
+
+2025-05-02 08:13:07 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    account_balance = fetch_account_balance(client)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 108, in fetch_account_balance
+    account_info = client.futures_account()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 6063, in futures_account
+    return self._request_futures_api('get', 'account', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 339, in _request_futures_api
+    return self._request(method, uri, signed, True, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <!DOCTYPE html>
+<!-- saved from url=(0032)https://www.binance.com/en/error -->
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="format-detection" content="telephone=no,email=no,address=no">
+  <title>Binance</title>
+  <link rel="Shortcut Icon" href="https://www.binance.com/en/favicon.ico">
+  <style>
+    body {
+      margin: 0
+    }
+
+    .img {
+      width: 611px;
+      margin: 68px auto 0
+    }
+
+    .info {
+      width: 370px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    .info h3 {
+      margin: 0;
+      font-size: 25px;
+      color: #333;
+      font-weight: normal;
+    }
+
+    .info p {
+      font-size: 14px;
+      font-family: Arial;
+      color: #333;
+      line-height: 18px;
+      margin: 0
+    }
+
+    .info button {
+      margin-top: 20px;
+      width: 231px;
+      height: 34px;
+      background: #FFFFFF;
+      border: 1px solid #F0B90B;
+      box-sizing: border-box;
+      border-radius: 3px;
+      font-size: 14px;
+      line-height: 16px;
+      color: #F0B90B;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="img"><img alt="" src="/errorPages/404.jpg"></div>
+  <div class="info">
+    <h3>åºéå¦ï¼æ¨è®¿é®çç½é¡µä¸å­å¨ã</h3>
+    <p>Sorry! The page youâre looking for cannot be found.</p>
+    <a href="https://www.binance.com">
+      <button>Return to Binance home page</button>
+    </a>
+  </div>
+
+</body>
+
+</html>
+
+
+2025-05-02 08:13:07 | CRITICAL | An error occurred: APIError(code=0): Invalid JSON error message from Binance: <!DOCTYPE html>
+<!-- saved from url=(0032)https://www.binance.com/en/error -->
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="format-detection" content="telephone=no,email=no,address=no">
+  <title>Binance</title>
+  <link rel="Shortcut Icon" href="https://www.binance.com/en/favicon.ico">
+  <style>
+    body {
+      margin: 0
+    }
+
+    .img {
+      width: 611px;
+      margin: 68px auto 0
+    }
+
+    .info {
+      width: 370px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    .info h3 {
+      margin: 0;
+      font-size: 25px;
+      color: #333;
+      font-weight: normal;
+    }
+
+    .info p {
+      font-size: 14px;
+      font-family: Arial;
+      color: #333;
+      line-height: 18px;
+      margin: 0
+    }
+
+    .info button {
+      margin-top: 20px;
+      width: 231px;
+      height: 34px;
+      background: #FFFFFF;
+      border: 1px solid #F0B90B;
+      box-sizing: border-box;
+      border-radius: 3px;
+      font-size: 14px;
+      line-height: 16px;
+      color: #F0B90B;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="img"><img alt="" src="/errorPages/404.jpg"></div>
+  <div class="info">
+    <h3>åºéå¦ï¼æ¨è®¿é®çç½é¡µä¸å­å¨ã</h3>
+    <p>Sorry! The page youâre looking for cannot be found.</p>
+    <a href="https://www.binance.com">
+      <button>Return to Binance home page</button>
+    </a>
+  </div>
+
+</body>
+
+</html>
+
+2025-05-02 08:13:07 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 133, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    account_balance = fetch_account_balance(client)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 108, in fetch_account_balance
+    account_info = client.futures_account()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 6063, in futures_account
+    return self._request_futures_api('get', 'account', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 339, in _request_futures_api
+    return self._request(method, uri, signed, True, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <!DOCTYPE html>
+<!-- saved from url=(0032)https://www.binance.com/en/error -->
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="format-detection" content="telephone=no,email=no,address=no">
+  <title>Binance</title>
+  <link rel="Shortcut Icon" href="https://www.binance.com/en/favicon.ico">
+  <style>
+    body {
+      margin: 0
+    }
+
+    .img {
+      width: 611px;
+      margin: 68px auto 0
+    }
+
+    .info {
+      width: 370px;
+      margin: 0 auto;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    .info h3 {
+      margin: 0;
+      font-size: 25px;
+      color: #333;
+      font-weight: normal;
+    }
+
+    .info p {
+      font-size: 14px;
+      font-family: Arial;
+      color: #333;
+      line-height: 18px;
+      margin: 0
+    }
+
+    .info button {
+      margin-top: 20px;
+      width: 231px;
+      height: 34px;
+      background: #FFFFFF;
+      border: 1px solid #F0B90B;
+      box-sizing: border-box;
+      border-radius: 3px;
+      font-size: 14px;
+      line-height: 16px;
+      color: #F0B90B;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="img"><img alt="" src="/errorPages/404.jpg"></div>
+  <div class="info">
+    <h3>åºéå¦ï¼æ¨è®¿é®çç½é¡µä¸å­å¨ã</h3>
+    <p>Sorry! The page youâre looking for cannot be found.</p>
+    <a href="https://www.binance.com">
+      <button>Return to Binance home page</button>
+    </a>
+  </div>
+
+</body>
+
+</html>
+
+
+2025-05-02 08:17:36 | INFO | Starting Binance Futures Trading Bot...
+2025-05-02 08:17:36 | INFO | Configuration file loaded successfully.
+2025-05-02 08:17:36 | INFO | Binance client initialized (testnet=True)
+2025-05-02 08:17:37 | ERROR | Error fetching account balance: 'code'
+2025-05-02 08:17:37 | ERROR | Error initializing components: 'code'
+2025-05-02 08:17:37 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    account_balance = fetch_account_balance(client)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 108, in fetch_account_balance
+    account_info = client.futures_account()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 6063, in futures_account
+    return self._request_futures_api('get', 'account', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 339, in _request_futures_api
+    return self._request(method, uri, signed, True, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/exceptions.py", line 14, in __init__
+    self.code = json_res['code']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'code'
+
+2025-05-02 08:17:37 | CRITICAL | An error occurred: 'code'
+2025-05-02 08:17:37 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 133, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    account_balance = fetch_account_balance(client)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 108, in fetch_account_balance
+    account_info = client.futures_account()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 6063, in futures_account
+    return self._request_futures_api('get', 'account', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 339, in _request_futures_api
+    return self._request(method, uri, signed, True, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/exceptions.py", line 14, in __init__
+    self.code = json_res['code']
+                ~~~~~~~~^^^^^^^^
+KeyError: 'code'
+
+2025-05-02 08:28:03 | INFO | Starting Binance Futures Trading Bot...
+2025-05-02 08:28:03 | INFO | Configuration file loaded successfully.
+2025-05-02 08:28:04 | INFO | Binance client initialized (testnet=True)
+2025-05-02 08:28:04 | ERROR | Error fetching account balance: APIError(code=None): None
+2025-05-02 08:28:04 | ERROR | Error initializing components: APIError(code=None): None
+2025-05-02 08:28:04 | DEBUG | Detailed traceback:
+2025-05-02 08:28:04 | CRITICAL | An error occurred: APIError(code=None): None
+2025-05-02 08:28:04 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 139, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    account_balance = fetch_account_balance(client)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 108, in fetch_account_balance
+    account_info = client.futures_account()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 7793, in futures_account
+    return self._request_futures_api("get", "account", True, 2, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 126, in _request_futures_api
+    return self._request(method, uri, signed, force_params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=None): None
+
+2025-05-05 10:38:42 | INFO | Starting Binance Futures Trading Bot...
+2025-05-05 10:38:42 | INFO | Configuration file loaded successfully.
+2025-05-05 10:38:43 | INFO | Binance client initialized (testnet=True)
+2025-05-05 10:38:43 | ERROR | Error initializing components: RiskManagement.__init__() missing 1 required positional argument: 'account_balance'
+2025-05-05 10:38:43 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    risk_management = RiskManagement()
+                      ^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.__init__() missing 1 required positional argument: 'account_balance'
+
+2025-05-05 10:38:43 | CRITICAL | An error occurred: RiskManagement.__init__() missing 1 required positional argument: 'account_balance'
+2025-05-05 10:38:43 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 105, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 80, in initialize_components
+    risk_management = RiskManagement()
+                      ^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.__init__() missing 1 required positional argument: 'account_balance'
+
+2025-05-05 10:46:21 | INFO | Starting Binance Futures Trading Bot...
+2025-05-05 10:46:21 | INFO | Configuration file loaded successfully.
+2025-05-05 10:46:21 | INFO | Binance client initialized (testnet=True)
+2025-05-05 10:46:21 | INFO | TechnicalAnalysis initialized
+2025-05-05 10:46:21 | ERROR | Error initializing components: TradingLogic.__init__() takes 1 positional argument but 4 were given
+2025-05-05 10:46:21 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 85, in initialize_components
+    trading_logic = TradingLogic(client, risk_management, technical_analysis)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TradingLogic.__init__() takes 1 positional argument but 4 were given
+
+2025-05-05 10:46:21 | CRITICAL | An error occurred: TradingLogic.__init__() takes 1 positional argument but 4 were given
+2025-05-05 10:46:21 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 107, in main
+    client, risk_management, technical_analysis, trading_logic = initialize_components(config)
+                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 85, in initialize_components
+    trading_logic = TradingLogic(client, risk_management, technical_analysis)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TradingLogic.__init__() takes 1 positional argument but 4 were given
+
+2025-05-05 10:55:54 | INFO | Starting Binance Futures Trading Bot...
+2025-05-05 10:55:54 | INFO | Configuration file loaded successfully.
+2025-05-05 10:55:54 | INFO | Binance client initialized (testnet=True)
+2025-05-05 10:55:54 | INFO | TechnicalAnalysis initialized
+2025-05-05 10:55:54 | DEBUG | All components initialized successfully.
+2025-05-05 10:55:54 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-05 10:55:54 | INFO | Fetching data for BTCUSDT with interval 1h (testnet=True)...
+2025-05-05 10:55:55 | INFO | Data for BTCUSDT fetched successfully.
+2025-05-05 10:55:55 | INFO | Generating trading signals...
+2025-05-05 10:55:55 | CRITICAL | An error occurred: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'data'
+2025-05-05 10:55:55 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 117, in main
+    signals = technical_analysis.generate_optimized_signals()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'data'
+
+2025-05-05 11:03:26 | INFO | Starting Binance Futures Trading Bot...
+2025-05-05 11:03:26 | INFO | Configuration file loaded successfully.
+2025-05-05 11:03:27 | INFO | Binance client initialized (testnet=True)
+2025-05-05 11:03:27 | INFO | TechnicalAnalysis initialized
+2025-05-05 11:03:27 | DEBUG | All components initialized successfully.
+2025-05-05 11:03:27 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-05 11:03:27 | INFO | Fetching data for BTCUSDT with interval 1h (testnet=True)...
+2025-05-05 11:03:28 | INFO | Data for BTCUSDT fetched successfully.
+2025-05-05 11:03:28 | INFO | Generating trading signals...
+2025-05-05 11:03:28 | CRITICAL | An error occurred: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'data'
+2025-05-05 11:03:28 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 117, in main
+    signals = technical_analysis.generate_optimized_signals()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'data'
+
+2025-05-08 12:17:46 | INFO | Starting Binance Futures Trading Bot...
+2025-05-08 12:17:46 | INFO | Configuration file loaded successfully.
+2025-05-08 12:17:47 | INFO | Binance client initialized (testnet=True)
+2025-05-08 12:17:47 | INFO | TechnicalAnalysis initialized
+2025-05-08 12:17:47 | DEBUG | All components initialized successfully.
+2025-05-08 12:17:47 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-08 12:17:47 | INFO | Fetching data for BTCUSDT with interval 1h (testnet=True)...
+2025-05-08 12:17:48 | INFO | Data for BTCUSDT fetched successfully.
+2025-05-08 12:17:48 | INFO | Generating trading signals...
+2025-05-08 12:17:48 | CRITICAL | An error occurred: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'data'
+2025-05-08 12:17:48 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 117, in main
+    signals = technical_analysis.generate_optimized_signals()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'data'
+

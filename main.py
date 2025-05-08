@@ -6,6 +6,7 @@ from strategy.technical_analysis import TechnicalAnalysis
 from binance.client import Client
 from loguru import logger
 import traceback
+import sys  # Додано імпорт для використання sys
 
 
 def setup_logging(log_file="bot.log"):
@@ -32,7 +33,7 @@ def setup_logging(log_file="bot.log"):
     )
 
 
-def load_config(config_path="config.ini"):
+def load_config(config_path="config/config.ini"):
     """
     Load configuration from a file.
 
@@ -75,8 +76,11 @@ def initialize_components(config):
 
         logger.info("Binance client initialized (testnet={})".format(testnet))
 
+        # Fetch account balance (you can later replace this with actual API call)
+        account_balance = config.getfloat('TRADING', 'ACCOUNT_BALANCE', fallback=1000.0)  # Default to 1000.0 if not provided
+
         # Initialize other components
-        risk_management = RiskManagement()
+        risk_management = RiskManagement(account_balance)
         technical_analysis = TechnicalAnalysis()
         trading_logic = TradingLogic(client, risk_management, technical_analysis)
 
@@ -87,7 +91,6 @@ def initialize_components(config):
         logger.debug(traceback.format_exc())
         raise
 
-
 def main():
     """
     Main entry point for the trading bot.
@@ -97,7 +100,8 @@ def main():
     logger.info("Starting Binance Futures Trading Bot...")
     try:
         # Load configuration
-        config = load_config()
+        config_path = "config/config.ini"  # Оновлено шлях до файлу конфігурації
+        config = load_config(config_path)
 
         # Initialize components
         client, risk_management, technical_analysis, trading_logic = initialize_components(config)
