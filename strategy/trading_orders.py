@@ -2,6 +2,7 @@ import configparser
 from binance.client import Client
 from binance.enums import SIDE_BUY, SIDE_SELL, ORDER_TYPE_MARKET, ORDER_TYPE_LIMIT
 import logging
+import traceback
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -24,8 +25,10 @@ class BinanceOrderManager:
         if testnet:
             self.client = Client(api_key, api_secret, testnet=True)
             self.client.API_URL = 'https://testnet.binance.vision/api'  # Testnet URL
+            logging.info("Using Binance Testnet API")
         else:
             self.client = Client(api_key, api_secret)
+            logging.info("Using Binance Live API")
 
         logging.info("Binance Order Manager initialized with keys from config file.")
 
@@ -41,10 +44,15 @@ class BinanceOrderManager:
         """
         try:
             balance = self.client.get_asset_balance(asset=asset)
-            logging.info(f"Balance for {asset}: {balance['free']}")
-            return float(balance['free'])
+            if balance and float(balance['free']) > 0:
+                logging.info(f"Balance for {asset}: {balance['free']}")
+                return float(balance['free'])
+            else:
+                logging.warning(f"No balance available for {asset}. Returning 0.0.")
+                return 0.0
         except Exception as e:
             logging.error(f"Error fetching balance for {asset}: {e}")
+            logging.debug(traceback.format_exc())
             return 0.0
 
     def create_market_order(self, symbol: str, side: str, quantity: float):
@@ -59,6 +67,13 @@ class BinanceOrderManager:
         Returns:
             dict: Response from Binance API.
         """
+        if quantity <= 0:
+            logging.error("Quantity must be greater than 0")
+            return None
+        if not symbol or not side:
+            logging.error("Symbol and side must not be empty")
+            return None
+
         try:
             order = self.client.create_order(
                 symbol=symbol,
@@ -66,10 +81,11 @@ class BinanceOrderManager:
                 type=ORDER_TYPE_MARKET,
                 quantity=quantity
             )
-            logging.info(f"Market order created: {order}")
+            logging.info(f"Market order created successfully: {order}")
             return order
         except Exception as e:
             logging.error(f"Error creating market order: {e}")
+            logging.debug(traceback.format_exc())
             return None
 
     def create_limit_order(self, symbol: str, side: str, quantity: float, price: float, time_in_force: str = "GTC"):
@@ -86,6 +102,13 @@ class BinanceOrderManager:
         Returns:
             dict: Response from Binance API.
         """
+        if quantity <= 0 or price <= 0:
+            logging.error("Quantity and price must be greater than 0")
+            return None
+        if not symbol or not side:
+            logging.error("Symbol and side must not be empty")
+            return None
+
         try:
             order = self.client.create_order(
                 symbol=symbol,
@@ -95,10 +118,11 @@ class BinanceOrderManager:
                 quantity=quantity,
                 price=str(price)
             )
-            logging.info(f"Limit order created: {order}")
+            logging.info(f"Limit order created successfully: {order}")
             return order
         except Exception as e:
             logging.error(f"Error creating limit order: {e}")
+            logging.debug(traceback.format_exc())
             return None
 
     def get_order_status(self, symbol: str, order_id: int):
@@ -118,6 +142,7 @@ class BinanceOrderManager:
             return order_status
         except Exception as e:
             logging.error(f"Error fetching order status: {e}")
+            logging.debug(traceback.format_exc())
             return None
 
     def cancel_order(self, symbol: str, order_id: int):
@@ -133,10 +158,11 @@ class BinanceOrderManager:
         """
         try:
             cancel_response = self.client.cancel_order(symbol=symbol, orderId=order_id)
-            logging.info(f"Order cancelled: {cancel_response}")
+            logging.info(f"Order cancelled successfully: {cancel_response}")
             return cancel_response
         except Exception as e:
             logging.error(f"Error cancelling order: {e}")
+            logging.debug(traceback.format_exc())
             return None
 
 

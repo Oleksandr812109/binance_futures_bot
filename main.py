@@ -91,6 +91,7 @@ def initialize_components(config):
         logger.debug(traceback.format_exc())
         raise
 
+
 def main():
     """
     Main entry point for the trading bot.
@@ -100,7 +101,7 @@ def main():
     logger.info("Starting Binance Futures Trading Bot...")
     try:
         # Load configuration
-        config_path = "config/config.ini"  # Оновлено шлях до файлу конфігурації
+        config_path = "config/config.ini"  # Path to config file
         config = load_config(config_path)
 
         # Initialize components
@@ -109,22 +110,57 @@ def main():
         # Fetch market data
         symbol = config.get('TRADING', 'SYMBOL', fallback='BTCUSDT')
         interval = config.get('TRADING', 'INTERVAL', fallback='1h')
+        # Fetch market data
         logger.info(f"Fetching market data for {symbol} with interval {interval}...")
-        technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+        data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
 
-        # Generate trading signals
+        # Check if data is valid
+        if data is None or data.empty:
+            logger.error("Fetched market data is empty or invalid. Exiting...")
+            return
+
+        # Generate trading signals using fetched data
         logger.info("Generating trading signals...")
-        signals = technical_analysis.generate_optimized_signals()
+        signals = technical_analysis.generate_optimized_signals(data)
+
+        # Check if signals are valid
+        if signals is None or signals.empty:
+            logger.error("No valid trading signals generated. Exiting...")
+            return
 
         # Process each signal
         for signal in signals.itertuples():
             logger.debug(f"Processing signal: {signal}")
             if signal.Signal == "Buy":
                 logger.info("Buy signal detected, placing order...")
-                trading_logic.place_order(symbol, "BUY", risk_management.calculate_position_size())
+                
+                # Example stop-loss calculation
+                entry_price = signal.EntryPrice  # Replace with actual entry price from signal or data
+                stop_loss_price = signal.StopLossPrice  # Replace with actual stop-loss price from signal or data
+                stop_loss_distance = entry_price - stop_loss_price
+
+                # Ensure stop-loss distance is positive
+                if stop_loss_distance <= 0:
+                    logger.error("Invalid stop-loss distance. Skipping order.")
+                    continue
+
+                position_size = risk_management.calculate_position_size(stop_loss_distance)
+                trading_logic.place_order(symbol, "BUY", position_size)
             elif signal.Signal == "Sell":
                 logger.info("Sell signal detected, placing order...")
-                trading_logic.place_order(symbol, "SELL", risk_management.calculate_position_size())
+                
+                # Example stop-loss calculation
+                entry_price = signal.EntryPrice  # Replace with actual entry price from signal or data
+                stop_loss_price = signal.StopLossPrice  # Replace with actual stop-loss price from signal or data
+                stop_loss_distance = stop_loss_price - entry_price
+
+                # Ensure stop-loss distance is positive
+                if stop_loss_distance <= 0:
+                    logger.error("Invalid stop-loss distance. Skipping order.")
+                    continue
+
+                position_size = risk_management.calculate_position_size(stop_loss_distance)
+                trading_logic.place_order(symbol, "SELL", position_size)
 
         logger.info("Trading bot execution completed.")
     except Exception as e:
