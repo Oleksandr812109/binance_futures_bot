@@ -7,6 +7,7 @@ from binance.client import Client
 from loguru import logger
 import traceback
 import sys  # Додано імпорт для використання sys
+import time  # Додано для використання time.sleep
 
 
 def setup_logging(log_file="bot.log"):
@@ -107,62 +108,73 @@ def main():
         # Initialize components
         client, risk_management, technical_analysis, trading_logic = initialize_components(config)
 
-        # Fetch market data
+        # Fetch configuration for symbol and interval
         symbol = config.get('TRADING', 'SYMBOL', fallback='BTCUSDT')
         interval = config.get('TRADING', 'INTERVAL', fallback='1h')
-        # Fetch market data
-        logger.info(f"Fetching market data for {symbol} with interval {interval}...")
-        data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
 
-        # Check if data is valid
-        if data is None or data.empty:
-            logger.error("Fetched market data is empty or invalid. Exiting...")
-            return
+        # Continuous market analysis loop
+        while True:
+            try:
+                # Fetch market data
+                logger.info(f"Fetching market data for {symbol} with interval {interval}...")
+                data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
 
-        # Generate trading signals using fetched data
-        logger.info("Generating trading signals...")
-        signals = technical_analysis.generate_optimized_signals(data)
-
-        # Check if signals are valid
-        if signals is None or signals.empty:
-            logger.error("No valid trading signals generated. Exiting...")
-            return
-
-        # Process each signal
-        for signal in signals.itertuples():
-            logger.debug(f"Processing signal: {signal}")
-            if signal.Signal == "Buy":
-                logger.info("Buy signal detected, placing order...")
-                
-                # Example stop-loss calculation
-                entry_price = signal.EntryPrice  # Replace with actual entry price from signal or data
-                stop_loss_price = signal.StopLossPrice  # Replace with actual stop-loss price from signal or data
-                stop_loss_distance = entry_price - stop_loss_price
-
-                # Ensure stop-loss distance is positive
-                if stop_loss_distance <= 0:
-                    logger.error("Invalid stop-loss distance. Skipping order.")
+                # Check if data is valid
+                if data is None or data.empty:
+                    logger.error("Fetched market data is empty or invalid. Skipping iteration...")
+                    time.sleep(60)  # Wait for 1 minute before retrying
                     continue
 
-                position_size = risk_management.calculate_position_size(stop_loss_distance)
-                trading_logic.place_order(symbol, "BUY", position_size)
-            elif signal.Signal == "Sell":
-                logger.info("Sell signal detected, placing order...")
-                
-                # Example stop-loss calculation
-                entry_price = signal.EntryPrice  # Replace with actual entry price from signal or data
-                stop_loss_price = signal.StopLossPrice  # Replace with actual stop-loss price from signal or data
-                stop_loss_distance = stop_loss_price - entry_price
+                # Generate trading signals using fetched data
+                logger.info("Generating trading signals...")
+                signals = technical_analysis.generate_optimized_signals(data)
 
-                # Ensure stop-loss distance is positive
-                if stop_loss_distance <= 0:
-                    logger.error("Invalid stop-loss distance. Skipping order.")
+                # Check if signals are valid
+                if signals is None or signals.empty:
+                    logger.error("No valid trading signals generated. Skipping iteration...")
+                    time.sleep(60)  # Wait for 1 minute before retrying
                     continue
 
-                position_size = risk_management.calculate_position_size(stop_loss_distance)
-                trading_logic.place_order(symbol, "SELL", position_size)
+                # Process each signal
+                for signal in signals.itertuples():
+                    logger.debug(f"Processing signal: {signal}")
+                    if signal.Signal == "Buy":
+                        logger.info("Buy signal detected, placing order...")
 
-        logger.info("Trading bot execution completed.")
+                        entry_price = signal.EntryPrice
+                        stop_loss_price = signal.StopLossPrice
+                        stop_loss_distance = entry_price - stop_loss_price
+
+                        if stop_loss_distance <= 0:
+                            logger.error("Invalid stop-loss distance. Skipping order.")
+                            continue
+
+                        position_size = risk_management.calculate_position_size(stop_loss_distance)
+                        trading_logic.place_order(symbol, "BUY", position_size)
+
+                    elif signal.Signal == "Sell":
+                        logger.info("Sell signal detected, placing order...")
+
+                        entry_price = signal.EntryPrice
+                        stop_loss_price = signal.StopLossPrice
+                        stop_loss_distance = stop_loss_price - entry_price
+
+                        if stop_loss_distance <= 0:
+                            logger.error("Invalid stop-loss distance. Skipping order.")
+                            continue
+
+                        position_size = risk_management.calculate_position_size(stop_loss_distance)
+                        trading_logic.place_order(symbol, "SELL", position_size)
+
+                # Wait before the next iteration (e.g., 1 minute)
+                logger.info("Waiting for the next cycle...")
+                time.sleep(60)
+
+            except Exception as e:
+                logger.error(f"Error during market analysis loop: {e}")
+                logger.debug(traceback.format_exc())
+                time.sleep(60)  # Wait before retrying in case of an error
+
     except Exception as e:
         logger.critical(f"An error occurred: {e}")
         logger.debug(traceback.format_exc())
