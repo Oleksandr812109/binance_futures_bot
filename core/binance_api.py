@@ -1,5 +1,6 @@
-# Клас для взаємодії з Binance API
+# Оновлений файл для взаємодії з Binance API через ccxt
 import ccxt
+
 
 class BinanceAPI:
     def __init__(self, api_key, api_secret):
@@ -18,3 +19,4 @@ class BinanceAPI:
             return self.client.create_limit_order(symbol, side, amount, price)
         else:
             raise ValueError("Unsupported order type")
+

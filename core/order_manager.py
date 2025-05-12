@@ -2,10 +2,11 @@ import logging
 from binance.client import Client
 from binance.exceptions import BinanceAPIException
 
+
 class OrderManager:
-    def __init__(self, api_key, api_secret):
+    def __init__(self, api_key, api_secret, testnet=False):
         """Ініціалізація клієнта Binance."""
-        self.client = Client(api_key, api_secret)
+        self.client = Client(api_key, api_secret, testnet=testnet)
         self.logger = logging.getLogger(__name__)
         self.logger.setLevel(logging.INFO)
 

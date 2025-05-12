@@ -1,16 +1,17 @@
 import logging
 
+
 class TradingLogic:
-    def __init__(self, client, risk_management, technical_analysis):
+    def __init__(self, order_manager, risk_management, technical_analysis):
         """
         Initialize the Trading Logic system.
 
         Args:
-            client: Binance client instance.
+            order_manager: Instance of OrderManager for placing orders.
             risk_management: RiskManagement instance.
             technical_analysis: TechnicalAnalysis instance.
         """
-        self.client = client
+        self.order_manager = order_manager
         self.risk_management = risk_management
         self.technical_analysis = technical_analysis
         logging.info("TradingLogic initialized successfully.")
@@ -40,10 +41,10 @@ class TradingLogic:
         """
         try:
             logging.info(f"Attempting to place order: Symbol={symbol}, Side={side}, Quantity={quantity}")
-            order = self.client.create_order(
+            order = self.order_manager.create_order(
                 symbol=symbol,
                 side=side,
-                type='MARKET',
+                order_type='MARKET',  # Use MARKET orders for simplicity
                 quantity=quantity
             )
             logging.info(f"Order placed successfully: {order}")
@@ -62,7 +63,8 @@ class TradingLogic:
             side = signal.get('side')
             quantity = signal.get('quantity')
 
-            if not symbol or not side or not quantity:
+            # Validate signal data
+            if not symbol or not side or not quantity or quantity <= 0:
                 logging.warning(f"Invalid signal: {signal}")
                 continue
 
