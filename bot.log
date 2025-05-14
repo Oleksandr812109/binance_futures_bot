@@ -8719,3 +8719,64 @@ AttributeError: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
 
+2025-05-14 16:35:29 | INFO | Starting Binance Futures Trading Bot...
+2025-05-14 16:35:29 | INFO | Configuration file loaded successfully.
+2025-05-14 16:35:30 | INFO | Binance client initialized (testnet=True)
+2025-05-14 16:35:30 | INFO | Testing API key...
+2025-05-14 16:35:31 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-14 16:35:32 | INFO | Fetched balance for USDT: 15080.92811508 USDT
+2025-05-14 16:35:33 | DEBUG | All components initialized successfully.
+2025-05-14 16:35:33 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-14 16:35:33 | INFO | Fetching data for BTCUSDT with interval 1h (testnet=True)...
+2025-05-14 16:35:33 | ERROR | Error fetching Binance data: APIError(code=-5000): Path /fapi/v1/v3/klines, Method GET is invalid
+2025-05-14 16:35:33 | ERROR | Error during market analysis loop for BTCUSDT: APIError(code=-5000): Path /fapi/v1/v3/klines, Method GET is invalid
+2025-05-14 16:35:33 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 134, in main
+    data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/technical_analysis.py", line 27, in fetch_binance_data
+    klines = client.get_klines(symbol=symbol, interval=interval)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 742, in get_klines
+    return self._get("klines", data=params, version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-5000): Path /fapi/v1/v3/klines, Method GET is invalid
+
+2025-05-14 16:35:33 | INFO | Fetching market data for ETHUSDT with interval 1h...
+2025-05-14 16:35:33 | INFO | Fetching data for ETHUSDT with interval 1h (testnet=True)...
+2025-05-14 16:35:34 | ERROR | Error fetching Binance data: APIError(code=-5000): Path /fapi/v1/v3/klines, Method GET is invalid
+2025-05-14 16:35:34 | ERROR | Error during market analysis loop for ETHUSDT: APIError(code=-5000): Path /fapi/v1/v3/klines, Method GET is invalid
+2025-05-14 16:35:34 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 134, in main
+    data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/technical_analysis.py", line 27, in fetch_binance_data
+    klines = client.get_klines(symbol=symbol, interval=interval)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 742, in get_klines
+    return self._get("klines", data=params, version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-5000): Path /fapi/v1/v3/klines, Method GET is invalid
+
