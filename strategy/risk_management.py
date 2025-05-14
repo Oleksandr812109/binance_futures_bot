@@ -1,25 +1,44 @@
 import logging
 import numpy as np
 from typing import List, Dict
+from binance.client import Client
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class RiskManagement:
-    def __init__(self, account_balance: float, risk_per_trade: float = 0.01, max_drawdown: float = 0.2):
+    def __init__(self, client: Client, risk_per_trade: float = 0.1, max_drawdown: float = 0.2):
         """
         Initialize the Risk Management system.
 
         Args:
-            account_balance (float): Total account balance.
+            client (Client): Binance API client.
             risk_per_trade (float): Percentage of account balance to risk per trade.
             max_drawdown (float): Maximum allowable percentage drawdown before stopping trading.
         """
-        self.account_balance = account_balance
+        self.client = client
         self.risk_per_trade = risk_per_trade
         self.max_drawdown = max_drawdown
-        self.initial_balance = account_balance  # Track the initial balance for drawdown calculation
-        logging.info(f"Risk Management initialized with account balance: {account_balance}, risk per trade: {risk_per_trade * 100:.2f}%, max drawdown: {max_drawdown * 100:.2f}%")
+        self.account_balance = self.get_account_balance()
+        self.initial_balance = self.account_balance  # Track the initial balance for drawdown calculation
+
+    def get_account_balance(self, asset="USDT"):
+        """
+        Fetch the account balance from Binance.
+
+        Args:
+            asset (str): The asset symbol (e.g., 'USDT').
+
+        Returns:
+            float: The balance of the specified asset.
+        """
+        try:
+            balance = self.client.get_asset_balance(asset=asset)
+            if balance:
+                return float(balance['free'])
+        except Exception as e:
+            logging.error(f"Error fetching balance for {asset}: {e}")
+        return 0.0
 
     def calculate_volatility(self, price_data: List[float], window: int = 14) -> float:
         """

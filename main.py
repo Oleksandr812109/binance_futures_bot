@@ -10,6 +10,7 @@ import traceback
 import sys
 import time
 
+
 def setup_logging(log_file="bot.log"):
     logger.remove()
     logger.add(
@@ -38,23 +39,50 @@ def load_config(config_path="config/config.ini"):
     return config
 
 
+def test_api_key(client):
+    """
+    Test the API key by attempting to fetch account information.
+    If the API key is invalid, raise an exception and log an error.
+    """
+    try:
+        logger.info("Testing API key...")
+        account_info = client.get_account()
+        logger.info(f"API Key is valid. Account info fetched successfully.")
+        return True
+    except Exception as e:
+        logger.error(f"Invalid API Key or insufficient permissions: {e}")
+        logger.debug(traceback.format_exc())
+        return False
+
+
 def initialize_components(config):
     try:
-        api_key = config.get('BINANCE', 'API_KEY')
-        api_secret = config.get('BINANCE', 'API_SECRET')
-        testnet = config.getboolean('BINANCE', 'TESTNET', fallback=True)
-        bot_token = config.get('TELEGRAM', 'BOT_TOKEN')
-        chat_id = config.get('TELEGRAM', 'CHAT_ID')
+        api_key = config.get("BINANCE", "API_KEY")
+        api_secret = config.get("BINANCE", "API_SECRET")
+        testnet = config.getboolean("BINANCE", "TESTNET", fallback=True)
+        bot_token = config.get("TELEGRAM", "BOT_TOKEN")
+        chat_id = config.get("TELEGRAM", "CHAT_ID")
 
         client = Client(api_key, api_secret, testnet=testnet)
         if testnet:
-            client.API_URL = 'https://testnet.binance.vision/api'
+            client.API_URL = "https://testnet.binance.vision/api"
 
-        logger.info("Binance client initialized (testnet={})".format(testnet))
+        logger.info(f"Binance client initialized (testnet={testnet})")
 
-        account_balance = config.getfloat('TRADING', 'ACCOUNT_BALANCE', fallback=1000.0)
+        # Test API Key
+        if not test_api_key(client):
+            raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
 
-        risk_management = RiskManagement(account_balance)
+        # Fetching the real account balance from Binance API
+        account_balance = config.getfloat("TRADING", "ACCOUNT_BALANCE", fallback=0.0)
+        if account_balance <= 0:
+            asset = config.get("TRADING", "BASE_ASSET", fallback="USDT")
+            account_balance = get_account_balance(client, asset)
+
+        risk_per_trade = config.getfloat("TRADING", "risk_per_trade", fallback=0.01)
+        max_drawdown = config.getfloat("TRADING", "max_drawdown", fallback=0.2)
+
+        risk_management = RiskManagement(client, risk_per_trade, max_drawdown)
         technical_analysis = TechnicalAnalysis()
         trading_logic = TradingLogic(client, risk_management, technical_analysis)
         telegram_notifier = TelegramNotifier(bot_token, chat_id)
@@ -65,6 +93,21 @@ def initialize_components(config):
         logger.error(f"Error initializing components: {e}")
         logger.debug(traceback.format_exc())
         raise
+
+
+def get_account_balance(client, asset="USDT"):
+    """
+    Fetch the account balance for a specific asset.
+    """
+    try:
+        balance = client.get_asset_balance(asset=asset)
+        if balance:
+            logger.info(f"Fetched balance for {asset}: {balance['free']} USDT")
+            return float(balance["free"])
+    except Exception as e:
+        logger.error(f"Error fetching balance for {asset}: {e}")
+        logger.debug(traceback.format_exc())
+    return 0.0
 
 
 def main():
@@ -80,8 +123,8 @@ def main():
         account_balance = risk_management.account_balance
         telegram_notifier.send_message(f"Bot started. Current balance: {account_balance} USDT")
 
-        symbols = config.get('TRADING', 'SYMBOLS', fallback='BTCUSDT').split(',')
-        interval = config.get('TRADING', 'INTERVAL', fallback='1h')
+        symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
+        interval = config.get("TRADING", "INTERVAL", fallback="1h")
 
         while True:
             for symbol in symbols:
@@ -96,7 +139,7 @@ def main():
                     logger.info(f"Generating trading signals for {symbol}...")
                     signals = technical_analysis.generate_optimized_signals(data)
 
-                    if signals is None or signals.empty:
+                    if signals is None or signals.empty():
                         logger.error(f"No valid trading signals generated for {symbol}. Skipping...")
                         continue
 
