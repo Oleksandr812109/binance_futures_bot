@@ -8780,3 +8780,32 @@ binance.exceptions.BinanceAPIException: APIError(code=-5000): Path /fapi/v1/v3/k
     raise BinanceAPIException(response, response.status_code, response.text)
 binance.exceptions.BinanceAPIException: APIError(code=-5000): Path /fapi/v1/v3/klines, Method GET is invalid
 
+2025-05-14 17:01:09 | INFO | Starting Binance Futures Trading Bot...
+2025-05-14 17:01:09 | INFO | Configuration file loaded successfully.
+2025-05-14 17:01:09 | INFO | Binance client initialized (testnet=True)
+2025-05-14 17:01:09 | INFO | Testing API key...
+2025-05-14 17:01:10 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-14 17:01:10 | INFO | Fetched balance for USDT: 15080.92811508 USDT
+2025-05-14 17:01:10 | DEBUG | All components initialized successfully.
+2025-05-14 17:01:11 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-14 17:01:11 | INFO | Fetching data for BTCUSDT with interval 1h (testnet=True)...
+2025-05-14 17:01:11 | INFO | Data for BTCUSDT fetched successfully.
+2025-05-14 17:01:11 | INFO | Generating trading signals for BTCUSDT...
+2025-05-14 17:01:11 | ERROR | Error during market analysis loop for BTCUSDT: 'TechnicalAnalysis' object has no attribute 'generate_optimized_signals'
+2025-05-14 17:01:11 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 141, in main
+    signals = technical_analysis.generate_optimized_signals(data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TechnicalAnalysis' object has no attribute 'generate_optimized_signals'
+
+2025-05-14 17:01:11 | INFO | Fetching market data for ETHUSDT with interval 1h...
+2025-05-14 17:01:11 | INFO | Fetching data for ETHUSDT with interval 1h (testnet=True)...
+2025-05-14 17:01:12 | INFO | Data for ETHUSDT fetched successfully.
+2025-05-14 17:01:12 | INFO | Generating trading signals for ETHUSDT...
+2025-05-14 17:01:12 | ERROR | Error during market analysis loop for ETHUSDT: 'TechnicalAnalysis' object has no attribute 'generate_optimized_signals'
+2025-05-14 17:01:12 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 141, in main
+    signals = technical_analysis.generate_optimized_signals(data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TechnicalAnalysis' object has no attribute 'generate_optimized_signals'
+
