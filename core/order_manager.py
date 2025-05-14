@@ -21,6 +21,7 @@ class OrderManager:
         :return: Інформація про створений ордер
         """
         try:
+            self.logger.info(f"Запит на створення ордера: symbol={symbol}, side={side}, type={order_type}, quantity={quantity}, price={price}")
             if order_type == 'LIMIT':
                 order = self.client.futures_create_order(
                     symbol=symbol,
@@ -40,11 +41,12 @@ class OrderManager:
             else:
                 raise ValueError("Непідтримуваний тип ордера")
 
-            self.logger.info(f"Ордер створено: {order}")
+            self.logger.info(f"Ордер створено успішно: {order}")
             return order
 
         except BinanceAPIException as e:
             self.logger.error(f"Помилка створення ордера: {e}")
+            self.logger.debug(f"Деталі запиту: symbol={symbol}, side={side}, type={order_type}, quantity={quantity}, price={price}")
             raise e
 
     def cancel_order(self, symbol, order_id):
@@ -55,11 +57,13 @@ class OrderManager:
         :return: Інформація про скасований ордер
         """
         try:
+            self.logger.info(f"Запит на скасування ордера: symbol={symbol}, order_id={order_id}")
             result = self.client.futures_cancel_order(symbol=symbol, orderId=order_id)
-            self.logger.info(f"Ордер скасовано: {result}")
+            self.logger.info(f"Ордер скасовано успішно: {result}")
             return result
         except BinanceAPIException as e:
             self.logger.error(f"Помилка скасування ордера: {e}")
+            self.logger.debug(f"Деталі запиту: symbol={symbol}, order_id={order_id}")
             raise e
 
     def get_order_status(self, symbol, order_id):
@@ -70,9 +74,11 @@ class OrderManager:
         :return: Інформація про статус ордера
         """
         try:
+            self.logger.info(f"Запит на отримання статусу ордера: symbol={symbol}, order_id={order_id}")
             status = self.client.futures_get_order(symbol=symbol, orderId=order_id)
-            self.logger.info(f"Статус ордера: {status}")
+            self.logger.info(f"Статус ордера отримано успішно: {status}")
             return status
         except BinanceAPIException as e:
             self.logger.error(f"Помилка отримання статусу ордера: {e}")
+            self.logger.debug(f"Деталі запиту: symbol={symbol}, order_id={order_id}")
             raise e

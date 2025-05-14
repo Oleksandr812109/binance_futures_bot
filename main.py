@@ -41,12 +41,12 @@ def load_config(config_path="config/config.ini"):
 
 def test_api_key(client):
     """
-    Test the API key by attempting to fetch account information.
+    Test the API key by attempting to fetch futures account information.
     If the API key is invalid, raise an exception and log an error.
     """
     try:
         logger.info("Testing API key...")
-        account_info = client.get_account()
+        account_info = client.futures_account()  # Updated for futures
         logger.info(f"API Key is valid. Account info fetched successfully.")
         return True
     except Exception as e:
@@ -65,7 +65,7 @@ def initialize_components(config):
 
         client = Client(api_key, api_secret, testnet=testnet)
         if testnet:
-            client.API_URL = "https://testnet.binance.vision/api"
+            client.API_URL = "https://testnet.binancefuture.com/fapi/v1"  # Updated URL
 
         logger.info(f"Binance client initialized (testnet={testnet})")
 
@@ -100,10 +100,11 @@ def get_account_balance(client, asset="USDT"):
     Fetch the account balance for a specific asset.
     """
     try:
-        balance = client.get_asset_balance(asset=asset)
-        if balance:
-            logger.info(f"Fetched balance for {asset}: {balance['free']} USDT")
-            return float(balance["free"])
+        balance = client.futures_account_balance()  # Updated for futures
+        for item in balance:
+            if item["asset"] == asset:
+                logger.info(f"Fetched balance for {asset}: {item['balance']} USDT")
+                return float(item["balance"])
     except Exception as e:
         logger.error(f"Error fetching balance for {asset}: {e}")
         logger.debug(traceback.format_exc())

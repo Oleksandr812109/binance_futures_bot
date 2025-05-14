@@ -8410,3 +8410,312 @@ ValueError: Invalid API Key or insufficient permissions. Please check your API s
     raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
 ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
 
+2025-05-14 09:32:24 | INFO | Starting Binance Futures Trading Bot...
+2025-05-14 09:32:24 | INFO | Configuration file loaded successfully.
+2025-05-14 09:32:24 | INFO | Binance client initialized (testnet=True)
+2025-05-14 09:32:24 | INFO | Testing API key...
+2025-05-14 09:32:25 | ERROR | Invalid API Key or insufficient permissions: APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+2025-05-14 09:32:25 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 49, in test_api_key
+    account_info = client.get_account()
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 1968, in get_account
+    return self._get('account', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 371, in _get
+    return self._request_api('get', path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 334, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+
+2025-05-14 09:32:25 | ERROR | Error initializing components: Invalid API Key or insufficient permissions. Please check your API settings.
+2025-05-14 09:32:25 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 74, in initialize_components
+    raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
+ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
+
+2025-05-14 09:32:25 | CRITICAL | An error occurred: Invalid API Key or insufficient permissions. Please check your API settings.
+2025-05-14 09:32:25 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 121, in main
+    client, risk_management, technical_analysis, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 74, in initialize_components
+    raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
+ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
+
+2025-05-14 09:46:47 | INFO | Starting Binance Futures Trading Bot...
+2025-05-14 09:46:47 | INFO | Configuration file loaded successfully.
+2025-05-14 09:46:48 | INFO | Binance client initialized (testnet=True)
+2025-05-14 09:46:48 | INFO | Testing API key...
+2025-05-14 09:46:48 | ERROR | Invalid API Key or insufficient permissions: APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+2025-05-14 09:46:48 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 49, in test_api_key
+    account_info = client.get_account()
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 1968, in get_account
+    return self._get('account', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 371, in _get
+    return self._request_api('get', path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 334, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+
+2025-05-14 09:46:48 | ERROR | Error initializing components: Invalid API Key or insufficient permissions. Please check your API settings.
+2025-05-14 09:46:48 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 74, in initialize_components
+    raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
+ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
+
+2025-05-14 09:46:48 | CRITICAL | An error occurred: Invalid API Key or insufficient permissions. Please check your API settings.
+2025-05-14 09:46:48 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 121, in main
+    client, risk_management, technical_analysis, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 74, in initialize_components
+    raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
+ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
+
+2025-05-14 09:53:36 | INFO | Starting Binance Futures Trading Bot...
+2025-05-14 09:53:36 | INFO | Configuration file loaded successfully.
+2025-05-14 09:53:37 | INFO | Binance client initialized (testnet=True)
+2025-05-14 09:53:37 | INFO | Testing API key...
+2025-05-14 09:53:37 | ERROR | Invalid API Key or insufficient permissions: APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+2025-05-14 09:53:37 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 49, in test_api_key
+    account_info = client.get_account()
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 1968, in get_account
+    return self._get('account', True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 371, in _get
+    return self._request_api('get', path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 334, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 315, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 324, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+
+2025-05-14 09:53:37 | ERROR | Error initializing components: Invalid API Key or insufficient permissions. Please check your API settings.
+2025-05-14 09:53:37 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 74, in initialize_components
+    raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
+ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
+
+2025-05-14 09:53:37 | CRITICAL | An error occurred: Invalid API Key or insufficient permissions. Please check your API settings.
+2025-05-14 09:53:37 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 121, in main
+    client, risk_management, technical_analysis, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 74, in initialize_components
+    raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
+ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
+
+2025-05-14 10:01:26 | INFO | Starting Binance Futures Trading Bot...
+2025-05-14 10:01:26 | INFO | Configuration file loaded successfully.
+2025-05-14 10:01:26 | INFO | Binance client initialized (testnet=True)
+2025-05-14 10:01:26 | INFO | Testing API key...
+2025-05-14 10:01:27 | ERROR | Invalid API Key or insufficient permissions: APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+2025-05-14 10:01:27 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 49, in test_api_key
+    account_info = client.get_account()
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 2166, in get_account
+    return self._get("account", True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+
+2025-05-14 10:01:27 | ERROR | Error initializing components: Invalid API Key or insufficient permissions. Please check your API settings.
+2025-05-14 10:01:27 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 74, in initialize_components
+    raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
+ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
+
+2025-05-14 10:01:27 | CRITICAL | An error occurred: Invalid API Key or insufficient permissions. Please check your API settings.
+2025-05-14 10:01:27 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 121, in main
+    client, risk_management, technical_analysis, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 74, in initialize_components
+    raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
+ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
+
+2025-05-14 16:07:19 | INFO | Starting Binance Futures Trading Bot...
+2025-05-14 16:07:19 | INFO | Configuration file loaded successfully.
+2025-05-14 16:07:20 | INFO | Binance client initialized (testnet=True)
+2025-05-14 16:07:20 | INFO | Testing API key...
+2025-05-14 16:07:21 | ERROR | Invalid API Key or insufficient permissions: APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+2025-05-14 16:07:21 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 49, in test_api_key
+    account_info = client.get_account()
+                   ^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 2166, in get_account
+    return self._get("account", True, data=params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=-2015): Invalid API-key, IP, or permissions for action.
+
+2025-05-14 16:07:21 | ERROR | Error initializing components: Invalid API Key or insufficient permissions. Please check your API settings.
+2025-05-14 16:07:21 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 74, in initialize_components
+    raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
+ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
+
+2025-05-14 16:07:21 | CRITICAL | An error occurred: Invalid API Key or insufficient permissions. Please check your API settings.
+2025-05-14 16:07:21 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 121, in main
+    client, risk_management, technical_analysis, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 74, in initialize_components
+    raise ValueError("Invalid API Key or insufficient permissions. Please check your API settings.")
+ValueError: Invalid API Key or insufficient permissions. Please check your API settings.
+
+2025-05-14 16:19:52 | INFO | Starting Binance Futures Trading Bot...
+2025-05-14 16:19:52 | INFO | Configuration file loaded successfully.
+2025-05-14 16:19:52 | INFO | Binance client initialized (testnet=True)
+2025-05-14 16:19:52 | INFO | Testing API key...
+2025-05-14 16:19:53 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-14 16:19:53 | INFO | Fetched balance for USDT: 15080.92811508 USDT
+2025-05-14 16:19:53 | INFO | TechnicalAnalysis initialized
+2025-05-14 16:19:53 | DEBUG | All components initialized successfully.
+2025-05-14 16:19:53 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-14 16:19:53 | INFO | Fetching data for BTCUSDT with interval 1h (testnet=True)...
+2025-05-14 16:19:54 | INFO | Data for BTCUSDT fetched successfully.
+2025-05-14 16:19:54 | INFO | Generating trading signals for BTCUSDT...
+2025-05-14 16:19:54 | INFO | Generating optimized trading signals...
+2025-05-14 16:19:54 | INFO | Trading signals generated successfully.
+2025-05-14 16:19:54 | ERROR | Error during market analysis loop for BTCUSDT: 'bool' object is not callable
+2025-05-14 16:19:54 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 143, in main
+    if signals is None or signals.empty():
+                          ^^^^^^^^^^^^^^^
+TypeError: 'bool' object is not callable
+
+2025-05-14 16:19:54 | INFO | Fetching market data for ETHUSDT with interval 1h...
+2025-05-14 16:19:54 | INFO | Fetching data for ETHUSDT with interval 1h (testnet=True)...
+2025-05-14 16:19:55 | INFO | Data for ETHUSDT fetched successfully.
+2025-05-14 16:19:55 | INFO | Generating trading signals for ETHUSDT...
+2025-05-14 16:19:55 | INFO | Generating optimized trading signals...
+2025-05-14 16:19:55 | INFO | Trading signals generated successfully.
+2025-05-14 16:19:55 | ERROR | Error during market analysis loop for ETHUSDT: 'bool' object is not callable
+2025-05-14 16:19:55 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 143, in main
+    if signals is None or signals.empty():
+                          ^^^^^^^^^^^^^^^
+TypeError: 'bool' object is not callable
+
+2025-05-14 16:20:55 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-14 16:20:55 | INFO | Fetching data for BTCUSDT with interval 1h (testnet=True)...
+2025-05-14 16:20:57 | INFO | Data for BTCUSDT fetched successfully.
+2025-05-14 16:20:57 | INFO | Generating trading signals for BTCUSDT...
+2025-05-14 16:20:57 | INFO | Generating optimized trading signals...
+2025-05-14 16:20:57 | INFO | Trading signals generated successfully.
+2025-05-14 16:20:57 | ERROR | Error during market analysis loop for BTCUSDT: 'bool' object is not callable
+2025-05-14 16:20:57 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 143, in main
+    if signals is None or signals.empty():
+                          ^^^^^^^^^^^^^^^
+TypeError: 'bool' object is not callable
+
+2025-05-14 16:20:57 | INFO | Fetching market data for ETHUSDT with interval 1h...
+2025-05-14 16:20:57 | INFO | Fetching data for ETHUSDT with interval 1h (testnet=True)...
+2025-05-14 16:20:58 | INFO | Data for ETHUSDT fetched successfully.
+2025-05-14 16:20:58 | INFO | Generating trading signals for ETHUSDT...
+2025-05-14 16:20:58 | INFO | Generating optimized trading signals...
+2025-05-14 16:20:58 | INFO | Trading signals generated successfully.
+2025-05-14 16:20:58 | ERROR | Error during market analysis loop for ETHUSDT: 'bool' object is not callable
+2025-05-14 16:20:58 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 143, in main
+    if signals is None or signals.empty():
+                          ^^^^^^^^^^^^^^^
+TypeError: 'bool' object is not callable
+
+2025-05-14 16:21:58 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-14 16:21:58 | INFO | Fetching data for BTCUSDT with interval 1h (testnet=True)...
+2025-05-14 16:21:59 | INFO | Data for BTCUSDT fetched successfully.
+2025-05-14 16:21:59 | INFO | Generating trading signals for BTCUSDT...
+2025-05-14 16:21:59 | INFO | Generating optimized trading signals...
+2025-05-14 16:21:59 | INFO | Trading signals generated successfully.
+2025-05-14 16:21:59 | ERROR | Error during market analysis loop for BTCUSDT: 'bool' object is not callable
+2025-05-14 16:21:59 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 143, in main
+    if signals is None or signals.empty():
+                          ^^^^^^^^^^^^^^^
+TypeError: 'bool' object is not callable
+
+2025-05-14 16:21:59 | INFO | Fetching market data for ETHUSDT with interval 1h...
+2025-05-14 16:21:59 | INFO | Fetching data for ETHUSDT with interval 1h (testnet=True)...
+2025-05-14 16:21:59 | INFO | Data for ETHUSDT fetched successfully.
+2025-05-14 16:21:59 | INFO | Generating trading signals for ETHUSDT...
+2025-05-14 16:21:59 | INFO | Generating optimized trading signals...
+2025-05-14 16:21:59 | INFO | Trading signals generated successfully.
+2025-05-14 16:21:59 | ERROR | Error during market analysis loop for ETHUSDT: 'bool' object is not callable
+2025-05-14 16:21:59 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 143, in main
+    if signals is None or signals.empty():
+                          ^^^^^^^^^^^^^^^
+TypeError: 'bool' object is not callable
+
+2025-05-14 16:27:08 | INFO | Starting Binance Futures Trading Bot...
+2025-05-14 16:27:08 | INFO | Configuration file loaded successfully.
+2025-05-14 16:27:09 | INFO | Binance client initialized (testnet=True)
+2025-05-14 16:27:09 | INFO | Testing API key...
+2025-05-14 16:27:09 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-14 16:27:09 | INFO | Fetched balance for USDT: 15080.92811508 USDT
+2025-05-14 16:27:10 | DEBUG | All components initialized successfully.
+2025-05-14 16:27:10 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-14 16:27:10 | ERROR | Error during market analysis loop for BTCUSDT: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+2025-05-14 16:27:10 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 134, in main
+    data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+
+2025-05-14 16:27:10 | INFO | Fetching market data for ETHUSDT with interval 1h...
+2025-05-14 16:27:10 | ERROR | Error during market analysis loop for ETHUSDT: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+2025-05-14 16:27:10 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 134, in main
+    data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+
