@@ -5,6 +5,7 @@ from strategy.risk_management import RiskManagement
 from strategy.technical_analysis import TechnicalAnalysis
 from binance.client import Client
 
+
 @pytest.fixture
 def mock_binance_client():
     """
@@ -12,6 +13,7 @@ def mock_binance_client():
     """
     client = MagicMock(spec=Client)
     return client
+
 
 @pytest.fixture
 def mock_risk_management():
@@ -21,6 +23,7 @@ def mock_risk_management():
     risk_manager = MagicMock(spec=RiskManagement)
     risk_manager.calculate_position_size.return_value = 0.01  # Приклад розміру позиції
     return risk_manager
+
 
 @pytest.fixture
 def mock_technical_analysis():
@@ -34,12 +37,14 @@ def mock_technical_analysis():
     ]
     return analysis
 
+
 @pytest.fixture
 def trading_logic(mock_binance_client, mock_risk_management, mock_technical_analysis):
     """
     Створення об'єкта торгової логіки для тестування.
     """
     return TradingLogic(mock_binance_client, mock_risk_management, mock_technical_analysis)
+
 
 def test_generate_signals(mock_technical_analysis, trading_logic):
     """
@@ -49,6 +54,18 @@ def test_generate_signals(mock_technical_analysis, trading_logic):
     assert len(signals) == 2, "Сигнали повинні містити 2 записи"
     assert signals[0]["Signal"] == "Buy", "Перший сигнал має бути 'Buy'"
     assert signals[1]["Signal"] == "Sell", "Другий сигнал має бути 'Sell'"
+
+
+def test_generate_signals_with_indicators(mock_technical_analysis, trading_logic):
+    """
+    Test signal generation with advanced indicators (Bollinger Bands, RSI).
+    """
+    signals = trading_logic.get_trading_signals()  # Mocked signals include BB and RSI data
+    assert 'Signal' in signals.columns, "Signal column should exist"
+    assert 'RSI' in signals.columns, "RSI column should exist"
+    assert 'BB_Upper' in signals.columns, "Bollinger Bands columns should exist"
+    assert len(signals) > 0, "Signals DataFrame should not be empty"
+
 
 def test_place_order(mock_binance_client, trading_logic):
     """
@@ -71,6 +88,7 @@ def test_place_order(mock_binance_client, trading_logic):
         quantity=0.01
     )
 
+
 def test_risk_management_integration(mock_risk_management, trading_logic):
     """
     Тест інтеграції управління ризиками з торговою логікою.
@@ -79,6 +97,7 @@ def test_risk_management_integration(mock_risk_management, trading_logic):
     assert position_size == 0.01, "Розмір позиції має бути 0.01"
     mock_risk_management.calculate_position_size.assert_called_once_with(50)
 
+
 def test_handle_insufficient_balance(mock_binance_client, trading_logic):
     """
     Тест обробки недостатнього балансу.
@@ -86,5 +105,5 @@ def test_handle_insufficient_balance(mock_binance_client, trading_logic):
     # Мок для помилки балансу
     mock_binance_client.create_order.side_effect = Exception("Insufficient balance")
 
-    with pytest.raises(Exception, match="Insufficient balance"):
-        trading_logic.place_order("BTCUSDT", "BUY", 1)  # Спробуємо купити більше, ніж дозволяє баланс
+    with pytest.raises(Exception, match="Insufficient balance"): trading_logic.place_order("BTCUSDT", 
+        "BUY", 1) # Спробуємо купити більше, ніж дозволяє баланс

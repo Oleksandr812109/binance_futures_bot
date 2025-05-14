@@ -1,4 +1,5 @@
 import logging
+import numpy as np
 from typing import List, Dict
 
 # Set up logging
@@ -20,12 +21,33 @@ class RiskManagement:
         self.initial_balance = account_balance  # Track the initial balance for drawdown calculation
         logging.info(f"Risk Management initialized with account balance: {account_balance}, risk per trade: {risk_per_trade * 100:.2f}%, max drawdown: {max_drawdown * 100:.2f}%")
 
-    def calculate_position_size(self, stop_loss_distance: float) -> float:
+    def calculate_volatility(self, price_data: List[float], window: int = 14) -> float:
         """
-        Calculate the position size based on account balance, risk per trade, and stop-loss distance.
+        Calculate the volatility of an asset using standard deviation.
+
+        Args:
+            price_data (List[float]): List of historical prices.
+            window (int): Lookback window for calculating volatility.
+
+        Returns:
+            float: Calculated volatility.
+        """
+        if len(price_data) < window:
+            logging.error("Not enough data to calculate volatility.")
+            return 0.0
+
+        rolling_std = np.std(price_data[-window:])
+        logging.info(f"Calculated volatility (standard deviation) over window {window}: {rolling_std:.2f}")
+        return rolling_std
+
+    def calculate_position_size(self, stop_loss_distance: float, volatility: float = None) -> float:
+        """
+        Calculate the position size based on account balance, risk per trade, stop-loss distance,
+        and optionally asset volatility.
 
         Args:
             stop_loss_distance (float): Distance between entry price and stop-loss price.
+            volatility (float): Asset volatility (optional).
 
         Returns:
             float: Calculated position size.
@@ -33,43 +55,17 @@ class RiskManagement:
         if stop_loss_distance <= 0:
             logging.error("Stop-loss distance must be greater than zero.")
             return 0
-        risk_amount = self.account_balance * self.risk_per_trade
+
+        # Adjust risk per trade based on volatility (optional)
+        adjusted_risk_per_trade = self.risk_per_trade
+        if volatility:
+            adjusted_risk_per_trade = min(self.risk_per_trade, 1 / (1 + volatility))
+            logging.info(f"Adjusted risk per trade based on volatility {volatility:.2f}: {adjusted_risk_per_trade:.2f}")
+
+        risk_amount = self.account_balance * adjusted_risk_per_trade
         position_size = risk_amount / stop_loss_distance
         logging.info(f"Calculated position size: {position_size:.2f} with stop-loss distance: {stop_loss_distance}")
         return position_size
-
-    def calculate_stop_loss(self, entry_price: float, max_loss: float) -> float:
-        """
-        Calculate the stop-loss price based on entry price and maximum allowable loss.
-
-        Args:
-            entry_price (float): The entry price of the position.
-            max_loss (float): Maximum loss allowed for the trade.
-
-        Returns:
-            float: Calculated stop-loss price.
-        """
-        if max_loss <= 0 or entry_price <= 0:
-            logging.error("Max loss and entry price must be greater than zero.")
-            return 0
-        stop_loss_price = entry_price - max_loss
-        logging.info(f"Calculated stop-loss price: {stop_loss_price} for entry price: {entry_price} and max loss: {max_loss}")
-        return stop_loss_price
-
-    def evaluate_portfolio_risk(self, open_positions: List[Dict[str, float]], max_portfolio_risk: float = 0.05) -> bool:
-        """
-        Evaluate if the total portfolio risk exceeds the maximum allowable risk.
-
-        Args:
-            open_positions (List[Dict[str, float]]): List of dictionaries with details of open positions (e.g., risk per position).
-            max_portfolio_risk (float): Maximum allowable risk for the portfolio.
-
-        Returns:
-            bool: True if portfolio risk is within limits, False otherwise.
-        """
-        total_risk = sum(position['risk'] for position in open_positions)
-        logging.info(f"Total portfolio risk: {total_risk:.2f}, Max allowable risk: {max_portfolio_risk:.2f}")
-        return total_risk <= max_portfolio_risk
 
     def check_drawdown_limit(self) -> bool:
         """
@@ -94,30 +90,3 @@ class RiskManagement:
             return
         self.account_balance = new_balance
         logging.info(f"Account balance updated to: {new_balance}")
-
-if __name__ == "__main__":
-    # Example usage
-    account_balance = 10000  # Example account balance
-    risk_manager = RiskManagement(account_balance, risk_per_trade=0.01, max_drawdown=0.2)
-
-    # Example calculations
-    stop_loss_distance = 50  # Example stop-loss distance in price units
-    position_size = risk_manager.calculate_position_size(stop_loss_distance)
-
-    entry_price = 150
-    max_loss = 100
-    stop_loss_price = risk_manager.calculate_stop_loss(entry_price, max_loss)
-
-    # Evaluate portfolio risk
-    open_positions = [
-        {"risk": 0.01},
-        {"risk": 0.02},
-        {"risk": 0.01},
-    ]
-    portfolio_ok = risk_manager.evaluate_portfolio_risk(open_positions)
-    logging.info(f"Portfolio risk within limits: {portfolio_ok}")
-
-    # Update balance and check drawdown
-    risk_manager.update_account_balance(9000)  # Example of a balance update after a losing trade
-    drawdown_ok = risk_manager.check_drawdown_limit()
-    logging.info(f"Drawdown within limits: {drawdown_ok}")
