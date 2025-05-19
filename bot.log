@@ -8809,3 +8809,78 @@ AttributeError: 'TechnicalAnalysis' object has no attribute 'generate_optimized_
               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 AttributeError: 'TechnicalAnalysis' object has no attribute 'generate_optimized_signals'
 
+2025-05-14 17:13:00 | INFO | Starting Binance Futures Trading Bot...
+2025-05-14 17:13:00 | INFO | Configuration file loaded successfully.
+2025-05-14 17:13:01 | INFO | Binance client initialized (testnet=True)
+2025-05-14 17:13:01 | INFO | Testing API key...
+2025-05-14 17:13:02 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-14 17:13:02 | INFO | Fetched balance for USDT: 15080.92811508 USDT
+2025-05-14 17:13:03 | DEBUG | All components initialized successfully.
+2025-05-14 17:13:03 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-14 17:13:03 | ERROR | Error during market analysis loop for BTCUSDT: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+2025-05-14 17:13:03 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 134, in main
+    data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+
+2025-05-14 17:13:03 | INFO | Fetching market data for ETHUSDT with interval 1h...
+2025-05-14 17:13:03 | ERROR | Error during market analysis loop for ETHUSDT: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+2025-05-14 17:13:03 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 134, in main
+    data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+
+2025-05-19 07:25:17 | INFO | Starting Binance Futures Trading Bot...
+2025-05-19 07:25:17 | INFO | Configuration file loaded successfully.
+2025-05-19 07:25:18 | INFO | Binance client initialized (testnet=True)
+2025-05-19 07:25:18 | INFO | Testing API key...
+2025-05-19 07:25:18 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-19 07:25:18 | INFO | Fetched balance for USDT: 15080.92811508 USDT
+2025-05-19 07:25:19 | DEBUG | All components initialized successfully.
+2025-05-19 07:25:19 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-19 07:25:19 | ERROR | Error during market analysis loop for BTCUSDT: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+2025-05-19 07:25:19 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 134, in main
+    data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+
+2025-05-19 07:25:19 | INFO | Fetching market data for ETHUSDT with interval 1h...
+2025-05-19 07:25:19 | ERROR | Error during market analysis loop for ETHUSDT: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+2025-05-19 07:25:19 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 134, in main
+    data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TechnicalAnalysis' object has no attribute 'fetch_binance_data'
+
+2025-05-19 07:48:24 | INFO | Starting Binance Futures Trading Bot...
+2025-05-19 07:48:24 | INFO | Configuration file loaded successfully.
+2025-05-19 07:48:24 | INFO | Binance client initialized (testnet=True)
+2025-05-19 07:48:24 | INFO | Testing API key...
+2025-05-19 07:48:24 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-19 07:48:25 | INFO | Fetched balance for USDT: 15080.92811508 USDT
+2025-05-19 07:48:25 | DEBUG | All components initialized successfully.
+2025-05-19 07:48:26 | INFO | Fetching market data for BTCUSDT with interval 1h...
+2025-05-19 07:48:26 | INFO | Fetching data for BTCUSDT with interval 1h (testnet=True)...
+2025-05-19 07:48:27 | INFO | Data for BTCUSDT fetched successfully.
+2025-05-19 07:48:27 | INFO | Generating trading signals for BTCUSDT...
+2025-05-19 07:48:27 | ERROR | Error during market analysis loop for BTCUSDT: 'TechnicalAnalysis' object has no attribute 'generate_optimized_signals'
+2025-05-19 07:48:27 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 141, in main
+    signals = technical_analysis.generate_optimized_signals(data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TechnicalAnalysis' object has no attribute 'generate_optimized_signals'
+
+2025-05-19 07:48:27 | INFO | Fetching market data for ETHUSDT with interval 1h...
+2025-05-19 07:48:27 | INFO | Fetching data for ETHUSDT with interval 1h (testnet=True)...
+2025-05-19 07:48:27 | INFO | Data for ETHUSDT fetched successfully.
+2025-05-19 07:48:27 | INFO | Generating trading signals for ETHUSDT...
+2025-05-19 07:48:27 | ERROR | Error during market analysis loop for ETHUSDT: 'TechnicalAnalysis' object has no attribute 'generate_optimized_signals'
+2025-05-19 07:48:27 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 141, in main
+    signals = technical_analysis.generate_optimized_signals(data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TechnicalAnalysis' object has no attribute 'generate_optimized_signals'
+

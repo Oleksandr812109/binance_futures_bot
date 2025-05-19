@@ -1,5 +1,5 @@
-import pandas as pd
 from binance.client import Client
+import pandas as pd
 from loguru import logger
 
 class TechnicalAnalysis:
@@ -23,8 +23,8 @@ class TechnicalAnalysis:
             if testnet:
                 client.API_URL = 'https://testnet.binancefuture.com/fapi/v1'
 
-            # Fetch candlestick data (correct endpoint)
-            klines = client.futures_klines(symbol=symbol, interval=interval)  # Correct method
+            # Fetch candlestick data
+            klines = client.futures_klines(symbol=symbol, interval=interval)
 
             # Convert to DataFrame
             data = pd.DataFrame(klines, columns=[
