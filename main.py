@@ -140,7 +140,7 @@ def main():
                     logger.info(f"Generating trading signals for {symbol}...")
                     signals = technical_analysis.generate_optimized_signals(data)
 
-                    if signals is None or signals.empty():
+                    if signals is None or signals.empty:
                         logger.error(f"No valid trading signals generated for {symbol}. Skipping...")
                         continue
 
