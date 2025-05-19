@@ -3,13 +3,13 @@ from configparser import ConfigParser
 from strategy.trading_logic import TradingLogic
 from strategy.risk_management import RiskManagement
 from strategy.technical_analysis import TechnicalAnalysis
+from strategy.ai_signal_generator import AISignalGenerator  # Додаємо імпорт AI-модуля
 from core.telegram_notifier import TelegramNotifier
 from binance.client import Client
 from loguru import logger
 import traceback
 import sys
 import time
-
 
 def setup_logging(log_file="bot.log"):
     logger.remove()
@@ -27,7 +27,6 @@ def setup_logging(log_file="bot.log"):
         level="INFO",
     )
 
-
 def load_config(config_path="config/config.ini"):
     if not os.path.exists(config_path):
         logger.error(f"Configuration file '{config_path}' not found!")
@@ -37,7 +36,6 @@ def load_config(config_path="config/config.ini"):
     config.read(config_path)
     logger.info("Configuration file loaded successfully.")
     return config
-
 
 def test_api_key(client):
     """
@@ -53,7 +51,6 @@ def test_api_key(client):
         logger.error(f"Invalid API Key or insufficient permissions: {e}")
         logger.debug(traceback.format_exc())
         return False
-
 
 def initialize_components(config):
     try:
@@ -84,16 +81,16 @@ def initialize_components(config):
 
         risk_management = RiskManagement(client, risk_per_trade, max_drawdown)
         technical_analysis = TechnicalAnalysis()
+        ai_signal_generator = AISignalGenerator()  # ініціалізуємо AI-модуль
         trading_logic = TradingLogic(client, risk_management, technical_analysis)
         telegram_notifier = TelegramNotifier(bot_token, chat_id)
 
         logger.debug("All components initialized successfully.")
-        return client, risk_management, technical_analysis, trading_logic, telegram_notifier
+        return client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier
     except Exception as e:
         logger.error(f"Error initializing components: {e}")
         logger.debug(traceback.format_exc())
         raise
-
 
 def get_account_balance(client, asset="USDT"):
     """
@@ -110,7 +107,6 @@ def get_account_balance(client, asset="USDT"):
         logger.debug(traceback.format_exc())
     return 0.0
 
-
 def main():
     setup_logging()
 
@@ -119,7 +115,7 @@ def main():
         config_path = "config/config.ini"
         config = load_config(config_path)
 
-        client, risk_management, technical_analysis, trading_logic, telegram_notifier = initialize_components(config)
+        client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
 
         account_balance = risk_management.account_balance
         telegram_notifier.send_message(f"Bot started. Current balance: {account_balance} USDT")
@@ -138,49 +134,57 @@ def main():
                         continue
 
                     logger.info(f"Generating trading signals for {symbol}...")
-                    signals = technical_analysis.generate_optimized_signals(data)
+                    data = technical_analysis.generate_optimized_signals(data)
 
-                    if signals is None or signals.empty:
+                    # AI-модуль: генеруємо AI-сигнали на основі підготовлених технічних даних
+                    data = ai_signal_generator.predict_signals(data)
+
+                    if data is None or data.empty:
                         logger.error(f"No valid trading signals generated for {symbol}. Skipping...")
                         continue
 
-                    for signal in signals.itertuples():
+                    # Тепер використовуємо AI-сигнали для торгівлі
+                    for signal in data.itertuples():
                         logger.debug(f"Processing signal for {symbol}: {signal}")
-                        if signal.Signal == "Buy":
-                            logger.info(f"Buy signal detected for {symbol}, placing order...")
-                            entry_price = signal.EntryPrice
-                            stop_loss_price = signal.StopLossPrice
-                            stop_loss_distance = entry_price - stop_loss_price
 
-                            if stop_loss_distance <= 0:
-                                logger.error(f"Invalid stop-loss distance for {symbol}. Skipping order.")
-                                continue
+                        # Приклад: AI_Signal = 1 (Buy), -1 (Sell), 0 (Hold)
+                        if hasattr(signal, "AI_Signal"):
+                            if signal.AI_Signal == 1:
+                                logger.info(f"AI Buy signal detected for {symbol}, placing order...")
+                                # Далі аналогічно до вашої логіки, наприклад:
+                                entry_price = getattr(signal, "Close", None)
+                                stop_loss_price = getattr(signal, "Stop_Loss", None)
+                                if entry_price is None or stop_loss_price is None:
+                                    logger.error(f"Missing entry or stop-loss price. Skipping order.")
+                                    continue
+                                stop_loss_distance = entry_price - stop_loss_price
+                                if stop_loss_distance <= 0:
+                                    logger.error(f"Invalid stop-loss distance for {symbol}. Skipping order.")
+                                    continue
+                                position_size = risk_management.calculate_position_size(stop_loss_distance)
+                                order = trading_logic.place_order(symbol, "BUY", position_size)
+                                if order:
+                                    telegram_notifier.send_message(
+                                        f"Order placed: AI BUY {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
+                                    )
 
-                            position_size = risk_management.calculate_position_size(stop_loss_distance)
-                            order = trading_logic.place_order(symbol, "BUY", position_size)
-
-                            if order:
-                                telegram_notifier.send_message(
-                                    f"Order placed: BUY {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
-                                )
-
-                        elif signal.Signal == "Sell":
-                            logger.info(f"Sell signal detected for {symbol}, placing order...")
-                            entry_price = signal.EntryPrice
-                            stop_loss_price = signal.StopLossPrice
-                            stop_loss_distance = stop_loss_price - entry_price
-
-                            if stop_loss_distance <= 0:
-                                logger.error(f"Invalid stop-loss distance for {symbol}. Skipping order.")
-                                continue
-
-                            position_size = risk_management.calculate_position_size(stop_loss_distance)
-                            order = trading_logic.place_order(symbol, "SELL", position_size)
-
-                            if order:
-                                telegram_notifier.send_message(
-                                    f"Order placed: SELL {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
-                                )
+                            elif signal.AI_Signal == -1:
+                                logger.info(f"AI Sell signal detected for {symbol}, placing order...")
+                                entry_price = getattr(signal, "Close", None)
+                                stop_loss_price = getattr(signal, "Stop_Loss", None)
+                                if entry_price is None or stop_loss_price is None:
+                                    logger.error(f"Missing entry or stop-loss price. Skipping order.")
+                                    continue
+                                stop_loss_distance = stop_loss_price - entry_price
+                                if stop_loss_distance <= 0:
+                                    logger.error(f"Invalid stop-loss distance for {symbol}. Skipping order.")
+                                    continue
+                                position_size = risk_management.calculate_position_size(stop_loss_distance)
+                                order = trading_logic.place_order(symbol, "SELL", position_size)
+                                if order:
+                                    telegram_notifier.send_message(
+                                        f"Order placed: AI SELL {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
+                                    )
 
                     logger.info(f"Finished processing signals for {symbol}. Waiting for the next cycle...")
 
@@ -192,7 +196,6 @@ def main():
     except Exception as e:
         logger.critical(f"An error occurred: {e}")
         logger.debug(traceback.format_exc())
-
 
 if __name__ == "__main__":
     main()
