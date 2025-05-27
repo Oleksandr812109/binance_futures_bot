@@ -18,6 +18,20 @@ from core.telegram_signal_listener import TelegramSignalListener
 
 from utils.binance_precision import get_precision, round_quantity, round_price
 
+def get_symbol_info(client, symbol):
+    """
+    Отримує інформацію про символ з Binance Futures exchangeInfo.
+    """
+    try:
+        info = client.futures_exchange_info()
+        for s in info['symbols']:
+            if s['symbol'] == symbol:
+                return s
+        logger.error(f"Symbol info for {symbol} not found in exchange info.")
+    except Exception as e:
+        logger.error(f"Error fetching symbol info for {symbol}: {e}")
+    return None
+
 def setup_logging(log_file="bot.log"):
     logger.remove()
     logger.add(
