@@ -1,76 +1,109 @@
 import logging
+from binance.client import Client
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 class TradingLogic:
-    def __init__(self, order_manager, risk_management, technical_analysis):
-        """
-        Initialize the Trading Logic system.
-
-        Args:
-            order_manager: Instance of OrderManager for placing orders.
-            risk_management: RiskManagement instance.
-            technical_analysis: TechnicalAnalysis instance.
-        """
-        self.order_manager = order_manager
+    def __init__(self, client: Client, risk_management, technical_analysis):
+        self.client = client
         self.risk_management = risk_management
         self.technical_analysis = technical_analysis
-        logging.info("TradingLogic initialized successfully.")
 
-    def get_trading_signals(self):
+    def place_order(self, symbol: str, side: str, quantity: float):
         """
-        Generate trading signals based on technical analysis.
-
-        Returns:
-            list: List of trading signals.
-        """
-        signals = self.technical_analysis.generate_optimized_signals()
-        logging.info(f"Generated trading signals: {signals}")
-        return signals
-
-    def place_order(self, symbol, side, quantity):
-        """
-        Place a trading order.
+        Place a market order on Binance Futures.
 
         Args:
-            symbol (str): Trading pair (e.g., 'BTCUSDT').
-            side (str): Order side ('BUY' or 'SELL').
-            quantity (float): Order quantity.
+            symbol (str): Trading pair symbol (e.g., 'BTCUSDT').
+            side (str): 'BUY' or 'SELL'.
+            quantity (float): Quantity to buy or sell.
 
         Returns:
-            dict or None: Order details if successful, otherwise None.
+            dict: Response from Binance API.
         """
-        try:
-            logging.info(f"Attempting to place order: Symbol={symbol}, Side={side}, Quantity={quantity}")
-            order = self.order_manager.create_order(
-                symbol=symbol,
-                side=side,
-                order_type='MARKET',  # Use MARKET orders for simplicity
-                quantity=quantity
-            )
-            logging.info(f"Order placed successfully: {order}")
-            return order
-        except Exception as e:
-            logging.error(f"Error placing order for Symbol={symbol}, Side={side}, Quantity={quantity}: {e}")
+        if quantity <= 0:
+            logging.error("Order quantity must be greater than zero.")
             return None
 
-    def execute_trading_strategy(self):
-        """
-        Execute the trading strategy based on generated signals.
-        """
-        signals = self.get_trading_signals()
-        for signal in signals:
-            symbol = signal.get('symbol')
-            side = signal.get('side')
-            quantity = signal.get('quantity')
+        try:
+            order = self.client.futures_create_order(
+                symbol=symbol,
+                side=side,
+                type="MARKET",
+                quantity=quantity
+            )
+            logging.info(f"Order placed: {order}")
+            return order
+        except Exception as e:
+            logging.error(f"Error placing order: {e}")
+            return None
 
-            # Validate signal data
-            if not symbol or not side or not quantity or quantity <= 0:
-                logging.warning(f"Invalid signal: {signal}")
-                continue
+    def close_position(self, symbol: str, quantity: float, side: str):
+        """
+        Close an open position.
 
-            logging.info(f"Processing signal: {signal}")
-            order_result = self.place_order(symbol, side, quantity)
-            if order_result:
-                logging.info(f"Order executed successfully: {order_result}")
-            else:
-                logging.error(f"Failed to execute order for signal: {signal}")
+        Args:
+            symbol (str): Trading pair symbol.
+            quantity (float): Quantity to close.
+            side (str): 'BUY' or 'SELL' to close the position.
+
+        Returns:
+            dict: Response from Binance API.
+        """
+        if quantity <= 0:
+            logging.error("Close quantity must be greater than zero.")
+            return None
+
+        try:
+            order = self.client.futures_create_order(
+                symbol=symbol,
+                side=side,
+                type="MARKET",
+                quantity=quantity,
+                reduceOnly=True
+            )
+            logging.info(f"Position closed: {order}")
+            return order
+        except Exception as e:
+            logging.error(f"Error closing position: {e}")
+            return None
+
+    def get_open_positions(self, symbol: str = None):
+        """
+        Retrieve open positions from Binance Futures.
+
+        Args:
+            symbol (str): Trading pair symbol (optional).
+
+        Returns:
+            list: List of open positions.
+        """
+        try:
+            positions = self.client.futures_position_information()
+            if symbol:
+                positions = [pos for pos in positions if pos['symbol'] == symbol]
+            logging.info(f"Open positions: {positions}")
+            return positions
+        except Exception as e:
+            logging.error(f"Error fetching open positions: {e}")
+            return []
+
+    def handle_external_signal(self, signal):
+        """
+        Handle external trading signals and execute trades accordingly.
+
+        Args:
+            signal (dict): Parsed signal containing trading information.
+
+        Returns:
+            dict: Order response or None.
+        """
+        symbol = signal.get('symbol')
+        side = signal.get('side')
+        quantity = signal.get('quantity')
+        if not symbol or not side or not quantity:
+            logging.error("Signal data is incomplete.")
+            return None
+        return self.place_order(symbol, side, quantity)

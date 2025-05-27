@@ -65,6 +65,7 @@ def initialize_components(config):
         bot_token = config.get("TELEGRAM", "BOT_TOKEN")
         chat_id = config.get("TELEGRAM", "CHAT_ID")
 
+        # Єдиний Binance Client для всього проєкту
         client = Client(api_key, api_secret, testnet=testnet)
         if testnet:
             client.API_URL = "https://testnet.binancefuture.com/fapi/v1"  # Updated URL
@@ -84,9 +85,10 @@ def initialize_components(config):
         risk_per_trade = config.getfloat("TRADING", "risk_per_trade", fallback=0.01)
         max_drawdown = config.getfloat("TRADING", "max_drawdown", fallback=0.2)
 
+        # Передаємо client в усі компоненти!
         risk_management = RiskManagement(client, risk_per_trade, max_drawdown)
-        technical_analysis = TechnicalAnalysis()
-        ai_signal_generator = AISignalGenerator()  # ініціалізуємо AI-модуль
+        technical_analysis = TechnicalAnalysis(client)
+        ai_signal_generator = AISignalGenerator()
         trading_logic = TradingLogic(client, risk_management, technical_analysis)
         telegram_notifier = TelegramNotifier(bot_token, chat_id)
 
@@ -132,6 +134,7 @@ def main():
         config_path = "config/config.ini"
         config = load_config(config_path)
 
+        # --- 1. Ініціалізація компонентів з єдиним client ---
         client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
 
         account_balance = risk_management.account_balance
@@ -140,11 +143,11 @@ def main():
         symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
         interval = config.get("TRADING", "INTERVAL", fallback="1h")
 
-        # --- Асинхронний запуск Telegram Listener ---
+        # --- 2. Асинхронний запуск Telegram Listener ---
         loop = asyncio.get_event_loop()
         loop.create_task(run_telegram_listener())
 
-        # --- Основний торговий цикл (старий sync, залишаємо як є) ---
+        # --- 3. Основний торговий цикл ---
         while True:
             for symbol in symbols:
                 try:

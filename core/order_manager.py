@@ -2,6 +2,7 @@ from binance.client import Client
 from binance.exceptions import BinanceAPIException
 import logging
 import traceback
+import math
 
 def create_order(client, symbol, side, order_type, quantity):
     """
@@ -18,8 +19,20 @@ def create_order(client, symbol, side, order_type, quantity):
         dict or None: Order details if successful, otherwise None.
     """
     try:
+        # Перевірка параметрів перед відправкою ордера
+        if (
+            quantity is None
+            or type(quantity) not in [int, float]
+            or math.isnan(quantity)
+            or math.isinf(quantity)
+            or quantity <= 0
+            or order_type is None
+        ):
+            logging.error(f"Invalid order parameters: symbol={symbol}, side={side}, order_type={order_type}, quantity={quantity}")
+            return None
+
         logging.info(f"Placing {order_type} order for {symbol}: {side}, Quantity: {quantity}")
-        
+
         # Create the order
         order = client.futures_create_order(
             symbol=symbol,
@@ -27,7 +40,7 @@ def create_order(client, symbol, side, order_type, quantity):
             type=order_type,
             quantity=quantity
         )
-        
+
         logging.info(f"Order placed successfully: {order}")
         return order
 

@@ -1,115 +1,170 @@
-from binance.client import Client
+import logging
 import pandas as pd
-from loguru import logger
-import pandas_ta as ta
+import numpy as np
+from binance.client import Client
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class TechnicalAnalysis:
-    def fetch_binance_data(self, symbol, interval, testnet=False):
+    def __init__(self, client: Client):
+        self.client = client
+
+    def fetch_binance_data(self, symbol: str, interval: str = '1h', limit: int = 500, testnet: bool = True) -> pd.DataFrame:
         """
-        Fetch historical market data from Binance.
+        Fetch historical kline/candlestick data from Binance.
 
         Args:
-            symbol (str): Trading pair symbol, e.g., 'BTCUSDT'.
-            interval (str): Candlestick interval, e.g., '1h'.
-            testnet (bool): Whether to use Binance testnet.
+            symbol (str): Trading pair symbol (e.g., 'BTCUSDT').
+            interval (str): Kline interval (e.g., '1h').
+            limit (int): Number of data points to fetch.
+            testnet (bool): Unused, for compatibility.
 
         Returns:
-            pd.DataFrame: DataFrame containing market data.
+            pd.DataFrame: DataFrame containing OHLCV data.
         """
         try:
-            logger.info(f"Fetching data for {symbol} with interval {interval} (testnet={testnet})...")
-
-            # Initialize Binance client
-            client = Client()
-            if testnet:
-                client.API_URL = 'https://testnet.binancefuture.com/fapi/v1'
-
-            # Fetch candlestick data
-            klines = client.futures_klines(symbol=symbol, interval=interval)
-
-            # Convert to DataFrame
-            data = pd.DataFrame(klines, columns=[
+            klines = self.client.futures_klines(symbol=symbol, interval=interval, limit=limit)
+            df = pd.DataFrame(klines, columns=[
                 'Open time', 'Open', 'High', 'Low', 'Close', 'Volume',
                 'Close time', 'Quote asset volume', 'Number of trades',
                 'Taker buy base asset volume', 'Taker buy quote asset volume', 'Ignore'
             ])
-
-            # Convert numeric columns to float
-            data = data.astype({
-                'Open': 'float', 'High': 'float', 'Low': 'float', 'Close': 'float', 'Volume': 'float'
-            })
-
-            # Convert timestamps to datetime
-            data['Open time'] = pd.to_datetime(data['Open time'], unit='ms')
-            data['Close time'] = pd.to_datetime(data['Close time'], unit='ms')
-
-            logger.info(f"Data for {symbol} fetched successfully.")
-            return data
+            df['Open'] = df['Open'].astype(float)
+            df['High'] = df['High'].astype(float)
+            df['Low'] = df['Low'].astype(float)
+            df['Close'] = df['Close'].astype(float)
+            df['Volume'] = df['Volume'].astype(float)
+            df['Open time'] = pd.to_datetime(df['Open time'], unit='ms')
+            df['Close time'] = pd.to_datetime(df['Close time'], unit='ms')
+            logging.info(f"Fetched {len(df)} klines for {symbol} ({interval}) from Binance.")
+            return df
         except Exception as e:
-            logger.error(f"Error fetching Binance data: {e}")
-            raise
+            logging.error(f"Error fetching Binance data for {symbol}: {e}")
+            return pd.DataFrame()
 
-    def generate_optimized_signals(self, market_data, ema_short=12, ema_long=26, rsi_period=14, risk_reward_ratio=2):
+    def calculate_sma(self, data: pd.DataFrame, period: int = 20, column: str = "Close") -> pd.Series:
         """
-        Generate optimized trading signals based on technical analysis.
+        Calculate Simple Moving Average (SMA).
 
         Args:
-            market_data (pd.DataFrame): Historical market data with columns ['Open', 'High', 'Low', 'Close', 'Volume'].
-            ema_short (int): Period for the short EMA.
-            ema_long (int): Period for the long EMA.
-            rsi_period (int): Period for RSI calculation.
-            risk_reward_ratio (float): Desired risk-to-reward ratio for stop-loss and take-profit.
+            data (pd.DataFrame): Input DataFrame.
+            period (int): Window for SMA.
+            column (str): Column to calculate SMA on.
 
         Returns:
-            pd.DataFrame: Market data with added 'Signal', 'Stop_Loss', and 'Take_Profit' columns.
+            pd.Series: SMA values.
         """
-        # Validate input data
-        if not all(col in market_data.columns for col in ['Open', 'High', 'Low', 'Close', 'Volume']):
-            raise ValueError("market_data must contain 'Open', 'High', 'Low', 'Close', and 'Volume' columns")
+        sma = data[column].rolling(window=period).mean()
+        logging.info(f"Calculated {period}-period SMA.")
+        return sma
 
-        # Calculate EMAs
-        market_data['EMA_Short'] = ta.ema(market_data['Close'], length=ema_short)
-        market_data['EMA_Long'] = ta.ema(market_data['Close'], length=ema_long)
+    def calculate_ema(self, data: pd.DataFrame, period: int = 20, column: str = "Close") -> pd.Series:
+        """
+        Calculate Exponential Moving Average (EMA).
 
-        # Calculate RSI
-        market_data['RSI'] = ta.rsi(market_data['Close'], length=rsi_period)
+        Args:
+            data (pd.DataFrame): Input DataFrame.
+            period (int): Window for EMA.
+            column (str): Column to calculate EMA on.
 
-        # Calculate Bollinger Bands
-        bbands = ta.bbands(market_data['Close'], length=20, std=2)
-        market_data['Upper_Band'] = bbands['BBU_20_2.0']
-        market_data['Middle_Band'] = bbands['BBM_20_2.0']
-        market_data['Lower_Band'] = bbands['BBL_20_2.0']
+        Returns:
+            pd.Series: EMA values.
+        """
+        ema = data[column].ewm(span=period, adjust=False).mean()
+        logging.info(f"Calculated {period}-period EMA.")
+        return ema
 
-        # Calculate ADX for trend strength
-        adx = ta.adx(market_data['High'], market_data['Low'], market_data['Close'], length=14)
-        market_data['ADX'] = adx['ADX_14']
+    def calculate_rsi(self, data: pd.DataFrame, period: int = 14, column: str = "Close") -> pd.Series:
+        """
+        Calculate Relative Strength Index (RSI).
 
-        # Set default signal to HOLD
-        market_data['Signal'] = 'HOLD'
+        Args:
+            data (pd.DataFrame): Input DataFrame.
+            period (int): RSI lookback.
+            column (str): Column to calculate RSI on.
 
-        # Generate signals based on EMA crossovers and RSI
-        market_data.loc[
-            (market_data['EMA_Short'] > market_data['EMA_Long']) & (market_data['RSI'] < 70), 'Signal'
-        ] = 'BUY'
-        market_data.loc[
-            (market_data['EMA_Short'] < market_data['EMA_Long']) & (market_data['RSI'] > 30), 'Signal'
-        ] = 'SELL'
+        Returns:
+            pd.Series: RSI values.
+        """
+        delta = data[column].diff()
+        gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
+        loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
+        rs = gain / loss
+        rsi = 100 - (100 / (1 + rs))
+        logging.info(f"Calculated {period}-period RSI.")
+        return rsi
 
-        # Strong buy and sell signals using Bollinger Bands
-        market_data.loc[
-            (market_data['Close'] < market_data['Lower_Band']) & (market_data['RSI'] < 30), 'Signal'
-        ] = 'STRONG_BUY'
-        market_data.loc[
-            (market_data['Close'] > market_data['Upper_Band']) & (market_data['RSI'] > 70), 'Signal'
-        ] = 'STRONG_SELL'
+    def calculate_macd(self, data: pd.DataFrame, fast_period: int = 12, slow_period: int = 26, signal_period: int = 9, column: str = "Close") -> pd.DataFrame:
+        """
+        Calculate MACD indicator.
 
-        # Add Stop-Loss and Take-Profit levels
-        atr = ta.atr(market_data['High'], market_data['Low'], market_data['Close'], length=14)
-        market_data['Stop_Loss'] = market_data['Close'] - (atr * 1.5)
-        market_data['Take_Profit'] = market_data['Close'] + (atr * risk_reward_ratio)
+        Args:
+            data (pd.DataFrame): Input DataFrame.
+            fast_period (int): Fast EMA period.
+            slow_period (int): Slow EMA period.
+            signal_period (int): Signal line EMA period.
+            column (str): Column to calculate MACD on.
 
-        # Filter signals based on ADX (trend strength)
-        market_data.loc[(market_data['ADX'] < 25), 'Signal'] = 'HOLD'
+        Returns:
+            pd.DataFrame: MACD, Signal, Histogram.
+        """
+        fast_ema = self.calculate_ema(data, fast_period, column)
+        slow_ema = self.calculate_ema(data, slow_period, column)
+        macd = fast_ema - slow_ema
+        signal = macd.ewm(span=signal_period, adjust=False).mean()
+        histogram = macd - signal
+        result = data.copy()
+        result["MACD"] = macd
+        result["Signal"] = signal
+        result["Histogram"] = histogram
+        logging.info("Calculated MACD, Signal, and Histogram.")
+        return result
 
-        logger.info("Optimized signals generated successfully.")
-        return market_data
+    def generate_optimized_signals(self, data: pd.DataFrame) -> pd.DataFrame:
+        """
+        Generate trading signals based on optimized technical indicator logic.
+
+        Args:
+            data (pd.DataFrame): Input OHLCV DataFrame.
+
+        Returns:
+            pd.DataFrame: DataFrame with added signal columns.
+        """
+        data["SMA20"] = self.calculate_sma(data, 20)
+        data["EMA20"] = self.calculate_ema(data, 20)
+        data["RSI14"] = self.calculate_rsi(data, 14)
+        macd_df = self.calculate_macd(data)
+        data["MACD"] = macd_df["MACD"]
+        data["Signal"] = macd_df["Signal"]
+        data["Histogram"] = macd_df["Histogram"]
+
+        # Проста логіка для прикладу: BUY якщо EMA20 > SMA20 і RSI < 30, SELL якщо EMA20 < SMA20 і RSI > 70
+        data["SignalFlag"] = 0
+        data.loc[(data["EMA20"] > data["SMA20"]) & (data["RSI14"] < 30), "SignalFlag"] = 1
+        data.loc[(data["EMA20"] < data["SMA20"]) & (data["RSI14"] > 70), "SignalFlag"] = -1
+
+        logging.info("Generated optimized trading signals.")
+        return data
+
+    def calculate_atr(self, data: pd.DataFrame, period: int = 14) -> pd.Series:
+        """
+        Calculate Average True Range (ATR).
+
+        Args:
+            data (pd.DataFrame): Input OHLCV DataFrame.
+            period (int): ATR window.
+
+        Returns:
+            pd.Series: ATR values.
+        """
+        high_low = data["High"] - data["Low"]
+        high_close = np.abs(data["High"] - data["Close"].shift())
+        low_close = np.abs(data["Low"] - data["Close"].shift())
+        tr = high_low.to_frame("tr")
+        tr["hc"] = high_close
+        tr["lc"] = low_close
+        true_range = tr.max(axis=1)
+        atr = true_range.rolling(window=period).mean()
+        logging.info(f"Calculated {period}-period ATR.")
+        return atr

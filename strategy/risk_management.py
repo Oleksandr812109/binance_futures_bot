@@ -33,9 +33,11 @@ class RiskManagement:
             float: The balance of the specified asset.
         """
         try:
-            balance = self.client.get_asset_balance(asset=asset)
-            if balance:
-                return float(balance['free'])
+            # Використовуємо метод futures_account_balance для Binance Futures
+            balance_list = self.client.futures_account_balance()
+            for balance in balance_list:
+                if balance['asset'] == asset:
+                    return float(balance['balance'])
         except Exception as e:
             logging.error(f"Error fetching balance for {asset}: {e}")
         return 0.0

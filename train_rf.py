@@ -31,7 +31,7 @@ X = df[FEATURES].fillna(0)
 y = df[TARGET]
 
 # --- Розбиття на train/test ---
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # --- Створення та навчання моделі ---
 model = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42, class_weight="balanced")
@@ -45,7 +45,7 @@ print("Матриця невідповідностей:\n", confusion_matrix(y_t
 print("Точність: {:.2f}%".format(accuracy_score(y_test, y_pred) * 100))
 
 # --- Крос-валідація ---
-cv_scores = cross_val_score(model, X, y, cv=5)
+cv_scores = cross_val_score(model, X, y, cv=2)
 print("Середня точність (5-fold CV): {:.2f}%".format(cv_scores.mean() * 100))
 
 # --- Збереження моделі ---
