@@ -16,6 +16,8 @@ from loguru import logger
 # Додаємо імпорт TelegramSignalListener
 from core.telegram_signal_listener import TelegramSignalListener
 
+from utils.binance_precision import get_precision, round_quantity, round_price
+
 def setup_logging(log_file="bot.log"):
     logger.remove()
     logger.add(
