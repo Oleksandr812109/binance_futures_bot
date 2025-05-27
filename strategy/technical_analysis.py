@@ -95,6 +95,8 @@ class TechnicalAnalysis:
         logging.info(f"Calculated {period}-period Bollinger Bands.")
         return upper_band, lower_band
 
+    # ... (інші імпорти і код залишити без змін)
+
     def generate_optimized_signals(self, data: pd.DataFrame) -> pd.DataFrame:
         # EMA Short/Long
         data["EMA_Short"] = self.calculate_ema(data, 12)
@@ -119,6 +121,12 @@ class TechnicalAnalysis:
         data["SignalFlag"] = 0
         data.loc[(data["EMA20"] > data["SMA20"]) & (data["RSI14"] < 30), "SignalFlag"] = 1
         data.loc[(data["EMA20"] < data["SMA20"]) & (data["RSI14"] > 70), "SignalFlag"] = -1
+
+        # Додаємо стовпець Stop_Loss для коректної роботи головного циклу
+        data["Stop_Loss"] = np.where(
+            data["SignalFlag"] == 1, data["Close"] * 0.99,
+            np.where(data["SignalFlag"] == -1, data["Close"] * 1.01, np.nan)
+        )
 
         logging.info("Generated optimized trading signals with all required columns.")
         return data
