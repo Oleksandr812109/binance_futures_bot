@@ -128,5 +128,12 @@ class TechnicalAnalysis:
             np.where(data["SignalFlag"] == -1, data["Close"] * 1.01, np.nan)
         )
 
+        # Додано перевірку на наявність NaN у Close та Stop_Loss
+        print(data[["Close", "Stop_Loss"]].isna().sum())  # покаже кількість NaN у кожній колонці
+        print(data[data[["Close", "Stop_Loss"]].isna().any(axis=1)])  # покаже рядки з NaN
+
+        # Ось сюди додай фільтрацію:
+        data = data.dropna(subset=["Close", "Stop_Loss"])
+
         logging.info("Generated optimized trading signals with all required columns.")
         return data
