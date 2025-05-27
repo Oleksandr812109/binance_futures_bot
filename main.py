@@ -1,4 +1,9 @@
 import os
+import sys
+import time
+import traceback
+import logging
+import asyncio
 from configparser import ConfigParser
 from strategy.trading_logic import TradingLogic
 from strategy.risk_management import RiskManagement
@@ -7,9 +12,9 @@ from strategy.ai_signal_generator import AISignalGenerator  # Додаємо і�
 from core.telegram_notifier import TelegramNotifier
 from binance.client import Client
 from loguru import logger
-import traceback
-import sys
-import time
+
+# Додаємо імпорт TelegramSignalListener
+from core.telegram_signal_listener import TelegramSignalListener
 
 def setup_logging(log_file="bot.log"):
     logger.remove()
@@ -107,6 +112,18 @@ def get_account_balance(client, asset="USDT"):
         logger.debug(traceback.format_exc())
     return 0.0
 
+# --- Додаємо обробник сигналів із Telegram tradingruhal ---
+def handle_tradingruhal_signal(signal_text):
+    logger.info(f"Сигнал із tradingruhal: {signal_text}")
+    # TODO: Парсинг тексту сигналу та передача у торгову логіку
+    # parsed_signal = parse_signal(signal_text)
+    # trading_logic.handle_external_signal(parsed_signal)
+
+# --- Додаємо запуск TelegramSignalListener ---
+async def run_telegram_listener():
+    listener = TelegramSignalListener('config/config.ini', handle_tradingruhal_signal)
+    await listener.start()
+
 def main():
     setup_logging()
 
@@ -123,6 +140,11 @@ def main():
         symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
         interval = config.get("TRADING", "INTERVAL", fallback="1h")
 
+        # --- Асинхронний запуск Telegram Listener ---
+        loop = asyncio.get_event_loop()
+        loop.create_task(run_telegram_listener())
+
+        # --- Основний торговий цикл (старий sync, залишаємо як є) ---
         while True:
             for symbol in symbols:
                 try:
@@ -151,7 +173,6 @@ def main():
                         if hasattr(signal, "AI_Signal"):
                             if signal.AI_Signal == 1:
                                 logger.info(f"AI Buy signal detected for {symbol}, placing order...")
-                                # Далі аналогічно до вашої логіки, наприклад:
                                 entry_price = getattr(signal, "Close", None)
                                 stop_loss_price = getattr(signal, "Stop_Loss", None)
                                 if entry_price is None or stop_loss_price is None:
