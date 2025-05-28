@@ -202,6 +202,15 @@ def main():
                                     logger.error(f"Invalid stop-loss distance for {symbol}. Skipping order.")
                                     continue
                                 position_size = risk_management.calculate_position_size(stop_loss_distance)
+
+                                # Додаємо ОКРУГЛЕННЯ position_size відповідно до precision для символу
+                                symbol_info = get_symbol_info(client, symbol)
+                                if symbol_info is None:
+                                    logger.error(f"Cannot trade {symbol} because symbol_info is missing!")
+                                    continue
+                                quantity_precision = get_precision(symbol_info, "quantity")
+                                position_size = round_quantity(position_size, quantity_precision)
+
                                 order = trading_logic.place_order(symbol, "BUY", position_size)
                                 if order:
                                     telegram_notifier.send_message(
@@ -220,6 +229,15 @@ def main():
                                     logger.error(f"Invalid stop-loss distance for {symbol}. Skipping order.")
                                     continue
                                 position_size = risk_management.calculate_position_size(stop_loss_distance)
+
+                                # Додаємо ОКРУГЛЕННЯ position_size відповідно до precision для символу
+                                symbol_info = get_symbol_info(client, symbol)
+                                if symbol_info is None:
+                                    logger.error(f"Cannot trade {symbol} because symbol_info is missing!")
+                                    continue
+                                quantity_precision = get_precision(symbol_info, "quantity")
+                                position_size = round_quantity(position_size, quantity_precision)
+
                                 order = trading_logic.place_order(symbol, "SELL", position_size)
                                 if order:
                                     telegram_notifier.send_message(

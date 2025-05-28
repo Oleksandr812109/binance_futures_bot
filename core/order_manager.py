@@ -33,12 +33,16 @@ def create_order(client, symbol, side, order_type, quantity):
 
         logging.info(f"Placing {order_type} order for {symbol}: {side}, Quantity: {quantity}")
 
+        # Додаємо positionSide для Hedge Mode
+        positionSide = "LONG" if side == "BUY" else "SHORT"
+
         # Create the order
         order = client.futures_create_order(
             symbol=symbol,
             side=side,
             type=order_type,
-            quantity=quantity
+            quantity=quantity,
+            positionSide=positionSide
         )
 
         logging.info(f"Order placed successfully: {order}")

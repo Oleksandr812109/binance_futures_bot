@@ -28,11 +28,14 @@ class TradingLogic:
             return None
 
         try:
+            # Вказуємо positionSide для Hedge Mode
+            positionSide = "LONG" if side == "BUY" else "SHORT"
             order = self.client.futures_create_order(
                 symbol=symbol,
                 side=side,
                 type="MARKET",
-                quantity=quantity
+                quantity=quantity,
+                positionSide=positionSide
             )
             logging.info(f"Order placed: {order}")
             return order
@@ -57,12 +60,15 @@ class TradingLogic:
             return None
 
         try:
+            # Вказуємо positionSide для Hedge Mode
+            positionSide = "LONG" if side == "BUY" else "SHORT"
             order = self.client.futures_create_order(
                 symbol=symbol,
                 side=side,
                 type="MARKET",
                 quantity=quantity,
-                reduceOnly=True
+                reduceOnly=True,
+                positionSide=positionSide
             )
             logging.info(f"Position closed: {order}")
             return order
