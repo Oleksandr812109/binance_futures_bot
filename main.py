@@ -15,6 +15,7 @@ from loguru import logger
 from core.telegram_signal_listener import TelegramSignalListener
 from utils.binance_precision import get_precision, round_quantity, round_price
 from typing import Dict, Any
+from utils.trade_history_logger import save_trade 
 
 def get_symbol_info(client, symbol):
     try:
@@ -345,6 +346,12 @@ def main():
                                 )
                                 trade_info["status"] = "CLOSED"
                                 trade_info["close_price"] = current_price
+
+                                features_dict = trade_info.get("features", {})
+                                profit = current_price - entry_price if side == "BUY" else entry_price - current_price
+                                target = 1 if profit > 0 else 0
+                                save_trade(features_dict, trade_info, target)
+
                                 # LOGGING закриття угоди
                                 logger.info(f"[{trade_id}] Order closing info: {close_order}")
                             else:
