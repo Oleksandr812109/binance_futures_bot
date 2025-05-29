@@ -113,3 +113,36 @@ class TradingLogic:
             logging.error("Signal data is incomplete.")
             return None
         return self.place_order(symbol, side, quantity)
+
+    # --- Додано: універсальний метод закриття всіх позицій по символу (LONG і SHORT) ---
+    def close_all_positions(self, symbol: str):
+        """
+        Close all open positions (both LONG and SHORT) for a given symbol.
+        Useful for emergency exit or full reset.
+
+        Args:
+            symbol (str): Trading pair symbol.
+
+        Returns:
+            list: List of close order responses.
+        """
+        try:
+            close_orders = []
+            positions = self.get_open_positions(symbol=symbol)
+            for pos in positions:
+                amt = float(pos["positionAmt"])
+                if amt == 0:
+                    continue
+                # Якщо позиція LONG (amt > 0): треба SELL; якщо SHORT (amt < 0): треба BUY
+                close_side = "SELL" if amt > 0 else "BUY"
+                quantity = abs(amt)
+                response = self.close_position(symbol, quantity, close_side)
+                close_orders.append(response)
+            if close_orders:
+                logging.info(f"All positions for {symbol} closed: {close_orders}")
+            else:
+                logging.info(f"No open positions to close for {symbol}.")
+            return close_orders
+        except Exception as e:
+            logging.error(f"Error closing all positions for {symbol}: {e}")
+            return []
