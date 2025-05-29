@@ -159,6 +159,9 @@ def process_closed_trades(active_trades: Dict[str, Dict[str, Any]], ai_signal_ge
 
             trades_to_remove.append(trade_id)
 
+            # LOGGING закриття угоди
+            logger.info(f"[{trade_id}] Trade closed. Side: {trade_info.get('side')}, Entry: {trade_info.get('entry_price')}, Close: {trade_info.get('close_price')}, Profit: {profit:.4f}, Target label: {target}")
+
         except KeyError as e:
             logger.error(f"Trade {trade_id}: Missing expected key in trade_info: {e}. Skipping trade.")
         except Exception as e:
@@ -198,17 +201,22 @@ def main():
                         continue
 
                     logger.info(f"Generating trading signals for {symbol}...")
+
                     data = technical_analysis.generate_optimized_signals(data)
                     data = ai_signal_generator.predict_signals(data)
 
+                    # LOGGING згенерованих сигналів для кожного бару
+                    feature_cols = ["EMA_Short", "EMA_Long", "RSI", "ADX", "Upper_Band", "Lower_Band"]
                     for idx in range(len(data)):
                         signal = data.iloc[idx]
-                        logger.debug(f"Processing signal for {symbol}: {signal}")
+                        ai_signal = signal["AI_Signal"] if "AI_Signal" in signal else getattr(signal, "AI_Signal", None)
+                        features_log = {col: signal[col] for col in feature_cols if col in signal}
+                        logger.info(f"[{symbol}] idx={idx} | AI_Signal={ai_signal} | features: {features_log}")
 
                         if hasattr(signal, "AI_Signal") or "AI_Signal" in signal:
                             ai_signal = signal["AI_Signal"] if "AI_Signal" in signal else signal.AI_Signal
                             if ai_signal == 1:
-                                logger.info(f"AI Buy signal detected for {symbol}, placing order...")
+                                logger.info(f"AI Buy signal detected for {symbol} at idx={idx}, placing order...")
                                 entry_price = signal["Close"] if "Close" in signal else getattr(signal, "Close", None)
                                 stop_loss_price = signal["Stop_Loss"] if "Stop_Loss" in signal else getattr(signal, "Stop_Loss", None)
                                 if entry_price is None or stop_loss_price is None:
@@ -227,7 +235,6 @@ def main():
                                 quantity_precision = get_precision(symbol_info, "quantity")
                                 position_size = round_quantity(position_size, quantity_precision)
 
-                                feature_cols = ["EMA_Short", "EMA_Long", "RSI", "ADX", "Upper_Band", "Lower_Band"]
                                 features = {col: float(signal[col]) for col in feature_cols if col in signal}
                                 trade_id = f"{symbol}_BUY_{int(time.time())}"
                                 active_trades[trade_id] = {
@@ -240,13 +247,16 @@ def main():
 
                                 order = trading_logic.place_order(symbol, "BUY", position_size)
                                 if order:
+                                    logger.info(f"[{trade_id}] BUY order placed: {order}")
                                     telegram_notifier.send_message(
                                         f"Order placed: AI BUY {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
                                     )
                                     active_trades[trade_id]["order"] = order
+                                else:
+                                    logger.error(f"[{trade_id}] BUY order failed!")
 
                             elif ai_signal == -1:
-                                logger.info(f"AI Sell signal detected for {symbol}, placing order...")
+                                logger.info(f"AI Sell signal detected for {symbol} at idx={idx}, placing order...")
                                 entry_price = signal["Close"] if "Close" in signal else getattr(signal, "Close", None)
                                 stop_loss_price = signal["Stop_Loss"] if "Stop_Loss" in signal else getattr(signal, "Stop_Loss", None)
                                 if entry_price is None or stop_loss_price is None:
@@ -265,7 +275,6 @@ def main():
                                 quantity_precision = get_precision(symbol_info, "quantity")
                                 position_size = round_quantity(position_size, quantity_precision)
 
-                                feature_cols = ["EMA_Short", "EMA_Long", "RSI", "ADX", "Upper_Band", "Lower_Band"]
                                 features = {col: float(signal[col]) for col in feature_cols if col in signal}
                                 trade_id = f"{symbol}_SELL_{int(time.time())}"
                                 active_trades[trade_id] = {
@@ -278,10 +287,13 @@ def main():
 
                                 order = trading_logic.place_order(symbol, "SELL", position_size)
                                 if order:
+                                    logger.info(f"[{trade_id}] SELL order placed: {order}")
                                     telegram_notifier.send_message(
                                         f"Order placed: AI SELL {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
                                     )
                                     active_trades[trade_id]["order"] = order
+                                else:
+                                    logger.error(f"[{trade_id}] SELL order failed!")
 
                     # --- Блок автоматичного закриття позицій по PNL ---
                     for trade_id, trade_info in list(active_trades.items()):
@@ -333,6 +345,8 @@ def main():
                                 )
                                 trade_info["status"] = "CLOSED"
                                 trade_info["close_price"] = current_price
+                                # LOGGING закриття угоди
+                                logger.info(f"[{trade_id}] Order closing info: {close_order}")
                             else:
                                 logger.error(f"[{trade_id}] Failed to close position at {current_price} ({reason})")
 

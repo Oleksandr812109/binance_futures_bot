@@ -21,3 +21,6 @@ python-telegram-bot>=20.0
 
 # Якщо використовуєте jupyter notebook для досліджень:
 # jupyterlab>=3.0.0
+
+# ДЛЯ ONLINE LEARNING AI-МОДЕЛІ
+river>=0.22.0

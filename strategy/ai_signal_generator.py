@@ -1,21 +1,22 @@
 import numpy as np
 import pandas as pd
 import pickle
-from river.ensemble import AdaptiveRandomForestClassifier
+from river.ensemble import BaggingClassifier
+from river.tree import HoeffdingTreeClassifier
 
 class AISignalGenerator:
-    def __init__(self, model_path="ai_models/default_arf.pkl"):
+    def __init__(self, model_path="ai_models/default_bagging.pkl"):
         self.model_path = model_path
         try:
             with open(model_path, "rb") as f:
                 self.model = pickle.load(f)
         except (FileNotFoundError, EOFError):
-            self.model = AdaptiveRandomForestClassifier()
+            self.model = BaggingClassifier(model=HoeffdingTreeClassifier())
 
     def preprocess(self, df):
         features = ["EMA_Short", "EMA_Long", "RSI", "ADX", "Upper_Band", "Lower_Band"]
         return df[features].fillna(0)
-    
+
     def predict_signals(self, df):
         X = self.preprocess(df)
         preds = []
@@ -30,7 +31,6 @@ class AISignalGenerator:
         return df
 
     def partial_fit(self, features_dict, target):
-        # features_dict — dict із ознаками (наприклад, row.to_dict())
         self.model.learn_one(features_dict, target)
         self.save_model()
 
