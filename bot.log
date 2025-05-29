@@ -21232,3 +21232,19 @@ dtype: int64
 2025-05-29 18:06:29 | ERROR | Cannot close position for SOLUSDT_SELL_1748541511: unknown quantity.
 2025-05-29 18:06:29 | INFO | [SOLUSDT_BUY_1748541512] Current PNL: -1.89%
 2025-05-29 18:06:29 | INFO | Bot stopped manually by user.
+2025-05-29 19:43:06 | INFO | Starting Binance Futures Trading Bot...
+2025-05-29 19:43:06 | INFO | Configuration file loaded successfully.
+2025-05-29 19:43:07 | INFO | Binance client initialized (testnet=True)
+2025-05-29 19:43:07 | INFO | Testing API key...
+2025-05-29 19:43:08 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-29 19:43:08 | INFO | Fetched balance for USDT: 6627.01048755 USDT
+2025-05-29 19:43:08 | DEBUG | All components initialized successfully.
+2025-05-29 19:44:12 | INFO | Bot stopped manually by user.
+2025-05-29 19:44:31 | INFO | Starting Binance Futures Trading Bot...
+2025-05-29 19:44:31 | INFO | Configuration file loaded successfully.
+2025-05-29 19:44:32 | INFO | Binance client initialized (testnet=True)
+2025-05-29 19:44:32 | INFO | Testing API key...
+2025-05-29 19:44:33 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-29 19:44:33 | INFO | Fetched balance for USDT: 6627.01048755 USDT
+2025-05-29 19:44:34 | DEBUG | All components initialized successfully.
+2025-05-29 19:46:04 | INFO | Bot stopped manually by user.
