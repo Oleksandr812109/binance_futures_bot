@@ -45,35 +45,34 @@ class TradingLogic:
             return None
 
     def close_position(self, symbol: str, quantity: float, side: str):
-    """
-    Close an open position.
+        """
+        Close an open position.
 
-    Args:
-        symbol (str): Trading pair symbol.
-        quantity (float): Quantity to close.
-        side (str): 'BUY' or 'SELL' to close the position.
-    """
-    # --- Додаткова перевірка перед закриттям ---
-    ok, reason = can_close_position(self.client, symbol, quantity, side)
-    if not ok:
-        logging.error(f"Не можна закрити позицію: {reason}")
-        return None
+        Args:
+            symbol (str): Trading pair symbol.
+            quantity (float): Quantity to close.
+            side (str): 'BUY' or 'SELL' to close the position.
+        """
+        # --- Додаткова перевірка перед закриттям ---
+        ok, reason = can_close_position(self.client, symbol, quantity, side)
+        if not ok:
+            logging.error(f"Не можна закрити позицію: {reason}")
+            return None
 
-    try:
-        # Вказуємо positionSide для Hedge Mode
-        positionSide = "LONG" if side == "BUY" else "SHORT"
-        order = self.client.futures_create_order(
-            symbol=symbol,
-            side=side,
-            type="MARKET",
-            quantity=quantity,
-            positionSide=positionSide
-        )
-        logging.info(f"Position closed: {order}")
-        return order
-    except Exception as e:
-        logging.error(f"Error closing position: {e}")
-        return None
+        try:
+            positionSide = "LONG" if side == "BUY" else "SHORT"
+            order = self.client.futures_create_order(
+                symbol=symbol,
+                side=side,
+                type="MARKET",
+                quantity=quantity,
+                positionSide=positionSide
+            )
+            logging.info(f"Position closed: {order}")
+            return order
+        except Exception as e:
+            logging.error(f"Error closing position: {e}")
+            return None
 
     def get_open_positions(self, symbol: str = None):
         """
