@@ -218,13 +218,27 @@ def main():
                             elif last_row["EMA_Short"] < last_row["EMA_Long"] or last_row["RSI"] > 70:
                                 fallback_signal_val = -1
 
+                            fallback_stop_loss = last_row.get("Stop_Loss", None)
+                            entry_price = last_row.get("Close", None)
+                            # Перевірка та fallback для Stop_Loss
+                            if fallback_signal_val == 1 and entry_price is not None:
+                                if (fallback_stop_loss is None or 
+                                    fallback_stop_loss >= entry_price or 
+                                    fallback_stop_loss != fallback_stop_loss):
+                                    fallback_stop_loss = entry_price * 0.98
+                            elif fallback_signal_val == -1 and entry_price is not None:
+                                if (fallback_stop_loss is None or 
+                                    fallback_stop_loss <= entry_price or 
+                                    fallback_stop_loss != fallback_stop_loss):
+                                    fallback_stop_loss = entry_price * 1.02
+
                             if fallback_signal_val != 0:
                                 logger.info(f"Fallback сигнал для {symbol}: {fallback_signal_val}")
                                 signal = {
                                     "symbol": symbol,
                                     "decision": int(fallback_signal_val),
-                                    "Close": last_row.get("Close", None),
-                                    "Stop_Loss": last_row.get("Stop_Loss", None),
+                                    "Close": entry_price,
+                                    "Stop_Loss": fallback_stop_loss,
                                     "EMA_Short": last_row.get("EMA_Short", 0.0),
                                     "EMA_Long": last_row.get("EMA_Long", 0.0),
                                     "RSI": last_row.get("RSI", 0.0),
@@ -252,7 +266,6 @@ def main():
                     except Exception as e:
                         logger.error(f"Error fetching/generating signal for {symbol}: {e}")
                         logger.debug(traceback.format_exc())
-
 
                 for idx, signal in enumerate(signals):
                     symbol = signal.get("symbol")
@@ -368,7 +381,7 @@ def main():
 
                     logger.info(f"[{trade_id}] Current PNL: {pnl:.2f}%")
 
-                    CLOSE_PROFIT_PNL = 5   # take-profit %
+                    CLOSE_PROFIT_PNL = 1   # take-profit %
                     CLOSE_LOSS_PNL = -40    # stop-loss %
 
                     if pnl >= CLOSE_PROFIT_PNL or pnl <= CLOSE_LOSS_PNL:
