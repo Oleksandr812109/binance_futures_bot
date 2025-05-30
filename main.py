@@ -197,37 +197,62 @@ def main():
                 # --- Отримання сигналів через AI ---
                 signals = []
                 for symbol in symbols:
-                    # Приклад: отримуємо ринок, готуємо датафрейм, передаємо в AI
                     try:
                         df = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
                         if df is None or df.empty:
                             logger.warning(f"No market data for {symbol}, skipping.")
                             continue
+                        df = technical_analysis.generate_optimized_signals(df)
 
-                        df = technical_analysis.generate_optimized_signals(df)  # Додаємо індикатори
-
+                        # AI сигнал
                         signals_df = ai_signal_generator.predict_signals(df)
-                        # Беремо останній сигнал
+                        num_signals = signals_df["AI_Signal"].abs().sum()
                         last_row = signals_df.iloc[-1]
-                        signal_val = last_row["AI_Signal"]
-                        if signal_val == 1 or signal_val == -1:
-                            signal = {
-                                "symbol": symbol,
-                                "decision": int(signal_val),
-                                "Close": last_row.get("Close", None),
-                                "Stop_Loss": last_row.get("Stop_Loss", None),
-                                # Додаємо фічі для AI навчанню
-                                "EMA_Short": last_row.get("EMA_Short", 0.0),
-                                "EMA_Long": last_row.get("EMA_Long", 0.0),
-                                "RSI": last_row.get("RSI", 0.0),
-                                "ADX": last_row.get("ADX", 0.0),
-                                "Upper_Band": last_row.get("Upper_Band", 0.0),
-                                "Lower_Band": last_row.get("Lower_Band", 0.0),
-                            }
-                            signals.append(signal)
+
+                        if num_signals == 0:
+                            # fallback: простий сигнал для старту навчання AI
+                            logger.info(f"AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для {symbol}")
+                            fallback_signal_val = 0
+                            if last_row["EMA_Short"] > last_row["EMA_Long"] or last_row["RSI"] < 30:
+                                fallback_signal_val = 1
+                            elif last_row["EMA_Short"] < last_row["EMA_Long"] or last_row["RSI"] > 70:
+                                fallback_signal_val = -1
+
+                            if fallback_signal_val != 0:
+                                logger.info(f"Fallback сигнал для {symbol}: {fallback_signal_val}")
+                                signal = {
+                                    "symbol": symbol,
+                                    "decision": int(fallback_signal_val),
+                                    "Close": last_row.get("Close", None),
+                                    "Stop_Loss": last_row.get("Stop_Loss", None),
+                                    "EMA_Short": last_row.get("EMA_Short", 0.0),
+                                    "EMA_Long": last_row.get("EMA_Long", 0.0),
+                                    "RSI": last_row.get("RSI", 0.0),
+                                    "ADX": last_row.get("ADX", 0.0),
+                                    "Upper_Band": last_row.get("Upper_Band", 0.0),
+                                    "Lower_Band": last_row.get("Lower_Band", 0.0),
+                                }
+                                signals.append(signal)
+                        else:
+                            signal_val = last_row["AI_Signal"]
+                            if signal_val == 1 or signal_val == -1:
+                                signal = {
+                                    "symbol": symbol,
+                                    "decision": int(signal_val),
+                                    "Close": last_row.get("Close", None),
+                                    "Stop_Loss": last_row.get("Stop_Loss", None),
+                                    "EMA_Short": last_row.get("EMA_Short", 0.0),
+                                    "EMA_Long": last_row.get("EMA_Long", 0.0),
+                                    "RSI": last_row.get("RSI", 0.0),
+                                    "ADX": last_row.get("ADX", 0.0),
+                                    "Upper_Band": last_row.get("Upper_Band", 0.0),
+                                    "Lower_Band": last_row.get("Lower_Band", 0.0),
+                                }
+                                signals.append(signal)
                     except Exception as e:
                         logger.error(f"Error fetching/generating signal for {symbol}: {e}")
                         logger.debug(traceback.format_exc())
+
 
                 for idx, signal in enumerate(signals):
                     symbol = signal.get("symbol")
@@ -343,7 +368,7 @@ def main():
 
                     logger.info(f"[{trade_id}] Current PNL: {pnl:.2f}%")
 
-                    CLOSE_PROFIT_PNL = 20   # take-profit %
+                    CLOSE_PROFIT_PNL = 5   # take-profit %
                     CLOSE_LOSS_PNL = -40    # stop-loss %
 
                     if pnl >= CLOSE_PROFIT_PNL or pnl <= CLOSE_LOSS_PNL:
