@@ -28245,3 +28245,109 @@ dtype: int64
 2025-05-30 18:42:17 | INFO | AI fallback: No signals for XRPUSDT
 2025-05-30 18:42:17 | INFO | AI fallback for XRPUSDT: 1
 2025-05-30 18:42:31 | INFO | Bot stopped manually by user.
+2025-05-30 19:04:41 | INFO | Starting Binance Futures Trading Bot...
+2025-05-30 19:04:41 | INFO | Configuration file loaded successfully.
+2025-05-30 19:04:42 | INFO | Binance client initialized (testnet=True)
+2025-05-30 19:04:42 | INFO | Testing API key...
+2025-05-30 19:04:42 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-30 19:04:43 | INFO | Fetched balance for USDT: 3223.36076629 USDT
+2025-05-30 19:04:43 | DEBUG | All components initialized successfully.
+2025-05-30 19:04:44 | INFO | AI fallback: No signals for BTCUSDT
+2025-05-30 19:04:44 | INFO | AI fallback for BTCUSDT: -1
+2025-05-30 19:04:44 | INFO | AI fallback: No signals for ETHUSDT
+2025-05-30 19:04:44 | INFO | AI fallback for ETHUSDT: 1
+2025-05-30 19:04:44 | INFO | AI fallback: No signals for BNBUSDT
+2025-05-30 19:04:44 | INFO | AI fallback for BNBUSDT: -1
+2025-05-30 19:04:45 | INFO | AI fallback: No signals for SOLUSDT
+2025-05-30 19:04:45 | INFO | AI fallback for SOLUSDT: -1
+2025-05-30 19:04:45 | INFO | AI fallback: No signals for XRPUSDT
+2025-05-30 19:04:45 | INFO | AI fallback for XRPUSDT: 1
+2025-05-30 19:05:45 | INFO | AI fallback: No signals for BTCUSDT
+2025-05-30 19:05:45 | INFO | AI fallback for BTCUSDT: -1
+2025-05-30 19:05:46 | INFO | AI fallback: No signals for ETHUSDT
+2025-05-30 19:05:46 | INFO | AI fallback for ETHUSDT: 1
+2025-05-30 19:05:46 | INFO | AI fallback: No signals for BNBUSDT
+2025-05-30 19:05:46 | INFO | AI fallback for BNBUSDT: -1
+2025-05-30 19:05:47 | INFO | AI fallback: No signals for SOLUSDT
+2025-05-30 19:05:47 | INFO | AI fallback for SOLUSDT: -1
+2025-05-30 19:05:47 | INFO | AI fallback: No signals for XRPUSDT
+2025-05-30 19:05:47 | INFO | AI fallback for XRPUSDT: 1
+2025-05-30 19:06:42 | INFO | Bot stopped manually by user.
+2025-05-30 19:08:26 | INFO | Starting Binance Futures Trading Bot...
+2025-05-30 19:08:26 | INFO | Configuration file loaded successfully.
+2025-05-30 19:08:27 | INFO | Binance client initialized (testnet=True)
+2025-05-30 19:08:27 | INFO | Testing API key...
+2025-05-30 19:08:28 | INFO | API Key is valid. Account info fetched successfully.
+2025-05-30 19:08:28 | INFO | Fetched balance for USDT: 3223.36076629 USDT
+2025-05-30 19:08:28 | DEBUG | All components initialized successfully.
+2025-05-30 19:08:29 | INFO | AI fallback: No signals for BTCUSDT
+2025-05-30 19:08:29 | INFO | AI fallback for BTCUSDT: -1
+2025-05-30 19:08:29 | INFO | AI fallback: No signals for ETHUSDT
+2025-05-30 19:08:29 | INFO | AI fallback for ETHUSDT: 1
+2025-05-30 19:08:30 | INFO | AI fallback: No signals for BNBUSDT
+2025-05-30 19:08:30 | INFO | AI fallback for BNBUSDT: -1
+2025-05-30 19:08:31 | INFO | AI fallback: No signals for SOLUSDT
+2025-05-30 19:08:31 | INFO | AI fallback for SOLUSDT: -1
+2025-05-30 19:08:31 | INFO | AI fallback: No signals for XRPUSDT
+2025-05-30 19:08:31 | INFO | AI fallback for XRPUSDT: 1
+2025-05-30 19:09:32 | INFO | AI fallback: No signals for BTCUSDT
+2025-05-30 19:09:32 | INFO | AI fallback for BTCUSDT: -1
+2025-05-30 19:09:32 | INFO | AI fallback: No signals for ETHUSDT
+2025-05-30 19:09:32 | INFO | AI fallback for ETHUSDT: 1
+2025-05-30 19:09:33 | INFO | AI fallback: No signals for BNBUSDT
+2025-05-30 19:09:33 | INFO | AI fallback for BNBUSDT: -1
+2025-05-30 19:09:33 | INFO | AI fallback: No signals for SOLUSDT
+2025-05-30 19:09:33 | INFO | AI fallback for SOLUSDT: -1
+2025-05-30 19:09:34 | INFO | AI fallback: No signals for XRPUSDT
+2025-05-30 19:09:34 | INFO | AI fallback for XRPUSDT: 1
+2025-05-30 19:10:35 | INFO | AI fallback: No signals for BTCUSDT
+2025-05-30 19:10:35 | INFO | AI fallback for BTCUSDT: -1
+2025-05-30 19:10:35 | INFO | AI fallback: No signals for ETHUSDT
+2025-05-30 19:10:35 | INFO | AI fallback for ETHUSDT: 1
+2025-05-30 19:10:36 | INFO | AI fallback: No signals for BNBUSDT
+2025-05-30 19:10:36 | INFO | AI fallback for BNBUSDT: -1
+2025-05-30 19:10:36 | INFO | AI fallback: No signals for SOLUSDT
+2025-05-30 19:10:36 | INFO | AI fallback for SOLUSDT: -1
+2025-05-30 19:10:36 | INFO | AI fallback: No signals for XRPUSDT
+2025-05-30 19:10:36 | INFO | AI fallback for XRPUSDT: 1
+2025-05-30 19:11:37 | INFO | AI fallback: No signals for BTCUSDT
+2025-05-30 19:11:37 | INFO | AI fallback for BTCUSDT: -1
+2025-05-30 19:11:38 | INFO | AI fallback: No signals for ETHUSDT
+2025-05-30 19:11:38 | INFO | AI fallback for ETHUSDT: 1
+2025-05-30 19:11:38 | INFO | AI fallback: No signals for BNBUSDT
+2025-05-30 19:11:38 | INFO | AI fallback for BNBUSDT: -1
+2025-05-30 19:11:38 | INFO | AI fallback: No signals for SOLUSDT
+2025-05-30 19:11:38 | INFO | AI fallback for SOLUSDT: -1
+2025-05-30 19:11:39 | INFO | AI fallback: No signals for XRPUSDT
+2025-05-30 19:11:39 | INFO | AI fallback for XRPUSDT: 1
+2025-05-30 19:12:40 | INFO | AI fallback: No signals for BTCUSDT
+2025-05-30 19:12:40 | INFO | AI fallback for BTCUSDT: -1
+2025-05-30 19:12:41 | INFO | AI fallback: No signals for ETHUSDT
+2025-05-30 19:12:41 | INFO | AI fallback for ETHUSDT: 1
+2025-05-30 19:12:42 | INFO | AI fallback: No signals for BNBUSDT
+2025-05-30 19:12:42 | INFO | AI fallback for BNBUSDT: -1
+2025-05-30 19:12:42 | INFO | AI fallback: No signals for SOLUSDT
+2025-05-30 19:12:42 | INFO | AI fallback for SOLUSDT: -1
+2025-05-30 19:12:43 | INFO | AI fallback: No signals for XRPUSDT
+2025-05-30 19:12:43 | INFO | AI fallback for XRPUSDT: 1
+2025-05-30 19:13:43 | INFO | AI fallback: No signals for BTCUSDT
+2025-05-30 19:13:43 | INFO | AI fallback for BTCUSDT: -1
+2025-05-30 19:13:44 | INFO | AI fallback: No signals for ETHUSDT
+2025-05-30 19:13:44 | INFO | AI fallback for ETHUSDT: 1
+2025-05-30 19:13:45 | INFO | AI fallback: No signals for BNBUSDT
+2025-05-30 19:13:45 | INFO | AI fallback for BNBUSDT: -1
+2025-05-30 19:13:45 | INFO | AI fallback: No signals for SOLUSDT
+2025-05-30 19:13:45 | INFO | AI fallback for SOLUSDT: -1
+2025-05-30 19:13:47 | INFO | AI fallback: No signals for XRPUSDT
+2025-05-30 19:13:47 | INFO | AI fallback for XRPUSDT: 1
+2025-05-30 19:14:47 | INFO | AI fallback: No signals for BTCUSDT
+2025-05-30 19:14:47 | INFO | AI fallback for BTCUSDT: -1
+2025-05-30 19:14:48 | INFO | AI fallback: No signals for ETHUSDT
+2025-05-30 19:14:48 | INFO | AI fallback for ETHUSDT: 1
+2025-05-30 19:14:49 | INFO | AI fallback: No signals for BNBUSDT
+2025-05-30 19:14:49 | INFO | AI fallback for BNBUSDT: -1
+2025-05-30 19:14:49 | INFO | AI fallback: No signals for SOLUSDT
+2025-05-30 19:14:49 | INFO | AI fallback for SOLUSDT: -1
+2025-05-30 19:14:50 | INFO | AI fallback: No signals for XRPUSDT
+2025-05-30 19:14:50 | INFO | AI fallback for XRPUSDT: 1
+2025-05-30 19:14:58 | INFO | Bot stopped manually by user.

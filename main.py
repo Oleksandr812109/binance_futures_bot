@@ -208,12 +208,12 @@ def main():
                         if num_signals == 0:
                             logger.info(f"AI fallback: No signals for {symbol}")
                             fallback_signal_val = 0
-                            if last_row["EMA_Short"] > last_row["EMA_Long"] or last_row["RSI"] > 30:
+                            if last_row["EMA_Short"] > last_row["EMA_Long"] or last_row["RSI"] > 50:
                                 fallback_signal_val = 1
-                            elif last_row["EMA_Short"] < last_row["EMA_Long"] or last_row["RSI"] < 70:
+                            elif last_row["EMA_Short"] < last_row["EMA_Long"] or last_row["RSI"] < 55:
                                 fallback_signal_val = -1
                             logger.info(f"AI fallback for {symbol}: {fallback_signal_val}")
-                        if last_row["EMA_Short"] > last_row["EMA_Long"] and last_row["RSI"] < 30:
+                        if last_row["EMA_Short"] > last_row["EMA_Long"] and last_row["RSI"] < 45:
                             signal = {
                                 "symbol": symbol,
                                 "decision": 1,
