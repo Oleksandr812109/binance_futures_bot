@@ -203,6 +203,9 @@ def main():
                         if df is None or df.empty:
                             logger.warning(f"No market data for {symbol}, skipping.")
                             continue
+
+                        df = technical_analysis.generate_optimized_signals(df)  # Додаємо індикатори
+
                         signals_df = ai_signal_generator.predict_signals(df)
                         # Беремо останній сигнал
                         last_row = signals_df.iloc[-1]
@@ -211,8 +214,8 @@ def main():
                             signal = {
                                 "symbol": symbol,
                                 "decision": int(signal_val),
-                                "Close": last_row.get("close", None),
-                                "Stop_Loss": last_row.get("low", None),
+                                "Close": last_row.get("Close", None),
+                                "Stop_Loss": last_row.get("Stop_Loss", None),
                                 # Додаємо фічі для AI навчанню
                                 "EMA_Short": last_row.get("EMA_Short", 0.0),
                                 "EMA_Long": last_row.get("EMA_Long", 0.0),
