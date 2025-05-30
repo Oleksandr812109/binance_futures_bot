@@ -186,111 +186,192 @@ def main():
         symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
         interval = config.get("TRADING", "INTERVAL", fallback="1h")
 
+        feature_cols = ["EMA_Short", "EMA_Long", "RSI", "ADX", "Upper_Band", "Lower_Band"]  # має відповідати фічам AI
+        active_trades = {}
+
         loop = asyncio.get_event_loop()
         loop.create_task(run_telegram_listener())
 
-        active_trades = {}
-
         while True:
-            for symbol in symbols:
-                try:
-                    logger.info(f"Fetching market data for {symbol} with interval {interval}...")
-                    data = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+            try:
+                # --- Отримання сигналів через AI ---
+                signals = []
+                for symbol in symbols:
+                    # Приклад: отримуємо ринок, готуємо датафрейм, передаємо в AI
+                    try:
+                        df = technical_analysis.fetch_binance_data(symbol=symbol, interval=interval, testnet=client.testnet)
+                        if df is None or df.empty:
+                            logger.warning(f"No market data for {symbol}, skipping.")
+                            continue
+                        signals_df = ai_signal_generator.predict_signals(df)
+                        # Беремо останній сигнал
+                        last_row = signals_df.iloc[-1]
+                        signal_val = last_row["AI_Signal"]
+                        if signal_val == 1 or signal_val == -1:
+                            signal = {
+                                "symbol": symbol,
+                                "decision": int(signal_val),
+                                "Close": last_row.get("close", None),
+                                "Stop_Loss": last_row.get("low", None),
+                                # Додаємо фічі для AI навчанню
+                                "EMA_Short": last_row.get("EMA_Short", 0.0),
+                                "EMA_Long": last_row.get("EMA_Long", 0.0),
+                                "RSI": last_row.get("RSI", 0.0),
+                                "ADX": last_row.get("ADX", 0.0),
+                                "Upper_Band": last_row.get("Upper_Band", 0.0),
+                                "Lower_Band": last_row.get("Lower_Band", 0.0),
+                            }
+                            signals.append(signal)
+                    except Exception as e:
+                        logger.error(f"Error fetching/generating signal for {symbol}: {e}")
+                        logger.debug(traceback.format_exc())
 
-                    if data is None or data.empty:
-                        logger.error(f"Fetched market data for {symbol} is empty or invalid. Skipping...")
+                for idx, signal in enumerate(signals):
+                    symbol = signal.get("symbol")
+                    decision = signal.get("decision")
+                    if symbol is None or decision is None:
+                        logger.error(f"Signal missing symbol or decision: {signal}")
                         continue
 
-                    logger.info(f"Generating trading signals for {symbol}...")
+                    if decision == 1:
+                        logger.info(f"Buy signal detected for {symbol} at idx={idx}, placing order.")
+                        entry_price = signal.get("Close")
+                        stop_loss_price = signal.get("Stop_Loss")
+                        if entry_price is None or stop_loss_price is None:
+                            logger.error(f"Missing entry or stop-loss price. Skipping order.")
+                            continue
+                        stop_loss_distance = entry_price - stop_loss_price
+                        if stop_loss_distance <= 0:
+                            logger.error(f"Invalid stop-loss distance for {symbol} (LONG). Skipping order.")
+                            continue
+                        position_size = risk_management.calculate_position_size(stop_loss_distance)
 
-                    data = technical_analysis.generate_optimized_signals(data)
-                    data = ai_signal_generator.predict_signals(data)
+                        symbol_info = get_symbol_info(client, symbol)
+                        if symbol_info is None:
+                            logger.error(f"Cannot trade {symbol} because symbol_info is missing!")
+                            continue
+                        quantity_precision = get_precision(symbol_info, "quantity")
+                        position_size = round_quantity(position_size, quantity_precision)
 
-                    # LOGGING згенерованих сигналів для кожного бару
-                    feature_cols = ["EMA_Short", "EMA_Long", "RSI", "ADX", "Upper_Band", "Lower_Band"]
-                    for idx in range(len(data)):
-                        signal = data.iloc[idx]
-                        features_log = {col: signal[col] for col in feature_cols if col in signal}
-                        logger.info(f"[{symbol}] idx={idx} | features: {features_log}")
-
-                        # === ВИБІР СИГНАЛУ ===
-                        if not is_enough_history("trade_history.csv", min_trades=30):
-                            decision = dumb_strategy_signal(signal)
-                            logger.info(f"[{symbol}] [DUMB STRATEGY] Signal={decision}")
+                        features = {col: float(signal[col]) for col in feature_cols if col in signal}
+                        trade_id = f"{symbol}_BUY_{int(time.time())}"
+                        active_trades[trade_id] = {
+                            "features": features,
+                            "symbol": symbol,
+                            "entry_price": entry_price,
+                            "side": "BUY",
+                            "status": "OPEN"
+                        }
+                        order = trading_logic.place_order(symbol, "BUY", position_size)
+                        if order:
+                            logger.info(f"[{trade_id}] BUY order placed: {order}")
+                            qty_keys = ["origQty", "executedQty", "cumQty", "quantity"]
+                            found_qty = next((order.get(k) for k in qty_keys if k in order), None)
+                            logger.info(f"[{trade_id}] Order quantity (for closing): {found_qty}")
+                            telegram_notifier.send_message(
+                                f"Order placed: AI BUY {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
+                            )
+                            active_trades[trade_id]["order"] = order
                         else:
-                            decision = signal["AI_Signal"] if "AI_Signal" in signal else getattr(signal, "AI_Signal", 0)
-                            logger.info(f"[{symbol}] [AI STRATEGY] Signal={decision}")
+                            logger.error(f"[{trade_id}] BUY order failed!")
 
-                        # === ВІДКРИТТЯ ОРДЕРІВ ===
-                        if decision == 1:
-                            logger.info(f"Buy signal detected for {symbol} at idx={idx}, placing order.")
-                            entry_price = signal["Close"] if "Close" in signal else getattr(signal, "Close", None)
-                            stop_loss_price = signal["Stop_Loss"] if "Stop_Loss" in signal else getattr(signal, "Stop_Loss", None)
-                            if entry_price is None or stop_loss_price is None:
-                                logger.error(f"Missing entry or stop-loss price. Skipping order.")
-                                continue
-                            stop_loss_distance = entry_price - stop_loss_price
-                            if stop_loss_distance <= 0:
-                                logger.error(f"Invalid stop-loss distance for {symbol}. Skipping order.")
-                                continue
-                            position_size = risk_management.calculate_position_size(stop_loss_distance)
+                    elif decision == -1:
+                        logger.info(f"Sell signal detected for {symbol} at idx={idx}, placing order.")
+                        entry_price = signal.get("Close")
+                        stop_loss_price = signal.get("Stop_Loss")
+                        if entry_price is None or stop_loss_price is None:
+                            logger.error(f"Missing entry or stop-loss price. Skipping order.")
+                            continue
+                        stop_loss_distance = stop_loss_price - entry_price
+                        if stop_loss_distance <= 0:
+                            logger.error(f"Invalid stop-loss distance for {symbol} (SHORT). Skipping order.")
+                            continue
+                        position_size = risk_management.calculate_position_size(stop_loss_distance)
 
-                            symbol_info = get_symbol_info(client, symbol)
-                            if symbol_info is None:
-                                logger.error(f"Cannot trade {symbol} because symbol_info is missing!")
-                                continue
-                            quantity_precision = get_precision(symbol_info, "quantity")
-                            position_size = round_quantity(position_size, quantity_precision)
+                        symbol_info = get_symbol_info(client, symbol)
+                        if symbol_info is None:
+                            logger.error(f"Cannot trade {symbol} because symbol_info is missing!")
+                            continue
+                        quantity_precision = get_precision(symbol_info, "quantity")
+                        position_size = round_quantity(position_size, quantity_precision)
 
-                            features = {col: float(signal[col]) for col in feature_cols if col in signal}
-                            trade_id = f"{symbol}_BUY_{int(time.time())}"
-                            active_trades[trade_id] = {
-                                "features": features,
-                                "symbol": symbol,
-                                "entry_price": entry_price,
-                                "side": "BUY",
-                                "status": "OPEN"
-                            }
+                        features = {col: float(signal[col]) for col in feature_cols if col in signal}
+                        trade_id = f"{symbol}_SELL_{int(time.time())}"
+                        active_trades[trade_id] = {
+                            "features": features,
+                            "symbol": symbol,
+                            "entry_price": entry_price,
+                            "side": "SELL",
+                            "status": "OPEN"
+                        }
+                        order = trading_logic.place_order(symbol, "SELL", position_size)
+                        if order:
+                            logger.info(f"[{trade_id}] SELL order placed: {order}")
+                            qty_keys = ["origQty", "executedQty", "cumQty", "quantity"]
+                            found_qty = next((order.get(k) for k in qty_keys if k in order), None)
+                            logger.info(f"[{trade_id}] Order quantity (for closing): {found_qty}")
+                            telegram_notifier.send_message(
+                                f"Order placed: AI SELL {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
+                            )
+                            active_trades[trade_id]["order"] = order
+                        else:
+                            logger.error(f"[{trade_id}] SELL order failed!")
 
-                        elif decision == -1:
-                            logger.info(f"Sell signal detected for {symbol} at idx={idx}, placing order.")
-                            entry_price = signal["Close"] if "Close" in signal else getattr(signal, "Close", None)
-                            stop_loss_price = signal["Stop_Loss"] if "Stop_Loss" in signal else getattr(signal, "Stop_Loss", None)
-                            if entry_price is None or stop_loss_price is None:
-                                logger.error(f"Missing entry or stop-loss price. Skipping order.")
-                                continue
-                            stop_loss_distance = stop_loss_price - entry_price
-                            if stop_loss_distance <= 0:
-                                logger.error(f"Invalid stop-loss distance for {symbol} (SHORT). Skipping order.")
-                                continue
-                            position_size = risk_management.calculate_position_size(stop_loss_distance)
+                # --- Блок автоматичного закриття позицій по PNL ---
+                for trade_id, trade_info in list(active_trades.items()):
+                    if trade_info.get("status") == "CLOSED":
+                        continue
 
-                            symbol_info = get_symbol_info(client, symbol)
-                            if symbol_info is None:
-                                logger.error(f"Cannot trade {symbol} because symbol_info is missing!")
-                                continue
-                            quantity_precision = get_precision(symbol_info, "quantity")
-                            position_size = round_quantity(position_size, quantity_precision)
+                    symbol = trade_info["symbol"]
+                    entry_price = trade_info["entry_price"]
+                    side = trade_info["side"]
 
-                            features = {col: float(signal[col]) for col in feature_cols if col in signal}
-                            trade_id = f"{symbol}_SELL_{int(time.time())}"
-                            active_trades[trade_id] = {
-                                "features": features,
-                                "symbol": symbol,
-                                "entry_price": entry_price,
-                                "side": "SELL",
-                                "status": "OPEN"
-                            }
-                            order = trading_logic.place_order(symbol, "SELL", position_size)
-                            if order:
-                                logger.info(f"[{trade_id}] SELL order placed: {order}")
-                                telegram_notifier.send_message(
-                                    f"Order placed: AI SELL {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
-                                )
-                                active_trades[trade_id]["order"] = order
-                            else:
-                                logger.error(f"[{trade_id}] SELL order failed!")
+                    try:
+                        ticker = client.futures_symbol_ticker(symbol=symbol)
+                        current_price = float(ticker["price"])
+                    except Exception as e:
+                        logger.error(f"Could not fetch current price for {symbol}: {e}")
+                        continue
 
+                    if side == "BUY":
+                        pnl = (current_price - entry_price) / entry_price * 100
+                    else:
+                        pnl = (entry_price - current_price) / entry_price * 100
+
+                    logger.info(f"[{trade_id}] Current PNL: {pnl:.2f}%")
+
+                    CLOSE_PROFIT_PNL = 20   # take-profit %
+                    CLOSE_LOSS_PNL = -40    # stop-loss %
+
+                    if pnl >= CLOSE_PROFIT_PNL or pnl <= CLOSE_LOSS_PNL:
+                        reason = "profit target" if pnl >= CLOSE_PROFIT_PNL else "stop-loss"
+                        quantity = None
+                        order_info = trade_info.get("order", {})
+                        for qty_key in ("origQty", "executedQty", "cumQty", "quantity"):
+                            if qty_key in order_info:
+                                try:
+                                    quantity = float(order_info[qty_key])
+                                    break
+                                except Exception:
+                                    continue
+                        if not quantity:
+                            logger.error(f"Cannot close position for {trade_id}: unknown quantity. Order info: {order_info}")
+                            continue
+
+                        close_side = "SELL" if side == "BUY" else "BUY"
+                        logger.info(f"[{trade_id}] Attempting to close position at {current_price} ({reason}) with quantity {quantity}")
+                        close_order = trading_logic.close_position(symbol, quantity, close_side)
+                        if close_order:
+                            logger.info(f"[{trade_id}] Position closed: {close_order}")
+                            telegram_notifier.send_message(
+                                f"Position closed: {symbol} | Reason: {reason} | Close price: {current_price} USDT | PNL: {pnl:.2f}%"
+                            )
+                            trade_info["status"] = "CLOSED"
+                            # TODO: Зберегти у trade_history.csv якщо потрібно
+                        else:
+                            logger.error(f"[{trade_id}] Failed to close position at {current_price} ({reason})")
+
+                # Ось тут, вже поза циклом
                 process_closed_trades(active_trades, ai_signal_generator)
 
                 time.sleep(60)
