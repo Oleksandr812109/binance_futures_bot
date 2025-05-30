@@ -56,8 +56,28 @@ class TradingLogic:
         # --- Додаткова перевірка перед закриттям ---
         ok, reason = can_close_position(self.client, symbol, quantity, side)
         if not ok:
-            logging.error(f"Не можна закрити позицію: {reason}")
-            return None
+            # Якщо причина саме у тому, що кількість перевищує відкриту позицію —
+            # автоматично беремо ту кількість, яка реально є
+            if "більша за відкриту позицію" in reason:
+                import re
+                m = re.search(r"відкриту позицію ([\d\.]+) для", reason)
+                if m:
+                    actual_qty = float(m.group(1))
+                    ok2, reason2 = can_close_position(self.client, symbol, actual_qty, side)
+                    if ok2:
+                        quantity = actual_qty
+                    else:
+                        logging.error(f"Не можна закрити позицію навіть на актуальну кількість: {reason2}")
+                        return None
+                else:
+                    logging.error(f"Не вдалося визначити фактичну кількість: {reason}")
+                    return None
+            elif "немає відкритої позиції" in reason:
+                logging.info(f"Позиція для {symbol} ({side}) вже закрита або не існує. Нічого робити не потрібно.")
+                return None
+            else:
+                logging.error(f"Не можна закрити позицію: {reason}")
+                return None
 
         try:
             positionSide = "LONG" if side == "BUY" else "SHORT"
