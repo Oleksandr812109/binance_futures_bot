@@ -16,8 +16,7 @@ from core.telegram_signal_listener import TelegramSignalListener
 from utils.binance_precision import get_precision, round_quantity, round_price
 from typing import Dict, Any
 from utils.trade_history_logger import save_trade
-from utils.dumb_strategy import dumb_strategy_signal
-from utils.history_checker import is_enough_history 
+from utils.dumb_strategy import dumb_strategy_signal 
 
 def get_symbol_info(client, symbol):
     try:
@@ -162,7 +161,7 @@ def process_closed_trades(active_trades: Dict[str, Dict[str, Any]], ai_signal_ge
             trades_to_remove.append(trade_id)
 
             # LOGGING видалення трейду
-            logger.info(f"[{trade_id}] Trade closed. Side: {trade_info.get('side')}, Entry: {trade_info.get('entry_price')}, Close: {trade_info.get('close_price')}, Profit: {profit:.4f}, Target label: {target}")
+            logger.info(f"[{trade_id}] Trade closed. Side: {trade_info.get('side')}, Entry: {trade_info.get('entry_price')}, Close: {trade_info.get('close_price')}, Profit: {profit:.4f}, Target l[...]")
         except KeyError as e:
             logger.error(f"Trade {trade_id}: Missing expected key in trade_info: {e}. Skipping trade.")
         except Exception as e:
@@ -191,6 +190,10 @@ def main():
 
         loop = asyncio.get_event_loop()
         loop.create_task(run_telegram_listener())
+
+        # --- Додаємо take-profit/stop-loss пороги (онови їх тут!)
+        CLOSE_PROFIT_PNL = 1   # take-profit %
+        CLOSE_LOSS_PNL = -40   # stop-loss %
 
         while True:
             try:
@@ -294,6 +297,15 @@ def main():
                         quantity_precision = get_precision(symbol_info, "quantity")
                         position_size = round_quantity(position_size, quantity_precision)
 
+                        # Перевірка максимальної позиції (maxQty)
+                        max_position_size = None
+                        for f in symbol_info.get("filters", []):
+                            if f["filterType"] == "MARKET_LOT_SIZE":
+                                max_position_size = float(f["maxQty"])
+                        if max_position_size and position_size > max_position_size:
+                            logger.warning(f"Position size {position_size} > max for {symbol}: {max_position_size}. Зменшую до ліміту.")
+                            position_size = max_position_size
+
                         features = {col: float(signal[col]) for col in feature_cols if col in signal}
                         trade_id = f"{symbol}_BUY_{int(time.time())}"
                         active_trades[trade_id] = {
@@ -309,10 +321,10 @@ def main():
                             qty_keys = ["origQty", "executedQty", "cumQty", "quantity"]
                             found_qty = next((order.get(k) for k in qty_keys if k in order), None)
                             logger.info(f"[{trade_id}] Order quantity (for closing): {found_qty}")
+                            active_trades[trade_id]["order"] = order
                             telegram_notifier.send_message(
                                 f"Order placed: AI BUY {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
                             )
-                            active_trades[trade_id]["order"] = order
                         else:
                             logger.error(f"[{trade_id}] BUY order failed!")
 
@@ -336,6 +348,15 @@ def main():
                         quantity_precision = get_precision(symbol_info, "quantity")
                         position_size = round_quantity(position_size, quantity_precision)
 
+                        # Перевірка максимальної позиції (maxQty)
+                        max_position_size = None
+                        for f in symbol_info.get("filters", []):
+                            if f["filterType"] == "MARKET_LOT_SIZE":
+                                max_position_size = float(f["maxQty"])
+                        if max_position_size and position_size > max_position_size:
+                            logger.warning(f"Position size {position_size} > max for {symbol}: {max_position_size}. Зменшую до ліміту.")
+                            position_size = max_position_size
+
                         features = {col: float(signal[col]) for col in feature_cols if col in signal}
                         trade_id = f"{symbol}_SELL_{int(time.time())}"
                         active_trades[trade_id] = {
@@ -351,10 +372,10 @@ def main():
                             qty_keys = ["origQty", "executedQty", "cumQty", "quantity"]
                             found_qty = next((order.get(k) for k in qty_keys if k in order), None)
                             logger.info(f"[{trade_id}] Order quantity (for closing): {found_qty}")
+                            active_trades[trade_id]["order"] = order
                             telegram_notifier.send_message(
                                 f"Order placed: AI SELL {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT"
                             )
-                            active_trades[trade_id]["order"] = order
                         else:
                             logger.error(f"[{trade_id}] SELL order failed!")
 
@@ -374,15 +395,21 @@ def main():
                         logger.error(f"Could not fetch current price for {symbol}: {e}")
                         continue
 
+                    # Враховуємо плечe (leverage) для точного розрахунку PNL!
+                    leverage = 1
+                    try:
+                        positions = client.futures_position_information(symbol=symbol)
+                        if positions and isinstance(positions, list):
+                            leverage = float(positions[0].get("leverage", 1))
+                    except Exception as e:
+                        logger.error(f"Cannot fetch leverage for {symbol}: {e}")
+
                     if side == "BUY":
-                        pnl = (current_price - entry_price) / entry_price * 100
+                        pnl = (current_price - entry_price) / entry_price * leverage * 100
                     else:
-                        pnl = (entry_price - current_price) / entry_price * 100
+                        pnl = (entry_price - current_price) / entry_price * leverage * 100
 
                     logger.info(f"[{trade_id}] Current PNL: {pnl:.2f}%")
-
-                    CLOSE_PROFIT_PNL = 1   # take-profit %
-                    CLOSE_LOSS_PNL = -40    # stop-loss %
 
                     if pnl >= CLOSE_PROFIT_PNL or pnl <= CLOSE_LOSS_PNL:
                         reason = "profit target" if pnl >= CLOSE_PROFIT_PNL else "stop-loss"
@@ -395,9 +422,21 @@ def main():
                                     break
                                 except Exception:
                                     continue
+
+                        # --- Fallback: якщо order_info порожнє, беремо кількість з біржі ---
                         if not quantity:
-                            logger.error(f"Cannot close position for {trade_id}: unknown quantity. Order info: {order_info}")
-                            continue
+                            try:
+                                positions = client.futures_position_information(symbol=symbol)
+                                for pos in positions:
+                                    if float(pos["positionAmt"]) != 0:
+                                        quantity = abs(float(pos["positionAmt"]))
+                                        break
+                                if not quantity:
+                                    logger.error(f"Cannot close position for {trade_id}: no open position found on exchange.")
+                                    continue
+                            except Exception as e:
+                                logger.error(f"Cannot fetch open position for {trade_id}: {e}")
+                                continue
 
                         close_side = "SELL" if side == "BUY" else "BUY"
                         logger.info(f"[{trade_id}] Attempting to close position at {current_price} ({reason}) with quantity {quantity}")
@@ -428,3 +467,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
