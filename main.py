@@ -196,7 +196,7 @@ def main():
             try:
                 # --- тут має бути ваш код отримання сигналів ---
                 # signals = ... (отримуйте сигнали з AI, теханалізу чи телеграм-бота)
-                signals = []  # <-- замініть на свою логіку отримання сигналів
+                signals = ai_signal_generator.get_signals()  # <-- замініть на свою логіку отримання сигналів
 
                 for idx, signal in enumerate(signals):
                     symbol = signal.get("symbol")
