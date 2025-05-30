@@ -1,6 +1,7 @@
 import logging
 from binance.client import Client
 from utils.check_margin_and_quantity import can_close_position
+from utils.binance_precision import get_precision, round_quantity  # ДОДАНО
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -29,6 +30,15 @@ class TradingLogic:
             return None
 
         try:
+            # Додаємо округлення quantity згідно precision символу
+            symbol_info = self.client.futures_exchange_info()
+            symbol_info = next((s for s in symbol_info['symbols'] if s['symbol'] == symbol), None)
+            if not symbol_info:
+                logging.error(f"Symbol info for {symbol} not found.")
+                return None
+            quantity_precision = get_precision(symbol_info, "quantity")
+            quantity = round_quantity(quantity, quantity_precision)
+
             # Вказуємо positionSide для Hedge Mode
             positionSide = "LONG" if side == "BUY" else "SHORT"
             order = self.client.futures_create_order(
@@ -80,6 +90,15 @@ class TradingLogic:
                 return None
 
         try:
+            # Додаємо округлення quantity згідно precision символу
+            symbol_info = self.client.futures_exchange_info()
+            symbol_info = next((s for s in symbol_info['symbols'] if s['symbol'] == symbol), None)
+            if not symbol_info:
+                logging.error(f"Symbol info for {symbol} not found.")
+                return None
+            quantity_precision = get_precision(symbol_info, "quantity")
+            quantity = round_quantity(quantity, quantity_precision)
+
             positionSide = "LONG" if side == "BUY" else "SHORT"
             order = self.client.futures_create_order(
                 symbol=symbol,
