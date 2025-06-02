@@ -172,7 +172,6 @@ def process_closed_trades(active_trades: Dict[str, Dict[str, Any]], ai_signal_ge
             del active_trades[trade_id]
             logger.info(f"Trade {trade_id} removed from active_trades.")
 
-# ==== START BLOCK 2 ====
 def main():
     setup_logging()
 
@@ -380,85 +379,85 @@ def main():
                         else:
                             logger.error(f"[{trade_id}] SELL order failed!")
 
-            # --- Блок автоматичного закриття позицій по PNL ---
-            for trade_id, trade_info in list(active_trades.items()):
-                if trade_info.get("status") == "CLOSED":
-                    continue
+               # --- Блок автоматичного закриття позицій по PNL ---
+               for trade_id, trade_info in list(active_trades.items()):
+                   if trade_info.get("status") == "CLOSED":
+                       continue
 
-                symbol = trade_info["symbol"]
-                entry_price = trade_info["entry_price"]
-                side = trade_info["side"]
+                   symbol = trade_info["symbol"]
+                   entry_price = trade_info["entry_price"]
+                   side = trade_info["side"]
 
-                try:
-                    ticker = client.futures_symbol_ticker(symbol=symbol)
-                    current_price = float(ticker["price"])
-                except Exception as e:
-                    logger.error(f"Could not fetch current price for {symbol}: {e}")
-                    continue
+                   try:
+                       ticker = client.futures_symbol_ticker(symbol=symbol)
+                       current_price = float(ticker["price"])
+                   except Exception as e:
+                       logger.error(f"Could not fetch current price for {symbol}: {e}")
+                       continue
 
-                # Враховуємо плечe (leverage) для точного розрахунку PNL!
-                leverage = 1
-                try:
-                    positions = client.futures_position_information(symbol=symbol)
-                    if positions and isinstance(positions, list):
-                        leverage = float(positions[0].get("leverage", 1))
-                except Exception as e:
-                    logger.error(f"Cannot fetch leverage for {symbol}: {e}")
+                   # Враховуємо плечe (leverage) для точного розрахунку PNL!
+                   leverage = 1
+                   try:
+                       positions = client.futures_position_information(symbol=symbol)
+                       if positions and isinstance(positions, list):
+                           leverage = float(positions[0].get("leverage", 1))
+                   except Exception as e:
+                       logger.error(f"Cannot fetch leverage for {symbol}: {e}")
 
-                if side == "BUY":
+                   if side == "BUY":
                     pnl = (current_price - entry_price) / entry_price * leverage * 100
-                else:
-                    pnl = (entry_price - current_price) / entry_price * leverage * 100
+                   else:
+                       pnl = (entry_price - current_price) / entry_price * leverage * 100
 
-                logger.info(f"[{trade_id}] Current PNL: {pnl:.2f}%")
+                   logger.info(f"[{trade_id}] Current PNL: {pnl:.2f}%")
 
-                if pnl >= CLOSE_PROFIT_PNL or pnl <= CLOSE_LOSS_PNL:
-                    reason = "profit target" if pnl >= CLOSE_PROFIT_PNL else "stop-loss"
-                    quantity = None
-                    order_info = trade_info.get("order", {})
-                    for qty_key in ("origQty", "executedQty", "cumQty", "quantity"):
-                        if qty_key in order_info:
-                            try:
-                                quantity = float(order_info[qty_key])
-                                break
-                            except Exception:
-                                continue
+                   if pnl >= CLOSE_PROFIT_PNL or pnl <= CLOSE_LOSS_PNL:
+                       reason = "profit target" if pnl >= CLOSE_PROFIT_PNL else "stop-loss"
+                       quantity = None
+                       order_info = trade_info.get("order", {})
+                       for qty_key in ("origQty", "executedQty", "cumQty", "quantity"):
+                           if qty_key in order_info:
+                               try:
+                                   quantity = float(order_info[qty_key])
+                                   break
+                               except Exception:
+                                   continue
 
-                    # --- Fallback: якщо order_info порожнє, беремо кількість з біржі ---
-                    if not quantity:
-                        try:
-                            positions = client.futures_position_information(symbol=symbol)
-                            for pos in positions:
-                                if float(pos["positionAmt"]) != 0:
-                                    quantity = abs(float(pos["positionAmt"]))
-                                    break
-                            if not quantity:
-                                logger.error(f"Cannot close position for {trade_id}: no open position found on exchange.")
-                                continue
-                        except Exception as e:
-                            logger.error(f"Cannot fetch open position for {trade_id}: {e}")
-                            continue
+                       # --- Fallback: якщо order_info порожнє, беремо кількість з біржі ---
+                       if not quantity:
+                           try:
+                               positions = client.futures_position_information(symbol=symbol)
+                               for pos in positions:
+                                   if float(pos["positionAmt"]) != 0:
+                                       quantity = abs(float(pos["positionAmt"]))
+                                       break
+                               if not quantity:
+                                   logger.error(f"Cannot close position for {trade_id}: no open position found on exchange.")
+                                   continue
+                           except Exception as e:
+                               logger.error(f"Cannot fetch open position for {trade_id}: {e}")
+                               continue
 
-                    close_side = "SELL" if side == "BUY" else "BUY"
-                    logger.info(f"[{trade_id}] Attempting to close position at {current_price} ({reason}) with quantity {quantity}")
-                    close_order = trading_logic.close_position(symbol, quantity, close_side)
-                    if close_order:
-                        logger.info(f"[{trade_id}] Position closed: {close_order}")
-                        telegram_notifier.send_message(
-                            f"Position closed: {symbol} | Reason: {reason} | Close price: {current_price} USDT | PNL: {pnl:.2f}%"
-                        )
-                        trade_info["status"] = "CLOSED"
-                        # TODO: Зберегти у trade_history.csv якщо потрібно
-                    else:
-                        logger.error(f"[{trade_id}] Failed to close position at {current_price} ({reason})")
+                       close_side = "SELL" if side == "BUY" else "BUY"
+                       logger.info(f"[{trade_id}] Attempting to close position at {current_price} ({reason}) with quantity {quantity}")
+                       close_order = trading_logic.close_position(symbol, quantity, close_side)
+                       if close_order:
+                           logger.info(f"[{trade_id}] Position closed: {close_order}")
+                           telegram_notifier.send_message(
+                               f"Position closed: {symbol} | Reason: {reason} | Close price: {current_price} USDT | PNL: {pnl:.2f}%"
+                           )
+                           trade_info["status"] = "CLOSED"
+                           # TODO: Зберегти у trade_history.csv якщо потрібно
+                       else:
+                           logger.error(f"[{trade_id}] Failed to close position at {current_price} ({reason})")
 
-            # Ось тут, вже поза циклом
-            process_closed_trades(active_trades, ai_signal_generator)
+               # Ось тут, вже поза циклом
+               process_closed_trades(active_trades, ai_signal_generator)
 
-            time.sleep(60)
-        except Exception as e:
-            logger.error(f"Error during market analysis loop: {e}")
-            logger.debug(traceback.format_exc())
+               time.sleep(60)
+           except Exception as e:
+               logger.error(f"Error during market analysis loop: {e}")
+               logger.debug(traceback.format_exc())
 
     except KeyboardInterrupt:
         logger.info("Bot stopped manually by user.")
@@ -468,4 +467,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
