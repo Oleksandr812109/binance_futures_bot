@@ -1,4 +1,3 @@
-
 import os
 import sys
 import time
@@ -162,7 +161,7 @@ def process_closed_trades(active_trades: Dict[str, Dict[str, Any]], ai_signal_ge
             trades_to_remove.append(trade_id)
 
             # LOGGING видалення трейду
-            logger.info(f"[{trade_id}] Trade closed. Side: {trade_info.get('side')}, Entry: {trade_info.get('entry_price')}, Close: {trade_info.get('close_price')}, Profit: {profit:.4f}, Target label: {target}")
+            logger.info(f"[{trade_id}] Trade closed. Side: {trade_info.get('side')}, Entry: {trade_info.get('entry_price')}, Close: {trade_info.get('close_price')}, Profit: {profit:.4f}, Target last: {target}")
         except KeyError as e:
             logger.error(f"Trade {trade_id}: Missing expected key in trade_info: {e}. Skipping trade.")
         except Exception as e:
@@ -175,7 +174,6 @@ def process_closed_trades(active_trades: Dict[str, Dict[str, Any]], ai_signal_ge
 
 def main():
     setup_logging()
-
     logger.info("Starting Binance Futures Trading Bot...")
     try:
         config_path = "config/config.ini"
@@ -186,7 +184,7 @@ def main():
         symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
         interval = config.get("TRADING", "INTERVAL", fallback="1h")
 
-        feature_cols = ["EMA_Short", "EMA_Long", "RSI", "ADX", "Upper_Band", "Lower_Band"]  # має відповідати фічам AI
+        feature_cols = ["EMA_Short", "EMA_Long", "RSI", "ADX", "Upper_Band", "Lower_Band"]
         active_trades = {}
 
         loop = asyncio.get_event_loop()
@@ -210,6 +208,9 @@ def main():
 
                         # AI сигнал
                         signals_df = ai_signal_generator.predict_signals(df)
+                        if signals_df is None or signals_df.empty:
+                            logger.warning(f"No signals generated for {symbol}, skipping.")
+                            continue
                         num_signals = signals_df["AI_Signal"].abs().sum()
                         last_row = signals_df.iloc[-1]
 
@@ -396,7 +397,6 @@ def main():
                         logger.error(f"Could not fetch current price for {symbol}: {e}")
                         continue
 
-                    # Враховуємо плечe (leverage) для точного розрахунку PNL!
                     leverage = 1
                     try:
                         positions = client.futures_position_information(symbol=symbol)
@@ -424,7 +424,6 @@ def main():
                                 except Exception:
                                     continue
 
-                        # --- Fallback: якщо order_info порожнє, беремо кількість з біржі ---
                         if not quantity:
                             try:
                                 positions = client.futures_position_information(symbol=symbol)
@@ -448,18 +447,14 @@ def main():
                                 f"Position closed: {symbol} | Reason: {reason} | Close price: {current_price} USDT | PNL: {pnl:.2f}%"
                             )
                             trade_info["status"] = "CLOSED"
-                            # TODO: Зберегти у trade_history.csv якщо потрібно
                         else:
                             logger.error(f"[{trade_id}] Failed to close position at {current_price} ({reason})")
 
-                # Ось тут, вже поза циклом
                 process_closed_trades(active_trades, ai_signal_generator)
-
                 time.sleep(60)
             except Exception as e:
                 logger.error(f"Error during market analysis loop: {e}")
                 logger.debug(traceback.format_exc()) 
-
     except KeyboardInterrupt:
         logger.info("Bot stopped manually by user.")
     except Exception as e:
@@ -468,3 +463,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
