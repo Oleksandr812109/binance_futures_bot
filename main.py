@@ -390,6 +390,22 @@ def main():
                     entry_price = trade_info["entry_price"]
                     side = trade_info["side"]
 
+                    # --- Перевірка: чи є ще відкрита позиція на біржі ---
+                    try:
+                        positions = client.futures_position_information(symbol=symbol)
+                        position_amt = 0
+                        for pos in positions:
+                            if float(pos["positionAmt"]) != 0:
+                                position_amt = float(pos["positionAmt"])
+                                break
+                        if position_amt == 0:
+                            logger.info(f"Позиція для {symbol} ({'SELL' if side == 'BUY' else 'BUY'}) вже закрита або не існує. Нічого робити не потрібно.")
+                            trade_info["status"] = "CLOSED"
+                            continue
+                    except Exception as e:
+                        logger.error(f"Cannot fetch open position for {trade_id}: {e}")
+                        continue
+
                     try:
                         ticker = client.futures_symbol_ticker(symbol=symbol)
                         current_price = float(ticker["price"])
