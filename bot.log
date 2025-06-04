@@ -36344,3 +36344,144 @@ binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error mes
 2025-06-04 16:11:34 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
 2025-06-04 16:11:36 | INFO | [SOLUSDT_BUY_1749053495] BUY order placed: {'order': {'orderId': 145646160, 'symbol': 'SOLUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ3321c13b77c2e86df565eb', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '13', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000', 'timeInForce': 'GTC', 'type': 'MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'BUY', 'positionSide': 'LONG', 'stopPrice': '0.0000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1749053495783}, 'stop_loss_order': {'orderId': 145646162, 'symbol': 'SOLUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ7737d46fe20fb3d86f4e3f', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '13', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '151.2000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1749053496060}, 'take_profit_order': {'orderId': 145646182, 'symbol': 'SOLUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJb6e8a0cdc175c72410f258', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '13', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '157.4000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1749053496820}}
 2025-06-04 16:12:52 | INFO | Bot stopped manually by user.
+2025-06-04 16:27:09 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 16:27:09 | INFO | Configuration file loaded successfully.
+2025-06-04 16:27:10 | INFO | Binance client initialized (testnet=True)
+2025-06-04 16:27:10 | INFO | Testing API key...
+2025-06-04 16:27:10 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-04 16:27:11 | INFO | Fetched balance for USDT: 1845.80200456 USDT
+2025-06-04 16:27:11 | ERROR | Error initializing components: TradingLogic.__init__() missing 1 required positional argument: 'ai_model'
+2025-06-04 16:27:11 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 94, in initialize_components
+    trading_logic = TradingLogic(client, risk_management, technical_analysis)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TradingLogic.__init__() missing 1 required positional argument: 'ai_model'
+
+2025-06-04 16:27:11 | ERROR | Critical error: TradingLogic.__init__() missing 1 required positional argument: 'ai_model'
+2025-06-04 16:27:11 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 179, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 94, in initialize_components
+    trading_logic = TradingLogic(client, risk_management, technical_analysis)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TradingLogic.__init__() missing 1 required positional argument: 'ai_model'
+
+2025-06-04 16:44:04 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 16:44:04 | INFO | Configuration file loaded successfully.
+2025-06-04 16:44:04 | INFO | Binance client initialized (testnet=True)
+2025-06-04 16:44:04 | INFO | Testing API key...
+2025-06-04 16:44:05 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-04 16:44:06 | INFO | Fetched balance for USDT: 1845.80200456 USDT
+2025-06-04 16:44:07 | ERROR | Error initializing components: [Errno 2] Unable to synchronously open file (unable to open file: name = 'ml/models/trade_strategy_model.h5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+2025-06-04 16:44:07 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 96, in initialize_components
+    ai_model = AIModel("ml/models/trade_strategy_model.h5")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/ai_model.py", line 18, in __init__
+    self.model = load_model(model_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/keras/src/saving/saving_api.py", line 196, in load_model
+    return legacy_h5_format.load_model_from_hdf5(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/keras/src/legacy/saving/legacy_h5_format.py", line 116, in load_model_from_hdf5
+    f = h5py.File(filepath, mode="r")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/h5py/_hl/files.py", line 564, in __init__
+    fid = make_fid(name, mode, userblock_size, fapl, fcpl, swmr=swmr)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/h5py/_hl/files.py", line 238, in make_fid
+    fid = h5f.open(name, flags, fapl=fapl)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5f.pyx", line 102, in h5py.h5f.open
+FileNotFoundError: [Errno 2] Unable to synchronously open file (unable to open file: name = 'ml/models/trade_strategy_model.h5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+
+2025-06-04 16:44:07 | ERROR | Critical error: [Errno 2] Unable to synchronously open file (unable to open file: name = 'ml/models/trade_strategy_model.h5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+2025-06-04 16:44:07 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 183, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 96, in initialize_components
+    ai_model = AIModel("ml/models/trade_strategy_model.h5")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/ai_model.py", line 18, in __init__
+    self.model = load_model(model_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/keras/src/saving/saving_api.py", line 196, in load_model
+    return legacy_h5_format.load_model_from_hdf5(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/keras/src/legacy/saving/legacy_h5_format.py", line 116, in load_model_from_hdf5
+    f = h5py.File(filepath, mode="r")
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/h5py/_hl/files.py", line 564, in __init__
+    fid = make_fid(name, mode, userblock_size, fapl, fcpl, swmr=swmr)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/h5py/_hl/files.py", line 238, in make_fid
+    fid = h5f.open(name, flags, fapl=fapl)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+  File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+  File "h5py/h5f.pyx", line 102, in h5py.h5f.open
+FileNotFoundError: [Errno 2] Unable to synchronously open file (unable to open file: name = 'ml/models/trade_strategy_model.h5', errno = 2, error message = 'No such file or directory', flags = 0, o_flags = 0)
+
+2025-06-04 16:54:43 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 16:54:43 | INFO | Configuration file loaded successfully.
+2025-06-04 16:54:44 | INFO | Binance client initialized (testnet=True)
+2025-06-04 16:54:44 | INFO | Testing API key...
+2025-06-04 16:54:44 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-04 16:54:44 | INFO | Fetched balance for USDT: 1845.80200456 USDT
+2025-06-04 16:54:46 | DEBUG | All components initialized successfully.
+2025-06-04 16:54:46 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 16:54:46 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 16:54:47 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 16:54:47 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 16:54:48 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 16:54:48 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 16:54:49 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 16:54:49 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 16:54:49 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 16:54:49 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 16:54:52 | ERROR | [BTCUSDT_BUY_1749056090] BUY order failed!
+2025-06-04 16:54:52 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 16:54:55 | ERROR | [ETHUSDT_BUY_1749056092] BUY order failed!
+2025-06-04 16:54:55 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 16:54:57 | ERROR | [BNBUSDT_BUY_1749056095] BUY order failed!
+2025-06-04 16:54:57 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 16:55:00 | ERROR | [SOLUSDT_BUY_1749056098] BUY order failed!
+2025-06-04 16:56:02 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 16:56:02 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 16:56:04 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 16:56:04 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 16:56:04 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 16:56:04 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 16:56:04 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 16:56:04 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 16:56:05 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 16:56:05 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 16:56:07 | ERROR | [BTCUSDT_BUY_1749056165] BUY order failed!
+2025-06-04 16:56:07 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 16:56:09 | ERROR | [ETHUSDT_BUY_1749056167] BUY order failed!
+2025-06-04 16:56:09 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 16:56:11 | ERROR | [BNBUSDT_BUY_1749056169] BUY order failed!
+2025-06-04 16:56:11 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 16:56:13 | ERROR | [SOLUSDT_BUY_1749056171] BUY order failed!
+2025-06-04 16:57:17 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 16:57:17 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 16:57:18 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 16:57:18 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 16:57:18 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 16:57:18 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 16:57:19 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 16:57:19 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 16:57:20 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 16:57:20 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 16:57:22 | ERROR | [BTCUSDT_BUY_1749056241] BUY order failed!
+2025-06-04 16:57:22 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 16:57:25 | ERROR | [ETHUSDT_BUY_1749056243] BUY order failed!
+2025-06-04 16:57:25 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 16:57:27 | ERROR | [BNBUSDT_BUY_1749056246] BUY order failed!
+2025-06-04 16:57:27 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 16:57:31 | ERROR | [SOLUSDT_BUY_1749056248] BUY order failed!
+2025-06-04 16:57:37 | INFO | Bot stopped manually by user.

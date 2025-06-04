@@ -1,37 +1,41 @@
 import numpy as np
 import logging
+import os
 from typing import List, Dict, Any
-from tensorflow.keras.models import load_model
+from tensorflow.keras.models import load_model, Sequential
+from tensorflow.keras.layers import Dense
 
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class AIModel:
-    def __init__(self, model_path: str):
+    def __init__(self, model_path: str, input_dim: int = 4):  # input_dim за замовчуванням, змінюй під свою задачу
         """
-        Initializes the AI model by loading a pre-trained model.
+        Initializes the AI model by loading a pre-trained model or creating a new one if not found.
 
         Args:
             model_path (str): Path to the pre-trained model file.
+            input_dim (int): Number of input features for the model.
         """
-        try:
-            self.model = load_model(model_path)
-            logging.info(f"Model loaded successfully from {model_path}")
-        except Exception as e:
-            logging.error(f"Error loading model from {model_path}: {e}")
-            raise
+        self.model_path = model_path
+        if os.path.exists(model_path):
+            try:
+                self.model = load_model(model_path)
+                logging.info(f"Model loaded successfully from {model_path}")
+            except Exception as e:
+                logging.error(f"Error loading model from {model_path}: {e}")
+                raise
+        else:
+            # Створюємо нову просту модель, якщо файл не знайдено
+            self.model = Sequential([
+                Dense(64, input_dim=input_dim, activation='relu'),
+                Dense(32, activation='relu'),
+                Dense(2, activation='softmax')  # наприклад, для 2 класів (Buy/Sell), змінюй під свою задачу
+            ])
+            self.model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
+            logging.info(f"No model found at {model_path}. Created a new model.")
 
     def preprocess_data(self, data: List[float], input_shape: tuple) -> np.array:
-        """
-        Preprocesses input data to match the model's expected input shape.
-
-        Args:
-            data (List[float]): Raw input data.
-            input_shape (tuple): Expected input shape for the model.
-
-        Returns:
-            np.array: Preprocessed input data.
-        """
         try:
             data = np.array(data, dtype=np.float32)
             if len(data.shape) == 1:
@@ -43,16 +47,6 @@ class AIModel:
             raise
 
     def predict(self, input_data: List[float], input_shape: tuple) -> Dict[str, Any]:
-        """
-        Makes a prediction using the pre-trained model.
-
-        Args:
-            input_data (List[float]): Input data for prediction.
-            input_shape (tuple): Expected input shape for the model.
-
-        Returns:
-            Dict[str, Any]: Prediction results.
-        """
         try:
             preprocessed_data = self.preprocess_data(input_data, input_shape)
             predictions = self.model.predict(preprocessed_data)

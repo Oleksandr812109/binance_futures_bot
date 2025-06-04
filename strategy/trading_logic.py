@@ -1,19 +1,17 @@
 import logging
 from binance.client import Client
 from utils.check_margin_and_quantity import can_close_position
-
 import decimal
-
-# Set up logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+import time
 
 class TradingLogic:
-    def __init__(self, client: Client, risk_management, technical_analysis):
+    def __init__(self, client: Client, risk_management, technical_analysis, ai_model):
         self.client = client
         self.risk_management = risk_management
         self.technical_analysis = technical_analysis
-        # Кеш для швидкого доступу до параметрів precision по symbol
+        self.ai_model = ai_model
         self._symbol_precision_cache = {}
+        self.active_trades = []  # Список всіх відкритих угод
 
     def _get_symbol_precisions(self, symbol):
         """
@@ -73,27 +71,51 @@ class TradingLogic:
             )
             logging.info(f"Market order placed: {order}")
 
-            # 2. Place stop loss order (без reduceOnly)
+            entry_price = float(order.get('avgPrice', 0)) if order.get('avgPrice', '0.00') != '0.00' else None
+            if not entry_price:
+                # Якщо ціна ще не відома, пробуємо отримати з позиції
+                positions = self.client.futures_position_information()
+                for pos in positions:
+                    if pos['symbol'] == symbol and float(pos['positionAmt']) != 0 and pos['positionSide'] == positionSide:
+                        entry_price = float(pos['entryPrice'])
+                        break
+
+            # 2. Place stop loss order
             stop_loss_order = self.client.futures_create_order(
                 symbol=symbol,
                 side="SELL" if side == "BUY" else "BUY",
                 type="STOP_MARKET",
                 stopPrice=stop_loss_price,
                 quantity=quantity,
-                positionSide=positionSide
+                positionSide=positionSide,
+                reduceOnly=True
             )
             logging.info(f"Stop loss order placed: {stop_loss_order}")
 
-            # 3. Place take profit order (без reduceOnly)
+            # 3. Place take profit order
             take_profit_order = self.client.futures_create_order(
                 symbol=symbol,
                 side="SELL" if side == "BUY" else "BUY",
                 type="TAKE_PROFIT_MARKET",
                 stopPrice=take_profit_price,
                 quantity=quantity,
-                positionSide=positionSide
+                positionSide=positionSide,
+                reduceOnly=True
             )
             logging.info(f"Take profit order placed: {take_profit_order}")
+
+            # Зберігаємо трейд для подальшого відстеження
+            trade_info = {
+                "symbol": symbol,
+                "side": side,
+                "qty": quantity,
+                "positionSide": positionSide,
+                "entry_price": entry_price,
+                "tp_order_id": take_profit_order['orderId'],
+                "sl_order_id": stop_loss_order['orderId'],
+                "opened_at": time.time()
+            }
+            self.active_trades.append(trade_info)
 
             return {
                 "order": order,
@@ -103,6 +125,57 @@ class TradingLogic:
         except Exception as e:
             logging.error(f"Error placing bracket orders: {e}")
             return None
+
+    def check_closed_trades(self):
+        """
+        Перевірити виконання стоп-лосс/тейк-профіт ордерів та навчити AI на реальних результатах.
+        """
+        for trade in self.active_trades[:]:
+            # Перевіряємо тейк-профіт
+            try:
+                tp_order = self.client.futures_get_order(symbol=trade['symbol'], orderId=trade['tp_order_id'])
+                if tp_order['status'] == 'FILLED':
+                    close_price = float(tp_order['avgPrice']) if tp_order['avgPrice'] else None
+                    self.learn_ai(trade, close_price, 'TAKE_PROFIT')
+                    self.active_trades.remove(trade)
+                    continue
+            except Exception as e:
+                logging.error(f"Error checking TP order status: {e}")
+            # Перевіряємо стоп-лосс
+            try:
+                sl_order = self.client.futures_get_order(symbol=trade['symbol'], orderId=trade['sl_order_id'])
+                if sl_order['status'] == 'FILLED':
+                    close_price = float(sl_order['avgPrice']) if sl_order['avgPrice'] else None
+                    self.learn_ai(trade, close_price, 'STOP_LOSS')
+                    self.active_trades.remove(trade)
+                    continue
+            except Exception as e:
+                logging.error(f"Error checking SL order status: {e}")
+
+    def learn_ai(self, trade, close_price, exit_type):
+        entry_price = trade['entry_price']
+        side = trade['side']
+        qty = trade['qty']
+        profit = 0
+        if close_price is not None and entry_price is not None:
+            if side == 'BUY':
+                profit = (close_price - entry_price) * qty
+            else:
+                profit = (entry_price - close_price) * qty
+        else:
+            logging.warning(f"Trade info missing open/close price: {close_price}")
+
+        # Оновлення AI-модуля
+        self.ai_model.update(
+            symbol=trade['symbol'],
+            entry=entry_price,
+            close=close_price,
+            qty=qty,
+            profit=profit,
+            side=side,
+            exit_type=exit_type
+        )
+        logging.info(f"AI model updated for trade {trade['symbol']} {side}. Profit: {profit:.4f}, Exit type: {exit_type}")
 
     def close_position(self, symbol: str, quantity: float, side: str):
         """
@@ -145,7 +218,8 @@ class TradingLogic:
                 side=side,
                 type="MARKET",
                 quantity=quantity,
-                positionSide=positionSide
+                positionSide=positionSide,
+                reduceOnly=True
             )
             logging.info(f"Position closed: {order}")
             return order
@@ -190,3 +264,24 @@ class TradingLogic:
         return self.place_order(symbol, side, quantity, stop_loss_price, take_profit_price)
 
     # --- Додано: універсальний метод закриття всіх позицій по символу (LONG і SHORT) ---
+
+    def close_all_positions_for_symbol(self, symbol: str):
+        """
+        Закрити всі відкриті позиції по символу для LONG та SHORT.
+        """
+        positions = self.get_open_positions(symbol)
+        for pos in positions:
+            position_amt = float(pos['positionAmt'])
+            if position_amt == 0:
+                continue
+            side = 'SELL' if position_amt > 0 else 'BUY'
+            quantity = abs(position_amt)
+            self.close_position(symbol, quantity, side)
+
+    def update(self):
+        """
+        Основний періодичний метод для виклику в головному циклі:
+        1. Перевірити закриття стоп-лосс/тейк-профіт.
+        2. Можна додати інші регулярні дії.
+        """
+        self.check_closed_trades()

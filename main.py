@@ -6,6 +6,7 @@ import logging
 import asyncio
 from configparser import ConfigParser
 from strategy.trading_logic import TradingLogic
+from strategy.ai_model import AIModel
 from strategy.risk_management import RiskManagement
 from strategy.technical_analysis import TechnicalAnalysis
 from strategy.ai_signal_generator import AISignalGenerator
@@ -91,7 +92,10 @@ def initialize_components(config):
         risk_management = RiskManagement(client, risk_per_trade, max_drawdown)
         technical_analysis = TechnicalAnalysis(client)
         ai_signal_generator = AISignalGenerator()
-        trading_logic = TradingLogic(client, risk_management, technical_analysis)
+
+        ai_model = AIModel("ml/models/trade_strategy_model.h5")
+
+        trading_logic = TradingLogic(client, risk_management, technical_analysis, ai_model)
         telegram_notifier = TelegramNotifier(bot_token, chat_id)
 
         logger.debug("All components initialized successfully.")
