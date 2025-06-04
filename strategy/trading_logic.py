@@ -48,7 +48,6 @@ class TradingLogic:
                 type="STOP_MARKET",
                 stopPrice=stop_loss_price,
                 quantity=quantity,
-                reduceOnly=True,
                 positionSide=positionSide
             )
             logging.info(f"Stop loss order placed: {stop_loss_order}")
@@ -60,7 +59,6 @@ class TradingLogic:
                 type="TAKE_PROFIT_MARKET",
                 stopPrice=take_profit_price,
                 quantity=quantity,
-                reduceOnly=True,
                 positionSide=positionSide
             )
             logging.info(f"Take profit order placed: {take_profit_order}")

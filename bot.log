@@ -35153,3 +35153,942 @@ binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error mes
 <!-- a padding to disable MSIE and Chrome friendly error page -->
 
 
+2025-06-04 09:34:18 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 09:34:18 | INFO | Configuration file loaded successfully.
+2025-06-04 09:34:19 | ERROR | Error initializing components: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 09:34:19 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 09:34:19 | ERROR | Critical error: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 09:34:19 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 179, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 10:14:17 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 10:14:17 | INFO | Configuration file loaded successfully.
+2025-06-04 10:14:18 | ERROR | Error initializing components: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 10:14:18 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 10:14:18 | ERROR | Critical error: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 10:14:18 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 179, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 10:42:59 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 10:42:59 | INFO | Configuration file loaded successfully.
+2025-06-04 10:42:59 | ERROR | Error initializing components: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 10:42:59 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 10:42:59 | ERROR | Critical error: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 10:42:59 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 179, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 10:52:05 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 10:52:05 | INFO | Configuration file loaded successfully.
+2025-06-04 10:52:06 | ERROR | Error initializing components: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 10:52:06 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 10:52:06 | ERROR | Critical error: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 10:52:06 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 179, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 11:07:04 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 11:07:04 | INFO | Configuration file loaded successfully.
+2025-06-04 11:07:04 | ERROR | Error initializing components: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 11:07:04 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 11:07:04 | ERROR | Critical error: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 11:07:04 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 179, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 14:43:41 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 14:43:41 | INFO | Configuration file loaded successfully.
+2025-06-04 14:43:41 | INFO | Binance client initialized (testnet=True)
+2025-06-04 14:43:41 | INFO | Testing API key...
+2025-06-04 14:43:42 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-04 14:43:42 | INFO | Fetched balance for USDT: 1575.93555794 USDT
+2025-06-04 14:43:43 | DEBUG | All components initialized successfully.
+2025-06-04 14:43:43 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:43:43 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:43:44 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:43:44 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:43:45 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:43:45 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:43:46 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:43:46 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:43:47 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:43:47 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:43:48 | ERROR | [BTCUSDT_BUY_1749048227] BUY order failed!
+2025-06-04 14:43:48 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:43:49 | ERROR | [ETHUSDT_BUY_1749048228] BUY order failed!
+2025-06-04 14:43:49 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:43:51 | ERROR | [BNBUSDT_BUY_1749048230] BUY order failed!
+2025-06-04 14:43:51 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:43:53 | ERROR | [SOLUSDT_BUY_1749048232] BUY order failed!
+2025-06-04 14:44:56 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:44:56 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:44:57 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:44:57 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:44:57 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:44:57 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:44:58 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:44:58 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:44:59 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:44:59 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:45:01 | ERROR | [BTCUSDT_BUY_1749048299] BUY order failed!
+2025-06-04 14:45:01 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:45:02 | ERROR | [ETHUSDT_BUY_1749048302] BUY order failed!
+2025-06-04 14:45:02 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:45:04 | ERROR | [BNBUSDT_BUY_1749048303] BUY order failed!
+2025-06-04 14:45:04 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:45:06 | ERROR | [SOLUSDT_BUY_1749048305] BUY order failed!
+2025-06-04 14:46:11 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:46:11 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:46:11 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:46:11 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:46:12 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:46:12 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:46:14 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:46:14 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:46:14 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:46:14 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:46:15 | ERROR | [BTCUSDT_BUY_1749048374] BUY order failed!
+2025-06-04 14:46:15 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:46:17 | ERROR | [ETHUSDT_BUY_1749048376] BUY order failed!
+2025-06-04 14:46:17 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:46:18 | ERROR | [BNBUSDT_BUY_1749048378] BUY order failed!
+2025-06-04 14:46:18 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:46:20 | ERROR | [SOLUSDT_BUY_1749048379] BUY order failed!
+2025-06-04 14:47:28 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:47:28 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:47:29 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:47:29 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:47:30 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:47:30 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:47:31 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:47:31 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:47:32 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:47:32 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:47:34 | ERROR | [BTCUSDT_BUY_1749048452] BUY order failed!
+2025-06-04 14:47:34 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:47:35 | ERROR | [ETHUSDT_BUY_1749048455] BUY order failed!
+2025-06-04 14:47:35 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:47:37 | ERROR | [BNBUSDT_BUY_1749048456] BUY order failed!
+2025-06-04 14:47:37 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:47:39 | ERROR | [SOLUSDT_BUY_1749048458] BUY order failed!
+2025-06-04 14:48:47 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:48:47 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:48:48 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:48:48 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:48:48 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:48:48 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:48:49 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:48:49 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:48:49 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:48:49 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:48:50 | ERROR | [BTCUSDT_BUY_1749048529] BUY order failed!
+2025-06-04 14:48:50 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:48:51 | ERROR | [ETHUSDT_BUY_1749048531] BUY order failed!
+2025-06-04 14:48:51 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:48:54 | ERROR | [BNBUSDT_BUY_1749048532] BUY order failed!
+2025-06-04 14:48:54 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:48:55 | ERROR | [SOLUSDT_BUY_1749048534] BUY order failed!
+2025-06-04 14:50:06 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:50:06 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:50:07 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:50:07 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:50:08 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:50:08 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:50:09 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:50:09 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:50:10 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:50:10 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:50:12 | ERROR | [BTCUSDT_BUY_1749048610] BUY order failed!
+2025-06-04 14:50:12 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:50:13 | ERROR | [ETHUSDT_BUY_1749048612] BUY order failed!
+2025-06-04 14:50:13 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:50:16 | ERROR | [BNBUSDT_BUY_1749048614] BUY order failed!
+2025-06-04 14:50:16 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:50:17 | ERROR | [SOLUSDT_BUY_1749048616] BUY order failed!
+2025-06-04 14:51:34 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:51:34 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:51:34 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:51:34 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:51:34 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:51:34 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:51:35 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:51:35 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:51:35 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:51:35 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:51:37 | ERROR | [BTCUSDT_BUY_1749048696] BUY order failed!
+2025-06-04 14:51:37 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:51:38 | ERROR | [ETHUSDT_BUY_1749048698] BUY order failed!
+2025-06-04 14:51:38 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:51:39 | ERROR | [BNBUSDT_BUY_1749048698] BUY order failed!
+2025-06-04 14:51:39 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:51:42 | ERROR | [SOLUSDT_BUY_1749048700] BUY order failed!
+2025-06-04 14:52:57 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:52:57 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:52:58 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:52:58 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:52:59 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:52:59 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:53:00 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:53:00 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:53:01 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:53:01 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:53:02 | ERROR | [BTCUSDT_BUY_1749048781] BUY order failed!
+2025-06-04 14:53:02 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:53:04 | ERROR | [ETHUSDT_BUY_1749048783] BUY order failed!
+2025-06-04 14:53:04 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:53:06 | ERROR | [BNBUSDT_BUY_1749048785] BUY order failed!
+2025-06-04 14:53:06 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:53:07 | ERROR | [SOLUSDT_BUY_1749048786] BUY order failed!
+2025-06-04 14:54:25 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:54:25 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:54:26 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:54:26 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:54:26 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:54:26 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:54:27 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:54:27 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:54:27 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:54:27 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:54:28 | ERROR | [BTCUSDT_BUY_1749048867] BUY order failed!
+2025-06-04 14:54:28 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:54:29 | ERROR | [ETHUSDT_BUY_1749048868] BUY order failed!
+2025-06-04 14:54:29 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:54:30 | ERROR | [BNBUSDT_BUY_1749048869] BUY order failed!
+2025-06-04 14:54:30 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:54:31 | ERROR | [SOLUSDT_BUY_1749048871] BUY order failed!
+2025-06-04 14:55:51 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:55:51 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:55:52 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:55:52 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:55:53 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:55:53 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:55:53 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:55:53 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:55:54 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:55:54 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:55:55 | ERROR | [BTCUSDT_BUY_1749048954] BUY order failed!
+2025-06-04 14:55:55 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:55:57 | ERROR | [ETHUSDT_BUY_1749048956] BUY order failed!
+2025-06-04 14:55:57 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:55:57 | ERROR | [BNBUSDT_BUY_1749048957] BUY order failed!
+2025-06-04 14:55:57 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:55:59 | ERROR | [SOLUSDT_BUY_1749048958] BUY order failed!
+2025-06-04 14:57:16 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:57:16 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:57:17 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:57:17 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:57:18 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:57:18 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:57:18 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:57:18 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:57:19 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:57:19 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:57:20 | ERROR | [BTCUSDT_BUY_1749049039] BUY order failed!
+2025-06-04 14:57:20 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:57:21 | ERROR | [ETHUSDT_BUY_1749049040] BUY order failed!
+2025-06-04 14:57:21 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:57:23 | ERROR | [BNBUSDT_BUY_1749049042] BUY order failed!
+2025-06-04 14:57:23 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:57:25 | ERROR | [SOLUSDT_BUY_1749049044] BUY order failed!
+2025-06-04 14:58:49 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 14:58:49 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 14:58:49 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 14:58:49 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 14:58:50 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 14:58:50 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 14:58:51 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 14:58:51 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 14:58:52 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 14:58:52 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 14:58:53 | ERROR | [BTCUSDT_BUY_1749049132] BUY order failed!
+2025-06-04 14:58:53 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 14:58:54 | ERROR | [ETHUSDT_BUY_1749049133] BUY order failed!
+2025-06-04 14:58:54 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 14:58:56 | ERROR | [BNBUSDT_BUY_1749049134] BUY order failed!
+2025-06-04 14:58:56 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 14:58:58 | ERROR | [SOLUSDT_BUY_1749049137] BUY order failed!
+2025-06-04 15:00:25 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:00:25 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:00:26 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:00:26 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:00:27 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:00:27 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:00:28 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:00:28 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:00:29 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:00:29 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:00:30 | ERROR | [BTCUSDT_BUY_1749049229] BUY order failed!
+2025-06-04 15:00:30 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:00:32 | ERROR | [ETHUSDT_BUY_1749049231] BUY order failed!
+2025-06-04 15:00:32 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:00:33 | ERROR | [BNBUSDT_BUY_1749049232] BUY order failed!
+2025-06-04 15:00:33 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:00:35 | ERROR | [SOLUSDT_BUY_1749049234] BUY order failed!
+2025-06-04 15:02:01 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:02:01 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:02:02 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:02:02 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:02:02 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:02:02 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:02:02 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:02:02 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:02:03 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:02:03 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:02:04 | ERROR | [BTCUSDT_BUY_1749049323] BUY order failed!
+2025-06-04 15:02:04 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:02:06 | ERROR | [ETHUSDT_BUY_1749049325] BUY order failed!
+2025-06-04 15:02:06 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:02:07 | ERROR | [BNBUSDT_BUY_1749049327] BUY order failed!
+2025-06-04 15:02:07 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:02:09 | ERROR | [SOLUSDT_BUY_1749049328] BUY order failed!
+2025-06-04 15:03:38 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:03:38 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:03:38 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:03:38 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:03:39 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:03:39 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:03:39 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:03:39 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:03:40 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:03:40 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:03:42 | ERROR | [BTCUSDT_BUY_1749049420] BUY order failed!
+2025-06-04 15:03:42 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:03:43 | ERROR | [ETHUSDT_BUY_1749049423] BUY order failed!
+2025-06-04 15:03:43 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:03:46 | ERROR | [BNBUSDT_BUY_1749049424] BUY order failed!
+2025-06-04 15:03:46 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:03:47 | ERROR | [SOLUSDT_BUY_1749049426] BUY order failed!
+2025-06-04 15:05:22 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:05:22 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:05:22 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:05:22 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:05:22 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:05:22 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:05:23 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:05:23 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:05:24 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:05:24 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:05:26 | ERROR | [BTCUSDT_BUY_1749049525] BUY order failed!
+2025-06-04 15:05:26 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:05:27 | ERROR | [ETHUSDT_BUY_1749049526] BUY order failed!
+2025-06-04 15:05:27 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:05:29 | ERROR | [BNBUSDT_BUY_1749049528] BUY order failed!
+2025-06-04 15:05:29 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:05:30 | ERROR | [SOLUSDT_BUY_1749049530] BUY order failed!
+2025-06-04 15:07:02 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:07:02 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:07:03 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:07:03 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:07:04 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:07:04 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:07:05 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:07:05 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:07:05 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:07:05 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:07:07 | ERROR | [BTCUSDT_BUY_1749049626] BUY order failed!
+2025-06-04 15:07:07 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:07:09 | ERROR | [ETHUSDT_BUY_1749049628] BUY order failed!
+2025-06-04 15:07:09 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:07:11 | ERROR | [BNBUSDT_BUY_1749049630] BUY order failed!
+2025-06-04 15:07:11 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:07:12 | ERROR | [SOLUSDT_BUY_1749049632] BUY order failed!
+2025-06-04 15:08:52 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:08:52 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:08:52 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:08:52 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:08:53 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:08:53 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:08:55 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:08:55 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:08:56 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:08:56 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:08:56 | ERROR | [BTCUSDT_BUY_1749049736] BUY order failed!
+2025-06-04 15:08:56 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:08:57 | ERROR | [ETHUSDT_BUY_1749049737] BUY order failed!
+2025-06-04 15:08:57 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:08:58 | ERROR | [BNBUSDT_BUY_1749049737] BUY order failed!
+2025-06-04 15:08:58 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:08:59 | ERROR | [SOLUSDT_BUY_1749049739] BUY order failed!
+2025-06-04 15:10:42 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:10:42 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:10:43 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:10:43 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:10:43 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:10:43 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:10:44 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:10:44 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:10:44 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:10:44 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:10:45 | ERROR | [BTCUSDT_BUY_1749049845] BUY order failed!
+2025-06-04 15:10:45 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:10:47 | ERROR | [ETHUSDT_BUY_1749049846] BUY order failed!
+2025-06-04 15:10:47 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:10:48 | ERROR | [BNBUSDT_BUY_1749049848] BUY order failed!
+2025-06-04 15:10:48 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:10:49 | ERROR | [SOLUSDT_BUY_1749049849] BUY order failed!
+2025-06-04 15:12:29 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:12:29 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:12:29 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:12:29 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:12:30 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:12:30 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:12:30 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:12:30 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:12:30 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:12:30 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:12:32 | ERROR | [BTCUSDT_BUY_1749049951] BUY order failed!
+2025-06-04 15:12:32 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:12:34 | ERROR | [ETHUSDT_BUY_1749049953] BUY order failed!
+2025-06-04 15:12:34 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:12:35 | ERROR | [BNBUSDT_BUY_1749049955] BUY order failed!
+2025-06-04 15:12:35 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:12:37 | ERROR | [SOLUSDT_BUY_1749049956] BUY order failed!
+2025-06-04 15:14:19 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:14:19 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:14:20 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:14:20 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:14:20 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:14:20 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:14:21 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:14:21 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:14:21 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:14:21 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:14:22 | ERROR | [BTCUSDT_BUY_1749050061] BUY order failed!
+2025-06-04 15:14:22 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:14:24 | ERROR | [ETHUSDT_BUY_1749050063] BUY order failed!
+2025-06-04 15:14:24 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:14:25 | ERROR | [BNBUSDT_BUY_1749050065] BUY order failed!
+2025-06-04 15:14:25 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:14:27 | ERROR | [SOLUSDT_BUY_1749050066] BUY order failed!
+2025-06-04 15:16:09 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:16:09 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:16:10 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:16:10 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:16:11 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:16:11 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:16:11 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:16:11 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:16:11 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:16:11 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:16:13 | ERROR | [BTCUSDT_BUY_1749050172] BUY order failed!
+2025-06-04 15:16:13 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:16:14 | ERROR | [ETHUSDT_BUY_1749050174] BUY order failed!
+2025-06-04 15:16:14 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:16:16 | ERROR | [BNBUSDT_BUY_1749050175] BUY order failed!
+2025-06-04 15:16:16 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:16:17 | ERROR | [SOLUSDT_BUY_1749050177] BUY order failed!
+2025-06-04 15:18:07 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:18:07 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:18:07 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:18:07 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:18:08 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:18:08 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:18:09 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:18:09 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:18:10 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:18:10 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:18:11 | ERROR | [BTCUSDT_BUY_1749050290] BUY order failed!
+2025-06-04 15:18:11 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:18:12 | ERROR | [ETHUSDT_BUY_1749050291] BUY order failed!
+2025-06-04 15:18:12 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:18:14 | ERROR | [BNBUSDT_BUY_1749050292] BUY order failed!
+2025-06-04 15:18:14 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:18:15 | ERROR | [SOLUSDT_BUY_1749050294] BUY order failed!
+2025-06-04 15:18:26 | INFO | Bot stopped manually by user.
+2025-06-04 15:29:23 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 15:29:23 | INFO | Configuration file loaded successfully.
+2025-06-04 15:29:23 | INFO | Binance client initialized (testnet=True)
+2025-06-04 15:29:23 | INFO | Testing API key...
+2025-06-04 15:29:24 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-04 15:29:25 | INFO | Fetched balance for USDT: 1959.74310791 USDT
+2025-06-04 15:29:25 | DEBUG | All components initialized successfully.
+2025-06-04 15:29:26 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BTCUSDT
+2025-06-04 15:29:26 | INFO | Fallback сигнал для BTCUSDT: 1
+2025-06-04 15:29:28 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для ETHUSDT
+2025-06-04 15:29:28 | INFO | Fallback сигнал для ETHUSDT: 1
+2025-06-04 15:29:29 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для BNBUSDT
+2025-06-04 15:29:29 | INFO | Fallback сигнал для BNBUSDT: 1
+2025-06-04 15:29:29 | INFO | AI не дав жодного сигналу — fallback: шукаю простий теханаліз сигнал для SOLUSDT
+2025-06-04 15:29:29 | INFO | Fallback сигнал для SOLUSDT: 1
+2025-06-04 15:29:30 | WARNING | No signals generated for XRPUSDT, skipping.
+2025-06-04 15:29:30 | INFO | Buy signal detected for BTCUSDT at idx=0, placing order.
+2025-06-04 15:29:31 | ERROR | [BTCUSDT_BUY_1749050970] BUY order failed!
+2025-06-04 15:29:31 | INFO | Buy signal detected for ETHUSDT at idx=1, placing order.
+2025-06-04 15:29:33 | INFO | [ETHUSDT_BUY_1749050972] BUY order placed: {'order': {'orderId': 1807821560, 'symbol': 'ETHUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJa6892141778dcc48e04fe7', 'price': '0.00', 'avgPrice': '0.00', 'origQty': '0.380', 'executedQty': '0.000', 'cumQty': '0.000', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'BUY', 'positionSide': 'LONG', 'stopPrice': '0.00', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1749050972272}, 'stop_loss_order': {'orderId': 1807821602, 'symbol': 'ETHUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ8ba17941093a20013fbd25', 'price': '0.00', 'avgPrice': '0.00', 'origQty': '0.380', 'executedQty': '0.000', 'cumQty': '0.000', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '2528.40', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1749050973036}, 'take_profit_order': {'orderId': 1807821655, 'symbol': 'ETHUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ900bfd109b705c944c9d3d', 'price': '0.00', 'avgPrice': '0.00', 'origQty': '0.380', 'executedQty': '0.000', 'cumQty': '0.000', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '2657.40', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1749050973313}}
+2025-06-04 15:29:33 | INFO | Buy signal detected for BNBUSDT at idx=2, placing order.
+2025-06-04 15:29:34 | ERROR | [BNBUSDT_BUY_1749050973] BUY order failed!
+2025-06-04 15:29:34 | INFO | Buy signal detected for SOLUSDT at idx=3, placing order.
+2025-06-04 15:29:36 | INFO | [SOLUSDT_BUY_1749050975] BUY order placed: {'order': {'orderId': 145618153, 'symbol': 'SOLUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ7b1c2ccee51e833bd9cde4', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '13', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000', 'timeInForce': 'GTC', 'type': 'MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'BUY', 'positionSide': 'LONG', 'stopPrice': '0.0000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1749050976138}, 'stop_loss_order': {'orderId': 145618167, 'symbol': 'SOLUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJac4c91c9d0d6f8d98d32e2', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '13', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '151.2918', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1749050976416}, 'take_profit_order': {'orderId': 145618178, 'symbol': 'SOLUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ2e3950fae19d8b28602551', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '13', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '157.4046', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1749050976693}}
+2025-06-04 15:30:22 | INFO | Bot stopped manually by user.
