@@ -75,8 +75,6 @@ def initialize_components(config):
         chat_id = config.get("TELEGRAM", "CHAT_ID")
 
         client = Client(api_key, api_secret, testnet=testnet)
-        if testnet:
-            client.API_URL = "https://testnet.binancefuture.com/fapi/v1"
 
         logger.info(f"Binance client initialized (testnet={testnet})")
 

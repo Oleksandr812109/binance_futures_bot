@@ -34741,3 +34741,415 @@
 2025-06-04 08:07:30 | INFO | Позиція для ETHUSDT (SELL) вже закрита або не існує. Нічого робити не потрібно.
 2025-06-04 08:07:31 | INFO | Позиція для BNBUSDT (SELL) вже закрита або не існує. Нічого робити не потрібно.
 2025-06-04 08:07:32 | INFO | Позиція для SOLUSDT (SELL) вже закрита або не існує. Нічого робити не потрібно.
+2025-06-04 08:32:19 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 08:32:19 | INFO | Configuration file loaded successfully.
+2025-06-04 08:32:20 | ERROR | Error initializing components: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 08:32:20 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 08:32:20 | ERROR | Critical error: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 08:32:20 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 181, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 08:37:10 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 08:37:10 | INFO | Configuration file loaded successfully.
+2025-06-04 08:37:11 | ERROR | Error initializing components: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 08:37:11 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 08:37:11 | ERROR | Critical error: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 08:37:11 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 181, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 08:57:08 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 08:57:08 | INFO | Configuration file loaded successfully.
+2025-06-04 08:57:09 | ERROR | Error initializing components: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 08:57:09 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 08:57:09 | ERROR | Critical error: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 08:57:09 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 181, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 09:05:50 | INFO | Starting Binance Futures Trading Bot...
+2025-06-04 09:05:50 | INFO | Configuration file loaded successfully.
+2025-06-04 09:05:51 | ERROR | Error initializing components: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 09:05:51 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
+2025-06-04 09:05:51 | ERROR | Critical error: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+2025-06-04 09:05:51 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 179, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 77, in initialize_components
+    client = Client(api_key, api_secret, testnet=testnet)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 51, in __init__
+    self.ping()
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 344, in ping
+    return self._get("ping", version=self.PRIVATE_API_VERSION)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 180, in _get
+    return self._request_api("get", path, signed, version, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 117, in _request_api
+    return self._request(method, uri, signed, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 89, in _request
+    return self._handle_response(self.response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/venv/lib/python3.11/site-packages/binance/client.py", line 98, in _handle_response
+    raise BinanceAPIException(response, response.status_code, response.text)
+binance.exceptions.BinanceAPIException: APIError(code=0): Invalid JSON error message from Binance: <html>
+<head><title>502 Bad Gateway</title></head>
+<body>
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx</center>
+</body>
+</html>
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+<!-- a padding to disable MSIE and Chrome friendly error page -->
+
+
