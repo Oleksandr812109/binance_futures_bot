@@ -2,6 +2,8 @@ import logging
 from binance.client import Client
 from utils.check_margin_and_quantity import can_close_position
 
+import decimal
+
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -10,6 +12,30 @@ class TradingLogic:
         self.client = client
         self.risk_management = risk_management
         self.technical_analysis = technical_analysis
+        # Кеш для швидкого доступу до параметрів precision по symbol
+        self._symbol_precision_cache = {}
+
+    def _get_symbol_precisions(self, symbol):
+        """
+        Отримати stepSize для quantity і tickSize для ціни для конкретного symbol.
+        Кешується в _symbol_precision_cache.
+        """
+        if symbol in self._symbol_precision_cache:
+            return self._symbol_precision_cache[symbol]
+
+        exchange_info = self.client.futures_exchange_info()
+        symbol_info = next(s for s in exchange_info['symbols'] if s['symbol'] == symbol)
+        quantity_step = float([f for f in symbol_info['filters'] if f['filterType'] == 'LOT_SIZE'][0]['stepSize'])
+        price_step = float([f for f in symbol_info['filters'] if f['filterType'] == 'PRICE_FILTER'][0]['tickSize'])
+        self._symbol_precision_cache[symbol] = (quantity_step, price_step)
+        return quantity_step, price_step
+
+    @staticmethod
+    def _round_step(value, step):
+        """
+        Округлити value до precision step (stepSize або tickSize)
+        """
+        return float(decimal.Decimal(str(value)).quantize(decimal.Decimal(str(step)), rounding=decimal.ROUND_DOWN))
 
     def place_order(self, symbol: str, side: str, quantity: float, stop_loss_price: float, take_profit_price: float):
         """
@@ -30,6 +56,12 @@ class TradingLogic:
             return None
 
         try:
+            # ОКРУГЛЕННЯ quantity та цін до потрібної точності
+            quantity_step, price_step = self._get_symbol_precisions(symbol)
+            quantity = self._round_step(quantity, quantity_step)
+            stop_loss_price = self._round_step(stop_loss_price, price_step)
+            take_profit_price = self._round_step(take_profit_price, price_step)
+
             positionSide = "LONG" if side == "BUY" else "SHORT"
             # 1. Place entry order
             order = self.client.futures_create_order(
@@ -41,7 +73,7 @@ class TradingLogic:
             )
             logging.info(f"Market order placed: {order}")
 
-            # 2. Place stop loss order (reduceOnly)
+            # 2. Place stop loss order (без reduceOnly)
             stop_loss_order = self.client.futures_create_order(
                 symbol=symbol,
                 side="SELL" if side == "BUY" else "BUY",
@@ -52,7 +84,7 @@ class TradingLogic:
             )
             logging.info(f"Stop loss order placed: {stop_loss_order}")
 
-            # 3. Place take profit order (reduceOnly)
+            # 3. Place take profit order (без reduceOnly)
             take_profit_order = self.client.futures_create_order(
                 symbol=symbol,
                 side="SELL" if side == "BUY" else "BUY",
@@ -104,6 +136,9 @@ class TradingLogic:
                 return None
 
         try:
+            # Округлення кількості при закритті позиції
+            quantity_step, _ = self._get_symbol_precisions(symbol)
+            quantity = self._round_step(quantity, quantity_step)
             positionSide = "LONG" if side == "BUY" else "SHORT"
             order = self.client.futures_create_order(
                 symbol=symbol,
