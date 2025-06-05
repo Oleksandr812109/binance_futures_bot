@@ -71,6 +71,13 @@ class TradingLogic:
             logging.error("Order quantity must be greater than zero.")
             return None
 
+        # === ДОДАНО ПЕРЕВІРКУ: Чи вже є відкрита угода по цій парі та напрямку ===
+        for trade in self.active_trades:
+            if trade["symbol"] == symbol and trade["side"] == side:
+                logging.info(f"Відкрита позиція по {symbol} ({side}) вже існує. Нову не відкриваємо.")
+                return None
+        # =======================================================================
+
         try:
             # ОКРУГЛЕННЯ quantity та цін до потрібної точності
             quantity_step, price_step = self._get_symbol_precisions(symbol)
@@ -89,12 +96,16 @@ class TradingLogic:
 
             entry_price = float(order.get('avgPrice', 0)) if order.get('avgPrice', '0.00') != '0.00' else None
             if not entry_price:
-                # Якщо ціна ще не відома, пробуємо отримати з позиції
-                positions = self.client.futures_position_information()
-                for pos in positions:
-                    if pos['symbol'] == symbol and float(pos['positionAmt']) != 0 and pos['positionSide'] == positionSide:
-                        entry_price = float(pos['entryPrice'])
+                # Дочекатися появи позиції на біржі (ретрай 3 рази)
+                for _ in range(3):
+                    positions = self.client.futures_position_information()
+                    for pos in positions:
+                        if pos['symbol'] == symbol and float(pos['positionAmt']) != 0 and pos['positionSide'] == positionSide:
+                            entry_price = float(pos['entryPrice'])
+                            break
+                    if entry_price:
                         break
+                    time.sleep(1)
 
             # ==== >>>> ДОДАНО КОНТРОЛЬ ВІДСТАНІ ДО TP/SL <<<< ====
             take_profit_price, stop_loss_price = self.safe_tp_sl(entry_price, take_profit_price, stop_loss_price, side)
