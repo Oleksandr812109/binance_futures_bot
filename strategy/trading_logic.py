@@ -1,8 +1,10 @@
-import logging
-from binance.client import Client
-from utils.check_margin_and_quantity import can_close_position
-import decimal
+import logging 
+from binance.client import Client 
+from utils.check_margin_and_quantity import can_close_position 
+import decimal 
 import time
+
+MIN_TP_SL_GAP = 0.04  # 0.3% (можна підвищити до 0.005 чи 0.01)
 
 class TradingLogic:
     def __init__(self, client: Client, risk_management, technical_analysis, ai_model):
@@ -35,6 +37,22 @@ class TradingLogic:
         """
         return float(decimal.Decimal(str(value)).quantize(decimal.Decimal(str(step)), rounding=decimal.ROUND_DOWN))
 
+    def safe_tp_sl(self, entry_price, tp_price, sl_price, side, min_gap=MIN_TP_SL_GAP):
+        """
+        Гарантує, що TP/SL не занадто близько до ціни входу (entry_price).
+        """
+        if side == "BUY":
+            min_tp = entry_price * (1 + min_gap)
+            max_sl = entry_price * (1 - min_gap)
+            tp_price = max(tp_price, min_tp)
+            sl_price = min(sl_price, max_sl)
+        else:
+            max_tp = entry_price * (1 - min_gap)
+            min_sl = entry_price * (1 + min_gap)
+            tp_price = min(tp_price, max_tp)
+            sl_price = max(sl_price, min_sl)
+        return tp_price, sl_price
+
     def place_order(self, symbol: str, side: str, quantity: float, stop_loss_price: float, take_profit_price: float):
         """
         Place a market order on Binance Futures AND immediately set stop-loss and take-profit.
@@ -57,11 +75,9 @@ class TradingLogic:
             # ОКРУГЛЕННЯ quantity та цін до потрібної точності
             quantity_step, price_step = self._get_symbol_precisions(symbol)
             quantity = self._round_step(quantity, quantity_step)
-            stop_loss_price = self._round_step(stop_loss_price, price_step)
-            take_profit_price = self._round_step(take_profit_price, price_step)
 
             positionSide = "LONG" if side == "BUY" else "SHORT"
-            # 1. Place entry order
+            # 1. Place entry order (reduceOnly не потрібен для відкриття)
             order = self.client.futures_create_order(
                 symbol=symbol,
                 side=side,
@@ -80,28 +96,58 @@ class TradingLogic:
                         entry_price = float(pos['entryPrice'])
                         break
 
+            # ==== >>>> ДОДАНО КОНТРОЛЬ ВІДСТАНІ ДО TP/SL <<<< ====
+            take_profit_price, stop_loss_price = self.safe_tp_sl(entry_price, take_profit_price, stop_loss_price, side)
+            stop_loss_price = self._round_step(stop_loss_price, price_step)
+            take_profit_price = self._round_step(take_profit_price, price_step)
+            # ==== <<<< ДОДАНО КОНТРОЛЬ ВІДСТАНІ ДО TP/SL <<<< ====
+
             # 2. Place stop loss order
-            stop_loss_order = self.client.futures_create_order(
+            stop_loss_params = dict(
                 symbol=symbol,
                 side="SELL" if side == "BUY" else "BUY",
                 type="STOP_MARKET",
                 stopPrice=stop_loss_price,
                 quantity=quantity,
                 positionSide=positionSide,
-                reduceOnly=True
             )
-            logging.info(f"Stop loss order placed: {stop_loss_order}")
-
             # 3. Place take profit order
-            take_profit_order = self.client.futures_create_order(
+            take_profit_params = dict(
                 symbol=symbol,
                 side="SELL" if side == "BUY" else "BUY",
                 type="TAKE_PROFIT_MARKET",
                 stopPrice=take_profit_price,
                 quantity=quantity,
                 positionSide=positionSide,
-                reduceOnly=True
             )
+
+            stop_loss_order = None
+            take_profit_order = None
+
+            # Додаємо reduceOnly, якщо Binance це приймає, інакше пробуємо без нього
+            try:
+                stop_loss_params['reduceOnly'] = True
+                stop_loss_order = self.client.futures_create_order(**stop_loss_params)
+            except Exception as e:
+                if "Parameter 'reduceonly' sent when not required" in str(e):
+                    stop_loss_params.pop('reduceOnly')
+                    stop_loss_order = self.client.futures_create_order(**stop_loss_params)
+                else:
+                    logging.error(f"Error placing stop-loss order: {e}")
+                    raise
+
+            try:
+                take_profit_params['reduceOnly'] = True
+                take_profit_order = self.client.futures_create_order(**take_profit_params)
+            except Exception as e:
+                if "Parameter 'reduceonly' sent when not required" in str(e):
+                    take_profit_params.pop('reduceOnly')
+                    take_profit_order = self.client.futures_create_order(**take_profit_params)
+                else:
+                    logging.error(f"Error placing take-profit order: {e}")
+                    raise
+
+            logging.info(f"Stop loss order placed: {stop_loss_order}")
             logging.info(f"Take profit order placed: {take_profit_order}")
 
             # Зберігаємо трейд для подальшого відстеження
@@ -261,6 +307,15 @@ class TradingLogic:
         if not symbol or not side or not quantity or not stop_loss_price or not take_profit_price:
             logging.error("Signal data is incomplete.")
             return None
+
+        # --- ДОДАНО: Перевірка, чи вже є відкрита позиція по цій парі ---
+        open_positions = self.get_open_positions(symbol)
+        for pos in open_positions:
+            if float(pos['positionAmt']) != 0:
+                logging.info(f"Відкрита позиція по {symbol} вже існує. Нову не відкриваємо.")
+                return None
+        # ---------------------------------------------------------------
+
         return self.place_order(symbol, side, quantity, stop_loss_price, take_profit_price)
 
     # --- Додано: універсальний метод закриття всіх позицій по символу (LONG і SHORT) ---
@@ -285,3 +340,4 @@ class TradingLogic:
         2. Можна додати інші регулярні дії.
         """
         self.check_closed_trades()
+
