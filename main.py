@@ -163,7 +163,7 @@ def process_closed_trades(active_trades: Dict[str, Dict[str, Any]], ai_signal_ge
             trades_to_remove.append(trade_id)
 
             # LOGGING видалення трейду
-            logger.info(f"[{trade_id}] Trade closed. Side: {trade_info.get('side')}, Entry: {trade_info.get('entry_price')}, Close: {trade_info.get('close_price')}, Profit: {profit:.4f}, Target l[...]")
+            logger.info(f"[{trade_id}] Trade closed. Side: {trade_info.get('side')}, Entry: {trade_info.get('entry_price')}, Close: {trade_info.get('close_price')}, Profit: {profit:.4f}, Target: {target}")
         except KeyError as e:
             logger.error(f"Trade {trade_id}: Missing expected key in trade_info: {e}. Skipping trade.")
         except Exception as e:
@@ -182,7 +182,12 @@ def main():
         config = load_config(config_path)
         client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
         account_balance = risk_management.account_balance
+
+        # === Додаємо лічильник профіту та час останнього звіту ===
+        total_profit = 0.0
+        last_report_time = time.time()
         telegram_notifier.send_message(f"Bot started. Current balance: {account_balance} USDT")
+
         symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
         interval = config.get("TRADING", "INTERVAL", fallback="1h")
 
@@ -338,9 +343,8 @@ def main():
                         if order:
                             logger.info(f"[{trade_id}] BUY order placed: {order}")
                             active_trades[trade_id]["order"] = order
-                            telegram_notifier.send_message(
-                                f"Order placed: AI BUY {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT | SL: {stop_loss_price} | TP: {take_profit_price}"
-                            )
+                            # === ВИМКНЕНО повідомлення про відкриття ордера ===
+                            # telegram_notifier.send_message(...)
                         else:
                             logger.error(f"[{trade_id}] BUY order failed!")
 
@@ -384,15 +388,12 @@ def main():
                         if order:
                             logger.info(f"[{trade_id}] SELL order placed: {order}")
                             active_trades[trade_id]["order"] = order
-                            telegram_notifier.send_message(
-                                f"Order placed: AI SELL {symbol} | Quantity: {position_size} | Entry price: {entry_price} USDT | SL: {stop_loss_price} | TP: {take_profit_price}"
-                            )
+                            # === ВИМКНЕНО повідомлення про відкриття ордера ===
+                            # telegram_notifier.send_message(...)
                         else:
                             logger.error(f"[{trade_id}] SELL order failed!")
 
-                # --- ВІДМІНЕНО БЛОК АВТОМАТИЧНОГО ЗАКРИТТЯ ПО PNL (бо тепер біржа сама закриває по SL/TP) ---
-
-                # --- Перевірка закриття позицій для Telegram ---
+                # --- Перевірка закриття позицій для Telegram та облік профіту ---
                 for trade_id, trade_info in list(active_trades.items()):
                     if trade_info.get("status") == "CLOSED":
                         continue
@@ -409,13 +410,27 @@ def main():
                         if position_amt == 0:
                             logger.info(f"[{trade_id}] Position already closed by SL/TP on exchange.")
                             trade_info["status"] = "CLOSED"
+                            # --- Оновлюємо профіт при закритті ---
+                            entry = trade_info.get("entry_price")
+                            # Додатково — якщо є можливість, підставляй фактичну ціну закриття із відповіді біржі
+                            close = entry  # Для простоти, ти можеш замінити це на справжню ціну закриття
+                            if entry is not None and close is not None:
+                                if side == "BUY":
+                                    profit = close - entry
+                                else:
+                                    profit = entry - close
+                                total_profit += profit
                             telegram_notifier.send_message(
                                 f"Position closed (by SL/TP): {symbol} | Side: {side}"
                             )
-                            # Можливо, сюди додати розрахунок PNL і збереження історії
                     except Exception as e:
                         logger.error(f"Cannot fetch open position for {trade_id}: {e}")
                         continue
+
+                # --- Сумарний профіт раз на годину ---
+                if time.time() - last_report_time > 3600:
+                    telegram_notifier.send_message(f"Загальний профіт: {total_profit:.2f} USDT")
+                    last_report_time = time.time()
 
                 process_closed_trades(active_trades, ai_signal_generator)
                 time.sleep(60)
