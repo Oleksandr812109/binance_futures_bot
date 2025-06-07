@@ -170,9 +170,6 @@ def process_closed_trades(active_trades: Dict[str, Dict[str, Any]], ai_signal_ge
             del active_trades[trade_id]
             logger.info(f"Trade {trade_id} removed from active_trades.")
 
-# ==== PART 1 END ====
-# ==== PART 2 START ====
-
 def main():
     setup_logging()
     logger.info("Starting Binance Futures Trading Bot...")
@@ -204,11 +201,17 @@ def main():
                             logger.warning(f"No market data for {symbol}, skipping.")
                             continue
 
-                        # --- ОНОВЛЕНА ЛОГІКА: AI формує сигнал напряму ---
+                        # === Додаємо всі технічні індикатори одним викликом ===
+                        df = technical_analysis.generate_optimized_signals(df)
+
+                        # Перевіримо, чи всі потрібні колонки присутні й немає NaN
+                        required_cols = ['EMA_Short', 'EMA_Long', 'RSI', 'ADX', 'Upper_Band', 'Lower_Band']
+                        if df[required_cols].isna().any().any():
+                            logger.error(f"Missing or NaN in columns: {required_cols} for {symbol}. Skipping.")
+                            continue
+
                         features = ai_signal_generator.extract_features(df)
                         ai_decision, price_info = ai_signal_generator.predict(features)
-                        # ai_decision: "buy", "sell", "hold"
-                        # price_info: dict з entry, stop_loss, take_profit
 
                         if ai_decision not in ["buy", "sell"]:
                             logger.info(f"AI decision: HOLD for {symbol}. No action taken.")
@@ -218,7 +221,6 @@ def main():
                         stop_loss_price = price_info.get("stop_loss")
                         take_profit_price = price_info.get("take_profit")
 
-                        # --- Перевірка коректності цін ---
                         if entry_price is None or stop_loss_price is None or take_profit_price is None:
                             logger.error(f"Missing entry, stop-loss, or take-profit price. Skipping order.")
                             continue
@@ -252,7 +254,7 @@ def main():
                             logger.warning(f"Position size {position_size} > max for {symbol}: {max_position_size}. Зменшую до ліміту.")
                             position_size = max_position_size
 
-                        features_for_save = features  # features — ваш словник для навчання
+                        features_for_save = features
 
                         trade_id = f"{symbol}_{side}_{int(time.time())}"
                         active_trades[trade_id] = {
@@ -266,7 +268,6 @@ def main():
                         if order:
                             logger.info(f"[{trade_id}] {side} order placed: {order}")
                             active_trades[trade_id]["order"] = order
-                            # telegram_notifier.send_message(...)
                         else:
                             logger.error(f"[{trade_id}] {side} order failed!")
                     except Exception as e:
@@ -321,4 +322,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

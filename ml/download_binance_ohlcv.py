@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 from binance.client import Client
 
@@ -22,6 +23,9 @@ df = df[['Open', 'High', 'Low', 'Close', 'Volume']]  # Інші колонки �
 # Конвертуємо всі ці дані у float
 for col in ['Open', 'High', 'Low', 'Close', 'Volume']:
     df[col] = df[col].astype(float)
+
+# --- Додаємо створення директорії ---
+os.makedirs("ml/data", exist_ok=True)
 
 # Зберігаємо
 df.to_csv("ml/data/raw_ohlcv.csv", index=False)
