@@ -187,6 +187,28 @@ class TradingLogic:
         """
         Перевірити виконання стоп-лосс/тейк-профіт ордерів та навчити AI на реальних результатах.
         """
+
+        pnl_threshold = 5.0  # у USDT
+        for trade in self.active_trades[:]:
+            try:
+                positions = self.client.futures_position_information(symbol=trade['symbol'])
+                for pos in positions:
+                    # Важливо: позиція має бути відкрита й відповідати стороні (LONG/SHORT)
+                    if float(pos['positionAmt']) != 0 and pos['positionSide'] == trade['positionSide']:
+                        pnl = float(pos['unrealizedProfit'])
+                        if pnl >= pnl_threshold:
+                            # Закриваємо позицію ринковим ордером
+                            self.close_position(
+                                trade['symbol'],
+                                abs(float(pos['positionAmt'])),
+                                "SELL" if pos['positionSide'] == "LONG" else "BUY"
+                            )
+                            logging.info(f"Position {trade['symbol']} closed early by PNL threshold: {pnl} USDT")
+                            self.active_trades.remove(trade)
+                            break
+            except Exception as e:
+                logging.error(f"Error checking/closing by PNL: {e}")
+
         for trade in self.active_trades[:]:
             # Перевіряємо тейк-профіт
             try:
