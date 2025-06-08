@@ -6,7 +6,17 @@
     "created_date": "2025-05-01",
     "framework": "TensorFlow",
     "input_shape": [
-        11
+        8
     ],
-    "output_classes": 2
+    "output_classes": 3,
+    "feature_names": [
+        "Close",
+        "EMA_Short",
+        "EMA_Long",
+        "RSI",
+        "ADX",
+        "Upper_Band",
+        "Lower_Band",
+        "Volume"
+    ]
 }
