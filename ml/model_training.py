@@ -11,6 +11,9 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
+# Import FEATURE_NAMES from config
+from ml.config import FEATURE_NAMES
+
 def load_data(file_path, target_column):
     """
     Load and prepare data for training.
@@ -23,7 +26,7 @@ def load_data(file_path, target_column):
         tuple: Features (X) and target (y) dataframes.
     """
     data = pd.read_csv(file_path)
-    X = data.drop(columns=[target_column])
+    X = data[FEATURE_NAMES]  # Use only the specified features
     y = data[target_column]
     return X, y
 
@@ -80,7 +83,8 @@ def save_metadata(metadata_path, input_shape, output_classes):
         "created_date": "2025-05-01",
         "framework": "TensorFlow",
         "input_shape": input_shape,
-        "output_classes": output_classes
+        "output_classes": output_classes,
+        "feature_names": FEATURE_NAMES
     }
     with open(metadata_path, 'w') as file:
         json.dump(metadata, file, indent=4)
@@ -112,6 +116,6 @@ if __name__ == "__main__":
     print(f"Scaler saved to {scaler_save_path}")
 
     # Save metadata
-    save_metadata(metadata_save_path, input_shape=X_train.shape[1:], output_classes=len(np.unique(y)))
+    save_metadata(metadata_save_path, input_shape=X_train.shape[1:], output_classes=3)
 
     print("Model training and saving completed.")
