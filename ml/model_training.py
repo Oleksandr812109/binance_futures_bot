@@ -4,6 +4,7 @@ import os
 import json
 import numpy as np
 import pandas as pd
+import pickle
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.callbacks import ModelCheckpoint
@@ -35,11 +36,11 @@ def preprocess_data(X, y):
         y (pd.Series): Target data.
 
     Returns:
-        tuple: Scaled features and one-hot encoded target data.
+        tuple: Scaled features, target data, and fitted scaler.
     """
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
-    return X_scaled, y
+    return X_scaled, y, scaler
 
 def build_model(input_dim, output_dim):
     """
@@ -91,10 +92,11 @@ if __name__ == "__main__":
     target_column = "target"
     model_save_path = "ml/models/model.h5"
     metadata_save_path = "ml/models/metadata.json"
+    scaler_save_path = "ml/models/scaler.pkl"
 
     # Load and preprocess data
     X, y = load_data(data_path, target_column)
-    X_scaled, y_preprocessed = preprocess_data(X, y)
+    X_scaled, y_preprocessed, scaler = preprocess_data(X, y)
 
     # Split data into training and validation sets
     X_train, X_val, y_train, y_val = train_test_split(X_scaled, y_preprocessed, test_size=0.2, random_state=42)
@@ -103,6 +105,11 @@ if __name__ == "__main__":
     model = build_model(input_dim=X_train.shape[1], output_dim=len(np.unique(y)))
     checkpoint = ModelCheckpoint(filepath=model_save_path, save_best_only=True, monitor='val_loss', mode='min')
     model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=20, batch_size=32, callbacks=[checkpoint])
+
+    # Save scaler
+    with open(scaler_save_path, "wb") as f:
+        pickle.dump(scaler, f)
+    print(f"Scaler saved to {scaler_save_path}")
 
     # Save metadata
     save_metadata(metadata_save_path, input_shape=X_train.shape[1:], output_classes=len(np.unique(y)))

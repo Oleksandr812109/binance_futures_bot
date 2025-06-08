@@ -3,6 +3,7 @@ import sys
 import time
 import traceback
 import logging
+import traceback
 import asyncio
 from configparser import ConfigParser
 from strategy.trading_logic import TradingLogic
@@ -316,6 +317,7 @@ def main():
                 logger.debug(traceback.format_exc())
     except KeyboardInterrupt:
         logger.info("Bot stopped manually by user.")
+        pass
     except Exception as e:
         logger.error(f"Critical error: {e}")
         logger.debug(traceback.format_exc())
