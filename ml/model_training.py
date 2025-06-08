@@ -102,7 +102,7 @@ if __name__ == "__main__":
     X_train, X_val, y_train, y_val = train_test_split(X_scaled, y_preprocessed, test_size=0.2, random_state=42)
 
     # Build and train the model
-    model = build_model(input_dim=X_train.shape[1], output_dim=len(np.unique(y)))
+    model = build_model(input_dim=X_train.shape[1], output_dim=3)
     checkpoint = ModelCheckpoint(filepath=model_save_path, save_best_only=True, monitor='val_loss', mode='min')
     model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=20, batch_size=32, callbacks=[checkpoint])
 

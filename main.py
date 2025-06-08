@@ -3,7 +3,6 @@ import sys
 import time
 import traceback
 import logging
-import traceback
 import asyncio
 from configparser import ConfigParser
 from strategy.trading_logic import TradingLogic
@@ -52,7 +51,6 @@ def load_config(config_path="config/config.ini"):
     if not os.path.exists(config_path):
         logger.error(f"Configuration file '{config_path}' not found!")
         raise FileNotFoundError(f"Configuration file '{config_path}' not found!")
-
     config = ConfigParser()
     config.read(config_path)
     logger.info("Configuration file loaded successfully.")
@@ -93,7 +91,7 @@ def initialize_components(config):
         risk_management = RiskManagement(client, risk_per_trade, max_drawdown)
         technical_analysis = TechnicalAnalysis(client)
         ai_signal_generator = AISignalGenerator()
-        ai_model = AIModel("ml/models/trade_strategy_model.h5")
+        ai_model = AIModel("ml/models/model.h5")
         trading_logic = TradingLogic(client, risk_management, technical_analysis, ai_model)
         telegram_notifier = TelegramNotifier(bot_token, chat_id)
 
@@ -202,10 +200,7 @@ def main():
                             logger.warning(f"No market data for {symbol}, skipping.")
                             continue
 
-                        # === Додаємо всі технічні індикатори одним викликом ===
                         df = technical_analysis.generate_optimized_signals(df)
-
-                        # Перевіримо, чи всі потрібні колонки присутні й немає NaN
                         required_cols = ['EMA_Short', 'EMA_Long', 'RSI', 'ADX', 'Upper_Band', 'Lower_Band']
                         if df[required_cols].isna().any().any():
                             logger.error(f"Missing or NaN in columns: {required_cols} for {symbol}. Skipping.")
@@ -214,7 +209,7 @@ def main():
                         features = ai_signal_generator.extract_features(df)
                         ai_decision, price_info = ai_signal_generator.predict(features)
 
-                        if ai_decision not in ["buy", "sell"]:
+                        if ai_decision not in [Decision.BUY, Decision.SELL]:
                             logger.info(f"AI decision: HOLD for {symbol}. No action taken.")
                             continue
 
@@ -226,7 +221,7 @@ def main():
                             logger.error(f"Missing entry, stop-loss, or take-profit price. Skipping order.")
                             continue
 
-                        if ai_decision == "buy":
+                        if ai_decision == Decision.BUY:
                             stop_loss_distance = entry_price - stop_loss_price
                             if stop_loss_distance <= 0:
                                 logger.error(f"Invalid stop-loss distance for {symbol} (LONG). Skipping order.")
@@ -275,7 +270,6 @@ def main():
                         logger.error(f"Error fetching/generating signal for {symbol}: {e}")
                         logger.debug(traceback.format_exc())
 
-                # --- Перевірка закриття позицій для Telegram та облік профіту ---
                 for trade_id, trade_info in list(active_trades.items()):
                     if trade_info.get("status") == "CLOSED":
                         continue
@@ -293,7 +287,7 @@ def main():
                             logger.info(f"[{trade_id}] Position already closed by SL/TP on exchange.")
                             trade_info["status"] = "CLOSED"
                             entry = trade_info.get("entry_price")
-                            close = entry  # Для простоти, тут можна змінити на реальну ціну закриття
+                            close = entry  # TODO: отримати реальну ціну закриття
                             if entry is not None and close is not None:
                                 profit = close - entry if side == "BUY" else entry - close
                                 total_profit += profit
@@ -304,7 +298,6 @@ def main():
                         logger.error(f"Cannot fetch open position for {trade_id}: {e}")
                         continue
 
-                # --- Сумарний профіт раз на годину ---
                 if time.time() - last_report_time > 3600:
                     telegram_notifier.send_message(f"Загальний профіт: {total_profit:.2f} USDT")
                     last_report_time = time.time()
@@ -324,3 +317,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
