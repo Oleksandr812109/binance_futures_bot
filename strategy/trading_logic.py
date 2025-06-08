@@ -183,6 +183,7 @@ class TradingLogic:
             logging.error(f"Error placing bracket orders: {e}")
             return None
 
+
     def check_closed_trades(self):
         """
         Перевірити виконання стоп-лосс/тейк-профіт ордерів та навчити AI на реальних результатах.
@@ -215,6 +216,8 @@ class TradingLogic:
                 tp_order = self.client.futures_get_order(symbol=trade['symbol'], orderId=trade['tp_order_id'])
                 if tp_order['status'] == 'FILLED':
                     close_price = float(tp_order['avgPrice']) if tp_order['avgPrice'] else None
+                    # --- Додаємо логування avgPrice тейк-профіту ---
+                    logging.info(f"[TP FILL] symbol={trade['symbol']} | TP avgPrice={tp_order.get('avgPrice')} | orderId={trade['tp_order_id']}")
                     self.learn_ai(trade, close_price, 'TAKE_PROFIT')
                     self.active_trades.remove(trade)
                     continue
@@ -225,6 +228,8 @@ class TradingLogic:
                 sl_order = self.client.futures_get_order(symbol=trade['symbol'], orderId=trade['sl_order_id'])
                 if sl_order['status'] == 'FILLED':
                     close_price = float(sl_order['avgPrice']) if sl_order['avgPrice'] else None
+                    # --- Додаємо логування avgPrice стоп-лоссу ---
+                    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
                     self.learn_ai(trade, close_price, 'STOP_LOSS')
                     self.active_trades.remove(trade)
                     continue
@@ -235,6 +240,9 @@ class TradingLogic:
         entry_price = trade['entry_price']
         side = trade['side']
         qty = trade['qty']
+        # --- Додаємо детальне логування для дебагу PNL ---
+        logging.info(f"[learn_ai] Trade: {trade['symbol']} | Side: {side} | Entry: {entry_price} | Close: {close_price} | Qty: {qty} | Exit: {exit_type}")
+
         profit = 0
         if close_price is not None and entry_price is not None:
             if side == 'BUY':
@@ -373,4 +381,3 @@ class TradingLogic:
         2. Можна додати інші регулярні дії.
         """
         self.check_closed_trades()
-
