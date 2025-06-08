@@ -1,6 +1,7 @@
 # This script is responsible for training a machine learning model.
 
 import os
+import sys
 import json
 import numpy as np
 import pandas as pd
@@ -11,7 +12,9 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
-# Import FEATURE_NAMES from config
+# Ensure ml/ is in sys.path for import
+sys.path.append(os.path.abspath(os.path.dirname(__file__) + "/.."))
+
 from ml.config import FEATURE_NAMES
 
 def load_data(file_path, target_column):
@@ -26,6 +29,10 @@ def load_data(file_path, target_column):
         tuple: Features (X) and target (y) dataframes.
     """
     data = pd.read_csv(file_path)
+    # Перевірка, чи всі потрібні фічі є у датасеті
+    missing = set(FEATURE_NAMES) - set(data.columns)
+    if missing:
+        raise ValueError(f"Dataset is missing required features: {missing}")
     X = data[FEATURE_NAMES]  # Use only the specified features
     y = data[target_column]
     return X, y
@@ -105,8 +112,12 @@ if __name__ == "__main__":
     # Split data into training and validation sets
     X_train, X_val, y_train, y_val = train_test_split(X_scaled, y_preprocessed, test_size=0.2, random_state=42)
 
+    # Визначити кількість класів автоматично
+    unique_classes = np.unique(y_train)
+    output_dim = len(np.unique(y_train))
+
     # Build and train the model
-    model = build_model(input_dim=X_train.shape[1], output_dim=3)
+    model = build_model(input_dim=X_train.shape[1], output_dim=output_dim)
     checkpoint = ModelCheckpoint(filepath=model_save_path, save_best_only=True, monitor='val_loss', mode='min')
     model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=20, batch_size=32, callbacks=[checkpoint])
 
@@ -116,6 +127,6 @@ if __name__ == "__main__":
     print(f"Scaler saved to {scaler_save_path}")
 
     # Save metadata
-    save_metadata(metadata_save_path, input_shape=X_train.shape[1:], output_classes=3)
+    save_metadata(metadata_save_path, input_shape=X_train.shape[1:], output_classes=output_dim)
 
     print("Model training and saving completed.")
