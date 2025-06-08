@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import pickle
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.layers import Dense, Dropout, Input
 from tensorflow.keras.callbacks import ModelCheckpoint
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -63,8 +63,10 @@ def build_model(input_dim, output_dim):
     Returns:
         keras.Model: Compiled model.
     """
+    # Keras 3.x: використовуйте Input як перший шар
     model = Sequential([
-        Dense(128, activation='relu', input_dim=input_dim),
+        Input(shape=(input_dim,)),
+        Dense(128, activation='relu'),
         Dropout(0.3),
         Dense(64, activation='relu'),
         Dropout(0.3),
@@ -113,7 +115,6 @@ if __name__ == "__main__":
     X_train, X_val, y_train, y_val = train_test_split(X_scaled, y_preprocessed, test_size=0.2, random_state=42)
 
     # Визначити кількість класів автоматично
-    unique_classes = np.unique(y_train)
     output_dim = len(np.unique(y_train))
 
     # Build and train the model
