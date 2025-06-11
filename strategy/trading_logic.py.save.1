@@ -1,0 +1,76 @@
+# ==== ЧАСТИНА 1: ІМПОРТИ, ІНІЦІАЛІЗАЦІЯ, ДОПОМІЖНІ МЕТОДИ ====
+import logging 
+from binance.client import Client 
+from utils.check_margin_and_quantity import can_close_position 
+import decimal 
+import time
+
+MIN_TP_SL_GAP = 0.04  # 0.3% (можна підвищити до 0.005 чи 0.01)
+
+class TradingLogic:
+    def __init__(self, client: Client, risk_management, technical_analysis, ai_model):
+        self.client = client
+        self.risk_management = risk_management
+        self.technical_analysis = technical_analysis
+        self.ai_model = ai_model
+        self._symbol_precision_cache = {}
+        self.active_trades = []  # Список всіх відкритих угод
+
+    def _get_symbol_precisions(self, symbol):
+        """
+        Отримати stepSize для quantity і tickSize для ціни для конкретного symbol.
+        Кешується в _symbol_precision_cache.
+        """
+        if symbol in self._symbol_precision_cache:
+            return self._symbol_precision_cache[symbol]
+
+        exchange_info = self.client.futures_exchange_info()
+        symbol_info = next(s for s in exchange_info['symbols'] if s['symbol'] == symbol)
+        quantity_step = float([f for f in symbol_info['filters'] if f['filterType'] == 'LOT_SIZE'][0]['stepSize'])
+        price_step = float([f for f in symbol_info['filters'] if f['filterType'] == 'PRICE_FILTER'][0]['tickSize'])
+        self._symbol_precision_cache[symbol] = (quantity_step, price_step)
+        return quantity_step, price_step
+
+    @staticmethod
+    def _round_step(value, step):
+        """
+        Округлити value до precision step (stepSize або tickSize)
+        """
+        return float(decimal.Decimal(str(value)).quantize(decimal.Decimal(str(step)), rounding=decimal.ROUND_DOWN))
+
+    def safe_tp_sl(self, entry_price, tp_price, sl_price, side, min_gap=MIN_TP_SL_GAP):
+        """
+        Гарантує, що TP/SL не занадто близько до ціни входу (entry_price).
+        """
+        if side == "BUY":
+            min_tp = entry_price * (1 + min_gap)
+            max_sl = entry_price * (1 - min_gap)
+            tp_price = max(tp_price, min_tp)
+            sl_price = min(sl_price, max_sl)
+        else:
+            max_tp = entry_price * (1 - min_gap)
+            min_sl = entry_price * (1 + min_gap)
+            tp_price = min(tp_price, max_tp)
+            sl_price = max(sl_price, min_sl)
+        return tp_price, sl_price
+
+    def get_manual_close_price(self, trade):
+        """
+        Спробувати отримати ціну закриття з історії угод або останньої ціни для ручного закриття.
+        """
+        try:
+            trades = self.client.futures_account_trades(symbol=trade['symbol'])
+            # знайти останню угоду, яка відповідає закриттю позиції
+            if trades:
+                # Шукаємо останню угоду після часу відкриття
+                filtered = [t for t in trades if float(t['time']) / 1000 > trade.get('opened_at', 0)]
+                if filtered:
+                    return float(filtered[-1]['price'])
+                else:
+                    return float(trades[-1]['price'])
+        except Exception as e:
+            logging.error(f"Error fetching manual close price: {e}")
+        return None
+
+# ==== КІНЕЦЬ ЧАСТИНИ 1 ====
+

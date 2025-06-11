@@ -53,6 +53,24 @@ class TradingLogic:
             sl_price = max(sl_price, min_sl)
         return tp_price, sl_price
 
+    def get_manual_close_price(self, trade):
+        """
+        Спробувати отримати ціну закриття з історії угод або останньої ціни для ручного закриття.
+        """
+        try:
+            trades = self.client.futures_account_trades(symbol=trade['symbol'])
+            # знайти останню угоду, яка відповідає закриттю позиції
+            if trades:
+                # Шукаємо останню угоду після часу відкриття
+                filtered = [t for t in trades if float(t['time']) / 1000 > trade.get('opened_at', 0)]
+                if filtered:
+                    return float(filtered[-1]['price'])
+                else:
+                    return float(trades[-1]['price'])
+        except Exception as e:
+            logging.error(f"Error fetching manual close price: {e}")
+        return None
+
     def place_order(self, symbol: str, side: str, quantity: float, stop_loss_price: float, take_profit_price: float):
         """
         Place a market order on Binance Futures AND immediately set stop-loss and take-profit.
@@ -183,7 +201,6 @@ class TradingLogic:
             logging.error(f"Error placing bracket orders: {e}")
             return None
 
-
     def check_closed_trades(self):
         """
         Перевірити виконання стоп-лосс/тейк-профіт ордерів та навчити AI на реальних результатах.
@@ -236,6 +253,20 @@ class TradingLogic:
             except Exception as e:
                 logging.error(f"Error checking SL order status: {e}")
 
+        # --- Додаємо перевірку ручного закриття позиції ---
+        for trade in self.active_trades[:]:
+            positions = self.get_open_positions(trade['symbol'])
+            side = trade['side']
+            # якщо по цій парі немає відкритої позиції і не було SL/TP
+            if not any(float(pos['positionAmt']) != 0 and pos['positionSide'] == trade['positionSide'] for pos in positions):
+                close_price = self.get_manual_close_price(trade)
+                if close_price is None:
+                    logging.warning(f"Cannot update AI: missing close price for {trade['symbol']}. Trade skipped for training.")
+                else:
+                    self.learn_ai(trade, close_price, 'MANUAL_CLOSE')
+                self.active_trades.remove(trade)
+        # --------------------------------------------------
+
     def learn_ai(self, trade, close_price, exit_type):
         entry_price = trade['entry_price']
         side = trade['side']
@@ -243,14 +274,15 @@ class TradingLogic:
         # --- Додаємо детальне логування для дебагу PNL ---
         logging.info(f"[learn_ai] Trade: {trade['symbol']} | Side: {side} | Entry: {entry_price} | Close: {close_price} | Qty: {qty} | Exit: {exit_type}")
 
+        if close_price is None or entry_price is None:
+            logging.warning(f"AI not updated: missing open/close price for {trade['symbol']}")
+            return
+
         profit = 0
-        if close_price is not None and entry_price is not None:
-            if side == 'BUY':
-                profit = (close_price - entry_price) * qty
-            else:
-                profit = (entry_price - close_price) * qty
+        if side == 'BUY':
+            profit = (close_price - entry_price) * qty
         else:
-            logging.warning(f"Trade info missing open/close price: {close_price}")
+            profit = (entry_price - close_price) * qty
 
         # Оновлення AI-модуля
         self.ai_model.update(
@@ -381,3 +413,5 @@ class TradingLogic:
         2. Можна додати інші регулярні дії.
         """
         self.check_closed_trades()
+
+
