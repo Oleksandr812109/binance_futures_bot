@@ -274,6 +274,7 @@ class TradingLogic:
         # --- Додаємо детальне логування для дебагу PNL ---
         logging.info(f"[learn_ai] Trade: {trade['symbol']} | Side: {side} | Entry: {entry_price} | Close: {close_price} | Qty: {qty} | Exit: {exit_type}")
 
+        # --- ВАЖЛИВО: Не оновлюємо AI, якщо немає ціни закриття або входу ---
         if close_price is None or entry_price is None:
             logging.warning(f"AI not updated: missing open/close price for {trade['symbol']}")
             return

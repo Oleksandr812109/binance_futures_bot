@@ -19,6 +19,7 @@ from utils.binance_precision import get_precision, round_quantity, round_price
 from typing import Dict, Any
 from utils.trade_history_logger import save_trade
 from utils.dumb_strategy import dumb_strategy_signal
+from datetime import datetime
 
 def get_symbol_info(client, symbol):
     try:
@@ -176,11 +177,11 @@ def main():
         config_path = "config/config.ini"
         config = load_config(config_path)
         client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
-        account_balance = risk_management.account_balance
-
-        total_profit = 0.0
-        last_report_time = time.time()
-        telegram_notifier.send_message(f"Bot started. Current balance: {account_balance} USDT")
+        
+        # --- Відправляємо баланс у Telegram при старті ---
+        now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        account_balance = get_account_balance(client, asset="USDT")
+        telegram_notifier.send_message(f"[{now_str}] Старт бота. Баланс: {account_balance:.2f} USDT")
 
         symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
         interval = config.get("TRADING", "INTERVAL", fallback="1h")
@@ -188,8 +189,11 @@ def main():
         loop = asyncio.get_event_loop()
         loop.create_task(run_telegram_listener())
 
-        TP_PCT = 1.03     # take-profit як множник (3% зверху)
-        SL_PCT = 0.98     # stop-loss як множник (2% вниз)
+        TP_PCT = 1.03
+        SL_PCT = 0.98
+
+        # --- Для щогодинної відправки балансу ---
+        last_balance_time = time.time()
 
         while True:
             try:
@@ -270,37 +274,12 @@ def main():
                         logger.error(f"Error fetching/generating signal for {symbol}: {e}")
                         logger.debug(traceback.format_exc())
 
-                for trade_id, trade_info in list(active_trades.items()):
-                    if trade_info.get("status") == "CLOSED":
-                        continue
-                    symbol = trade_info["symbol"]
-                    side = trade_info["side"]
-
-                    try:
-                        positions = client.futures_position_information(symbol=symbol)
-                        position_amt = 0
-                        for pos in positions:
-                            if float(pos["positionAmt"]) != 0:
-                                position_amt = float(pos["positionAmt"])
-                                break
-                        if position_amt == 0:
-                            logger.info(f"[{trade_id}] Position already closed by SL/TP on exchange.")
-                            trade_info["status"] = "CLOSED"
-                            entry = trade_info.get("entry_price")
-                            close = entry  # TODO: отримати реальну ціну закриття
-                            if entry is not None and close is not None:
-                                profit = close - entry if side == "BUY" else entry - close
-                                total_profit += profit
-                            telegram_notifier.send_message(
-                                f"Position closed (by SL/TP): {symbol} | Side: {side}"
-                            )
-                    except Exception as e:
-                        logger.error(f"Cannot fetch open position for {trade_id}: {e}")
-                        continue
-
-                if time.time() - last_report_time > 3600:
-                    telegram_notifier.send_message(f"Загальний профіт: {total_profit:.2f} USDT")
-                    last_report_time = time.time()
+                # --- Щогодинна відправка балансу ---
+                if time.time() - last_balance_time > 3600:
+                    account_balance = get_account_balance(client, asset="USDT")
+                    now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                    telegram_notifier.send_message(f"[{now_str}] Баланс: {account_balance:.2f} USDT")
+                    last_balance_time = time.time()
 
                 process_closed_trades(active_trades, ai_signal_generator)
                 time.sleep(60)
@@ -317,4 +296,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
