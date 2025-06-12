@@ -65,11 +65,11 @@ class TradingLogic:
         Скасувати ордер на біржі Binance Futures.
         """
         try:
-            self.client.futures_cancel_order(symbol=symbol, orderId=order_id)
-            logging.info(f"Order {order_id} cancelled on {symbol}")
+            logging.info(f"Trying to cancel order {order_id} on {symbol}")
+            result = self.client.futures_cancel_order(symbol=symbol, orderId=order_id)
+            logging.info(f"Order {order_id} cancelled on {symbol} | Binance response: {result}")
         except Exception as e:
             logging.warning(f"Error cancelling order {order_id}: {e}")
-
 
     def place_order(self, symbol: str, side: str, quantity: float, stop_loss_price: float, take_profit_price: float):
         """
