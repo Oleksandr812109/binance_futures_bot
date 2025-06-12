@@ -1,3 +1,4 @@
+import time
 import logging 
 from binance.client import Client 
 from utils.check_margin_and_quantity import can_close_position 
@@ -60,16 +61,23 @@ class TradingLogic:
         # Реалізуй за потреби
         return None
 
-    def cancel_order(self, symbol, order_id):
+    def cancel_order(self, symbol, order_id, max_retries=3, retry_delay=2):
         """
-        Скасувати ордер на біржі Binance Futures.
+        Скасувати ордер на біржі Binance Futures, з повторними спробами у разі помилки.
         """
-        try:
-            logging.info(f"Trying to cancel order {order_id} on {symbol}")
-            result = self.client.futures_cancel_order(symbol=symbol, orderId=order_id)
-            logging.info(f"Order {order_id} cancelled on {symbol} | Binance response: {result}")
-        except Exception as e:
-            logging.warning(f"Error cancelling order {order_id}: {e}")
+        for attempt in range(1, max_retries + 1):
+            try:
+                logging.info(f"Trying to cancel order {order_id} on {symbol}, attempt {attempt}")
+                result = self.client.futures_cancel_order(symbol=symbol, orderId=order_id)
+                logging.info(f"Order {order_id} cancelled on {symbol} | Binance response: {result}")
+                return result
+            except Exception as e:
+                logging.warning(f"Error cancelling order {order_id} on {symbol}, attempt {attempt}: {e}")
+                if attempt < max_retries:
+                    time.sleep(retry_delay)
+                else:
+                    logging.error(f"Failed to cancel order {order_id} on {symbol} after {max_retries} attempts.")
+        return None
 
     def place_order(self, symbol: str, side: str, quantity: float, stop_loss_price: float, take_profit_price: float):
         """
