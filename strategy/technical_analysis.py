@@ -128,7 +128,15 @@ class TechnicalAnalysis:
             np.where(data["SignalFlag"] == -1, data["Close"] * 1.01, np.nan)
         )
 
-        # Додано перевірку на наявність NaN у Close та Stop_Loss
+        # === Діагностика NaN для головних колонок ===
+        required_cols = ['EMA_Short', 'EMA_Long', 'RSI', 'ADX', 'Upper_Band', 'Lower_Band']
+        print("NaN count in required columns for ADAUSDT:")
+        print(data[required_cols].isna().sum())
+        print("Rows with NaN in required columns:")
+        print(data[data[required_cols].isna().any(axis=1)])
+        # === /Діагностика ===
+
+        # Додано перевірку на наявність NaN у Close та Stop_Loss (за бажанням, можна залишити)
         print(data[["Close", "Stop_Loss"]].isna().sum())  # покаже кількість NaN у кожній колонці
         print(data[data[["Close", "Stop_Loss"]].isna().any(axis=1)])  # покаже рядки з NaN
 
