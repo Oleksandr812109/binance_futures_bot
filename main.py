@@ -204,10 +204,8 @@ def main():
                             logger.warning(f"No market data for {symbol}, skipping.")
                             continue
 
-                        df = technical_analysis.generate_optimized_signals(df)
-                        required_cols = ['EMA_Short', 'EMA_Long', 'RSI', 'ADX', 'Upper_Band', 'Lower_Band']
-                        if df[required_cols].isna().any().any():
-                            logger.error(f"Missing or NaN in columns: {required_cols} for {symbol}. Skipping.")
+                        df = technical_analysis.generate_optimized_signals(df, symbol)
+                        if df is None:
                             continue
 
                         features = ai_signal_generator.extract_features(df)
