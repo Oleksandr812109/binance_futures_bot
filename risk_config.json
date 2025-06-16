@@ -1,0 +1,11 @@
+{
+  "risk_per_trade": {
+    "BTCUSDT": 0.01,
+    "ETHUSDT": 0.008,
+    "BNBUSDT": 0.01,
+    "SOLUSDT": 0.012,
+    "ADAUSDT": 0.012
+  },
+  "default_risk_per_trade_percent": 0.005,
+  "max_drawdown": 0.15
+}

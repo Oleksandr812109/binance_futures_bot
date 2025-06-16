@@ -89,7 +89,7 @@ def initialize_components(config):
         risk_per_trade = config.getfloat("TRADING", "risk_per_trade", fallback=0.01)
         max_drawdown = config.getfloat("TRADING", "max_drawdown", fallback=0.2)
 
-        risk_management = RiskManagement(client, risk_per_trade, max_drawdown)
+        risk_management = RiskManagement(client, "risk_config.json")
         technical_analysis = TechnicalAnalysis(client)
         ai_signal_generator = AISignalGenerator()
         ai_model = AIModel("ml/models/model.h5")
@@ -228,14 +228,14 @@ def main():
                             if stop_loss_distance <= 0:
                                 logger.error(f"Invalid stop-loss distance for {symbol} (LONG). Skipping order.")
                                 continue
-                            position_size = risk_management.calculate_position_size(stop_loss_distance)
+                            position_size = risk_management.calculate_position_size(symbol, entry_price, stop_loss_price)
                             side = "BUY"
                         else:
                             stop_loss_distance = stop_loss_price - entry_price
                             if stop_loss_distance <= 0:
                                 logger.error(f"Invalid stop-loss distance for {symbol} (SHORT). Skipping order.")
                                 continue
-                            position_size = risk_management.calculate_position_size(stop_loss_distance)
+                            position_size = risk_management.calculate_position_size(symbol, entry_price, stop_loss_price)
                             side = "SELL"
 
                         symbol_info = get_symbol_info(client, symbol)

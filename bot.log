@@ -10238,3 +10238,1471 @@ AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
 2025-06-16 12:35:30 | ERROR | [BNBUSDT_SELL_1750077330] SELL order failed!
 2025-06-16 12:35:32 | ERROR | [SOLUSDT_BUY_1750077332] BUY order failed!
 2025-06-16 12:35:34 | ERROR | [ADAUSDT_SELL_1750077334] SELL order failed!
+2025-06-16 12:35:41 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:35:41 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:35:42 | ERROR | [BTCUSDT_BUY_1750077342] BUY order failed!
+2025-06-16 12:35:44 | ERROR | [ETHUSDT_BUY_1750077344] BUY order failed!
+2025-06-16 12:35:45 | ERROR | [BNBUSDT_SELL_1750077345] SELL order failed!
+2025-06-16 12:35:46 | ERROR | [SOLUSDT_BUY_1750077346] BUY order failed!
+2025-06-16 12:35:48 | ERROR | [ADAUSDT_SELL_1750077348] SELL order failed!
+2025-06-16 12:35:54 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:35:54 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:35:56 | ERROR | [BTCUSDT_BUY_1750077356] BUY order failed!
+2025-06-16 12:35:57 | ERROR | [ETHUSDT_BUY_1750077357] BUY order failed!
+2025-06-16 12:35:59 | ERROR | [BNBUSDT_SELL_1750077359] SELL order failed!
+2025-06-16 12:36:00 | ERROR | [SOLUSDT_BUY_1750077360] BUY order failed!
+2025-06-16 12:36:02 | ERROR | [ADAUSDT_SELL_1750077362] SELL order failed!
+2025-06-16 12:36:10 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:36:10 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:36:11 | ERROR | [BTCUSDT_BUY_1750077371] BUY order failed!
+2025-06-16 12:36:13 | ERROR | [ETHUSDT_BUY_1750077373] BUY order failed!
+2025-06-16 12:36:14 | ERROR | [BNBUSDT_SELL_1750077374] SELL order failed!
+2025-06-16 12:36:15 | ERROR | [SOLUSDT_BUY_1750077375] BUY order failed!
+2025-06-16 12:36:16 | ERROR | [ADAUSDT_SELL_1750077376] SELL order failed!
+2025-06-16 12:36:23 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:36:23 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:36:24 | ERROR | [BTCUSDT_BUY_1750077384] BUY order failed!
+2025-06-16 12:36:26 | ERROR | [ETHUSDT_BUY_1750077386] BUY order failed!
+2025-06-16 12:36:27 | ERROR | [BNBUSDT_SELL_1750077387] SELL order failed!
+2025-06-16 12:36:28 | ERROR | [SOLUSDT_BUY_1750077388] BUY order failed!
+2025-06-16 12:36:30 | ERROR | [ADAUSDT_SELL_1750077390] SELL order failed!
+2025-06-16 12:36:36 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:36:36 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:36:37 | ERROR | [BTCUSDT_BUY_1750077397] BUY order failed!
+2025-06-16 12:36:38 | ERROR | [ETHUSDT_BUY_1750077398] BUY order failed!
+2025-06-16 12:36:39 | ERROR | [BNBUSDT_SELL_1750077399] SELL order failed!
+2025-06-16 12:36:41 | ERROR | [SOLUSDT_BUY_1750077401] BUY order failed!
+2025-06-16 12:36:42 | ERROR | [ADAUSDT_SELL_1750077402] SELL order failed!
+2025-06-16 12:36:48 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:36:48 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:36:50 | ERROR | [BTCUSDT_BUY_1750077410] BUY order failed!
+2025-06-16 12:36:51 | ERROR | [ETHUSDT_BUY_1750077411] BUY order failed!
+2025-06-16 12:36:53 | ERROR | [BNBUSDT_SELL_1750077413] SELL order failed!
+2025-06-16 12:36:55 | ERROR | [SOLUSDT_BUY_1750077415] BUY order failed!
+2025-06-16 12:36:56 | ERROR | [ADAUSDT_SELL_1750077416] SELL order failed!
+2025-06-16 12:37:02 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:37:02 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:37:03 | ERROR | [BTCUSDT_BUY_1750077423] BUY order failed!
+2025-06-16 12:37:05 | ERROR | [ETHUSDT_BUY_1750077425] BUY order failed!
+2025-06-16 12:37:06 | ERROR | [BNBUSDT_SELL_1750077426] SELL order failed!
+2025-06-16 12:37:08 | ERROR | [SOLUSDT_BUY_1750077428] BUY order failed!
+2025-06-16 12:37:10 | ERROR | [ADAUSDT_SELL_1750077430] SELL order failed!
+2025-06-16 12:37:16 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:37:16 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:37:17 | ERROR | [BTCUSDT_BUY_1750077437] BUY order failed!
+2025-06-16 12:37:19 | ERROR | [ETHUSDT_BUY_1750077439] BUY order failed!
+2025-06-16 12:37:20 | ERROR | [BNBUSDT_SELL_1750077440] SELL order failed!
+2025-06-16 12:37:21 | ERROR | [SOLUSDT_BUY_1750077441] BUY order failed!
+2025-06-16 12:37:23 | ERROR | [ADAUSDT_SELL_1750077443] SELL order failed!
+2025-06-16 12:37:30 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:37:30 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:37:32 | ERROR | [BTCUSDT_BUY_1750077452] BUY order failed!
+2025-06-16 12:37:34 | ERROR | [ETHUSDT_BUY_1750077454] BUY order failed!
+2025-06-16 12:37:34 | ERROR | [BNBUSDT_SELL_1750077454] SELL order failed!
+2025-06-16 12:37:36 | ERROR | [SOLUSDT_BUY_1750077456] BUY order failed!
+2025-06-16 12:37:38 | ERROR | [ADAUSDT_SELL_1750077458] SELL order failed!
+2025-06-16 12:37:45 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:37:45 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:37:46 | ERROR | [BTCUSDT_BUY_1750077466] BUY order failed!
+2025-06-16 12:37:47 | ERROR | [ETHUSDT_BUY_1750077467] BUY order failed!
+2025-06-16 12:37:49 | ERROR | [BNBUSDT_SELL_1750077469] SELL order failed!
+2025-06-16 12:37:50 | ERROR | [SOLUSDT_BUY_1750077470] BUY order failed!
+2025-06-16 12:37:51 | ERROR | [ADAUSDT_SELL_1750077471] SELL order failed!
+2025-06-16 12:37:58 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:37:58 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:38:00 | ERROR | [BTCUSDT_BUY_1750077480] BUY order failed!
+2025-06-16 12:38:02 | ERROR | [ETHUSDT_BUY_1750077482] BUY order failed!
+2025-06-16 12:38:03 | ERROR | [BNBUSDT_SELL_1750077483] SELL order failed!
+2025-06-16 12:38:05 | ERROR | [SOLUSDT_BUY_1750077485] BUY order failed!
+2025-06-16 12:38:08 | ERROR | [ADAUSDT_SELL_1750077488] SELL order failed!
+2025-06-16 12:38:08 | INFO | Fetched balance for USDT: 787.60667131 USDT
+2025-06-16 12:38:15 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:38:15 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:38:16 | ERROR | [BTCUSDT_BUY_1750077496] BUY order failed!
+2025-06-16 12:38:17 | ERROR | [ETHUSDT_BUY_1750077497] BUY order failed!
+2025-06-16 12:38:19 | ERROR | [BNBUSDT_SELL_1750077499] SELL order failed!
+2025-06-16 12:38:21 | ERROR | [SOLUSDT_BUY_1750077501] BUY order failed!
+2025-06-16 12:38:22 | ERROR | [ADAUSDT_SELL_1750077502] SELL order failed!
+2025-06-16 12:38:29 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:38:29 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:38:31 | ERROR | [BTCUSDT_BUY_1750077511] BUY order failed!
+2025-06-16 12:38:33 | ERROR | [ETHUSDT_BUY_1750077513] BUY order failed!
+2025-06-16 12:38:34 | ERROR | [BNBUSDT_SELL_1750077514] SELL order failed!
+2025-06-16 12:38:36 | ERROR | [SOLUSDT_BUY_1750077516] BUY order failed!
+2025-06-16 12:38:37 | ERROR | [ADAUSDT_SELL_1750077517] SELL order failed!
+2025-06-16 12:38:43 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:38:43 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:38:45 | ERROR | [BTCUSDT_BUY_1750077525] BUY order failed!
+2025-06-16 12:38:46 | ERROR | [ETHUSDT_BUY_1750077526] BUY order failed!
+2025-06-16 12:38:48 | ERROR | [BNBUSDT_SELL_1750077528] SELL order failed!
+2025-06-16 12:38:49 | ERROR | [SOLUSDT_BUY_1750077529] BUY order failed!
+2025-06-16 12:38:50 | ERROR | [ADAUSDT_SELL_1750077530] SELL order failed!
+2025-06-16 12:38:55 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:38:55 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:38:56 | ERROR | [BTCUSDT_BUY_1750077536] BUY order failed!
+2025-06-16 12:38:59 | ERROR | [ETHUSDT_BUY_1750077539] BUY order failed!
+2025-06-16 12:39:00 | ERROR | [BNBUSDT_SELL_1750077540] SELL order failed!
+2025-06-16 12:39:02 | ERROR | [SOLUSDT_BUY_1750077542] BUY order failed!
+2025-06-16 12:39:03 | ERROR | [ADAUSDT_SELL_1750077543] SELL order failed!
+2025-06-16 12:39:09 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:39:09 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:39:10 | ERROR | [BTCUSDT_BUY_1750077550] BUY order failed!
+2025-06-16 12:39:12 | ERROR | [ETHUSDT_BUY_1750077552] BUY order failed!
+2025-06-16 12:39:13 | ERROR | [BNBUSDT_SELL_1750077553] SELL order failed!
+2025-06-16 12:39:15 | ERROR | [SOLUSDT_BUY_1750077555] BUY order failed!
+2025-06-16 12:39:16 | ERROR | [ADAUSDT_SELL_1750077556] SELL order failed!
+2025-06-16 12:39:25 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:39:25 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:39:26 | ERROR | [BTCUSDT_BUY_1750077566] BUY order failed!
+2025-06-16 12:39:28 | ERROR | [ETHUSDT_BUY_1750077568] BUY order failed!
+2025-06-16 12:39:30 | ERROR | [BNBUSDT_SELL_1750077570] SELL order failed!
+2025-06-16 12:39:31 | ERROR | [SOLUSDT_BUY_1750077571] BUY order failed!
+2025-06-16 12:39:32 | ERROR | [ADAUSDT_SELL_1750077572] SELL order failed!
+2025-06-16 12:39:39 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:39:39 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:39:41 | ERROR | [BTCUSDT_BUY_1750077581] BUY order failed!
+2025-06-16 12:39:42 | ERROR | [ETHUSDT_BUY_1750077582] BUY order failed!
+2025-06-16 12:39:43 | ERROR | [BNBUSDT_SELL_1750077583] SELL order failed!
+2025-06-16 12:39:44 | ERROR | [SOLUSDT_BUY_1750077584] BUY order failed!
+2025-06-16 12:39:44 | ERROR | [ADAUSDT_SELL_1750077584] SELL order failed!
+2025-06-16 12:39:53 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:39:53 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:39:55 | ERROR | [BTCUSDT_BUY_1750077595] BUY order failed!
+2025-06-16 12:39:57 | ERROR | [ETHUSDT_BUY_1750077597] BUY order failed!
+2025-06-16 12:39:58 | ERROR | [BNBUSDT_SELL_1750077598] SELL order failed!
+2025-06-16 12:40:00 | ERROR | [SOLUSDT_BUY_1750077600] BUY order failed!
+2025-06-16 12:40:01 | ERROR | [ADAUSDT_SELL_1750077601] SELL order failed!
+2025-06-16 12:40:08 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:40:08 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:40:10 | ERROR | [BTCUSDT_BUY_1750077610] BUY order failed!
+2025-06-16 12:40:12 | ERROR | [ETHUSDT_BUY_1750077612] BUY order failed!
+2025-06-16 12:40:13 | ERROR | [BNBUSDT_SELL_1750077613] SELL order failed!
+2025-06-16 12:40:15 | ERROR | [SOLUSDT_BUY_1750077615] BUY order failed!
+2025-06-16 12:40:15 | ERROR | [ADAUSDT_SELL_1750077615] SELL order failed!
+2025-06-16 12:40:21 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:40:21 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:40:24 | ERROR | [BTCUSDT_BUY_1750077624] BUY order failed!
+2025-06-16 12:40:25 | ERROR | [ETHUSDT_BUY_1750077625] BUY order failed!
+2025-06-16 12:40:27 | ERROR | [BNBUSDT_SELL_1750077627] SELL order failed!
+2025-06-16 12:40:29 | ERROR | [SOLUSDT_BUY_1750077629] BUY order failed!
+2025-06-16 12:40:30 | ERROR | [ADAUSDT_SELL_1750077630] SELL order failed!
+2025-06-16 12:40:36 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:40:36 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:40:38 | ERROR | [BTCUSDT_BUY_1750077638] BUY order failed!
+2025-06-16 12:40:40 | ERROR | [ETHUSDT_BUY_1750077640] BUY order failed!
+2025-06-16 12:40:41 | ERROR | [BNBUSDT_SELL_1750077641] SELL order failed!
+2025-06-16 12:40:42 | ERROR | [SOLUSDT_BUY_1750077642] BUY order failed!
+2025-06-16 12:40:43 | ERROR | [ADAUSDT_SELL_1750077643] SELL order failed!
+2025-06-16 12:40:50 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:40:50 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:40:51 | ERROR | [BTCUSDT_BUY_1750077651] BUY order failed!
+2025-06-16 12:40:53 | ERROR | [ETHUSDT_BUY_1750077653] BUY order failed!
+2025-06-16 12:40:55 | ERROR | [BNBUSDT_SELL_1750077655] SELL order failed!
+2025-06-16 12:40:56 | ERROR | [SOLUSDT_BUY_1750077656] BUY order failed!
+2025-06-16 12:40:58 | ERROR | [ADAUSDT_SELL_1750077658] SELL order failed!
+2025-06-16 12:41:05 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:41:05 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:41:07 | ERROR | [BTCUSDT_BUY_1750077667] BUY order failed!
+2025-06-16 12:41:08 | ERROR | [ETHUSDT_BUY_1750077668] BUY order failed!
+2025-06-16 12:41:10 | ERROR | [BNBUSDT_SELL_1750077670] SELL order failed!
+2025-06-16 12:41:11 | ERROR | [SOLUSDT_BUY_1750077671] BUY order failed!
+2025-06-16 12:41:12 | ERROR | [ADAUSDT_SELL_1750077672] SELL order failed!
+2025-06-16 12:41:17 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:41:17 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:41:19 | ERROR | [BTCUSDT_BUY_1750077679] BUY order failed!
+2025-06-16 12:41:21 | ERROR | [ETHUSDT_BUY_1750077681] BUY order failed!
+2025-06-16 12:41:22 | ERROR | [BNBUSDT_SELL_1750077682] SELL order failed!
+2025-06-16 12:41:24 | ERROR | [SOLUSDT_BUY_1750077684] BUY order failed!
+2025-06-16 12:41:25 | ERROR | [ADAUSDT_SELL_1750077685] SELL order failed!
+2025-06-16 12:41:34 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:41:34 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:41:36 | ERROR | [BTCUSDT_BUY_1750077696] BUY order failed!
+2025-06-16 12:41:37 | ERROR | [ETHUSDT_BUY_1750077697] BUY order failed!
+2025-06-16 12:41:39 | ERROR | [BNBUSDT_SELL_1750077699] SELL order failed!
+2025-06-16 12:41:40 | ERROR | [SOLUSDT_BUY_1750077700] BUY order failed!
+2025-06-16 12:41:41 | ERROR | [ADAUSDT_SELL_1750077701] SELL order failed!
+2025-06-16 12:41:49 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:41:49 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:41:51 | ERROR | [BTCUSDT_BUY_1750077711] BUY order failed!
+2025-06-16 12:41:53 | ERROR | [ETHUSDT_BUY_1750077713] BUY order failed!
+2025-06-16 12:41:55 | ERROR | [BNBUSDT_SELL_1750077715] SELL order failed!
+2025-06-16 12:41:57 | ERROR | [SOLUSDT_BUY_1750077717] BUY order failed!
+2025-06-16 12:41:59 | ERROR | [ADAUSDT_SELL_1750077719] SELL order failed!
+2025-06-16 12:42:04 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:42:04 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:42:06 | ERROR | [BTCUSDT_BUY_1750077726] BUY order failed!
+2025-06-16 12:42:07 | ERROR | [ETHUSDT_BUY_1750077727] BUY order failed!
+2025-06-16 12:42:09 | ERROR | [BNBUSDT_SELL_1750077729] SELL order failed!
+2025-06-16 12:42:10 | ERROR | [SOLUSDT_BUY_1750077730] BUY order failed!
+2025-06-16 12:42:12 | ERROR | [ADAUSDT_SELL_1750077732] SELL order failed!
+2025-06-16 12:42:19 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:42:19 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:42:21 | ERROR | [BTCUSDT_BUY_1750077741] BUY order failed!
+2025-06-16 12:42:23 | ERROR | [ETHUSDT_BUY_1750077743] BUY order failed!
+2025-06-16 12:42:24 | ERROR | [BNBUSDT_SELL_1750077744] SELL order failed!
+2025-06-16 12:42:26 | ERROR | [SOLUSDT_BUY_1750077746] BUY order failed!
+2025-06-16 12:42:28 | ERROR | [ADAUSDT_SELL_1750077748] SELL order failed!
+2025-06-16 12:42:35 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:42:35 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:42:37 | ERROR | [BTCUSDT_BUY_1750077757] BUY order failed!
+2025-06-16 12:42:39 | ERROR | [ETHUSDT_BUY_1750077759] BUY order failed!
+2025-06-16 12:42:40 | ERROR | [BNBUSDT_SELL_1750077760] SELL order failed!
+2025-06-16 12:42:41 | ERROR | [SOLUSDT_BUY_1750077761] BUY order failed!
+2025-06-16 12:42:43 | ERROR | [ADAUSDT_SELL_1750077763] SELL order failed!
+2025-06-16 12:42:50 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:42:50 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:42:52 | ERROR | [BTCUSDT_BUY_1750077772] BUY order failed!
+2025-06-16 12:42:53 | ERROR | [ETHUSDT_BUY_1750077773] BUY order failed!
+2025-06-16 12:42:55 | ERROR | [BNBUSDT_SELL_1750077775] SELL order failed!
+2025-06-16 12:42:56 | ERROR | [SOLUSDT_BUY_1750077776] BUY order failed!
+2025-06-16 12:42:57 | ERROR | [ADAUSDT_SELL_1750077777] SELL order failed!
+2025-06-16 12:43:05 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:43:05 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:43:06 | ERROR | [BTCUSDT_BUY_1750077786] BUY order failed!
+2025-06-16 12:43:09 | ERROR | [ETHUSDT_BUY_1750077789] BUY order failed!
+2025-06-16 12:43:10 | ERROR | [BNBUSDT_SELL_1750077790] SELL order failed!
+2025-06-16 12:43:12 | ERROR | [SOLUSDT_BUY_1750077792] BUY order failed!
+2025-06-16 12:43:14 | ERROR | [ADAUSDT_SELL_1750077794] SELL order failed!
+2025-06-16 12:43:19 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:43:19 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:43:22 | ERROR | [BTCUSDT_BUY_1750077802] BUY order failed!
+2025-06-16 12:43:24 | ERROR | [ETHUSDT_BUY_1750077804] BUY order failed!
+2025-06-16 12:43:25 | ERROR | [BNBUSDT_SELL_1750077805] SELL order failed!
+2025-06-16 12:43:27 | ERROR | [SOLUSDT_BUY_1750077807] BUY order failed!
+2025-06-16 12:43:28 | ERROR | [ADAUSDT_SELL_1750077808] SELL order failed!
+2025-06-16 12:43:35 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:43:35 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:43:36 | ERROR | [BTCUSDT_BUY_1750077816] BUY order failed!
+2025-06-16 12:43:37 | ERROR | [ETHUSDT_BUY_1750077817] BUY order failed!
+2025-06-16 12:43:39 | ERROR | [BNBUSDT_SELL_1750077819] SELL order failed!
+2025-06-16 12:43:40 | ERROR | [SOLUSDT_BUY_1750077820] BUY order failed!
+2025-06-16 12:43:41 | ERROR | [ADAUSDT_SELL_1750077821] SELL order failed!
+2025-06-16 12:43:49 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:43:49 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:43:51 | ERROR | [BTCUSDT_BUY_1750077831] BUY order failed!
+2025-06-16 12:43:52 | ERROR | [ETHUSDT_BUY_1750077832] BUY order failed!
+2025-06-16 12:43:53 | ERROR | [BNBUSDT_SELL_1750077833] SELL order failed!
+2025-06-16 12:43:55 | ERROR | [SOLUSDT_BUY_1750077835] BUY order failed!
+2025-06-16 12:43:56 | ERROR | [ADAUSDT_SELL_1750077836] SELL order failed!
+2025-06-16 12:44:03 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:44:03 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:44:04 | ERROR | [BTCUSDT_BUY_1750077844] BUY order failed!
+2025-06-16 12:44:05 | ERROR | [ETHUSDT_BUY_1750077845] BUY order failed!
+2025-06-16 12:44:06 | ERROR | [BNBUSDT_SELL_1750077846] SELL order failed!
+2025-06-16 12:44:08 | ERROR | [SOLUSDT_BUY_1750077848] BUY order failed!
+2025-06-16 12:44:10 | ERROR | [ADAUSDT_SELL_1750077850] SELL order failed!
+2025-06-16 12:44:15 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:44:15 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:44:17 | ERROR | [BTCUSDT_BUY_1750077857] BUY order failed!
+2025-06-16 12:44:19 | ERROR | [ETHUSDT_BUY_1750077859] BUY order failed!
+2025-06-16 12:44:21 | ERROR | [BNBUSDT_SELL_1750077861] SELL order failed!
+2025-06-16 12:44:23 | ERROR | [SOLUSDT_BUY_1750077863] BUY order failed!
+2025-06-16 12:44:24 | ERROR | [ADAUSDT_SELL_1750077864] SELL order failed!
+2025-06-16 12:44:31 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:44:31 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:44:34 | ERROR | [BTCUSDT_BUY_1750077874] BUY order failed!
+2025-06-16 12:44:35 | ERROR | [ETHUSDT_BUY_1750077875] BUY order failed!
+2025-06-16 12:44:37 | ERROR | [BNBUSDT_SELL_1750077877] SELL order failed!
+2025-06-16 12:44:38 | ERROR | [SOLUSDT_BUY_1750077878] BUY order failed!
+2025-06-16 12:44:40 | ERROR | [ADAUSDT_SELL_1750077880] SELL order failed!
+2025-06-16 12:44:46 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:44:46 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:44:48 | ERROR | [BTCUSDT_BUY_1750077888] BUY order failed!
+2025-06-16 12:44:49 | ERROR | [ETHUSDT_BUY_1750077889] BUY order failed!
+2025-06-16 12:44:50 | ERROR | [BNBUSDT_SELL_1750077890] SELL order failed!
+2025-06-16 12:44:51 | ERROR | [SOLUSDT_BUY_1750077891] BUY order failed!
+2025-06-16 12:44:53 | ERROR | [ADAUSDT_SELL_1750077893] SELL order failed!
+2025-06-16 12:45:01 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:45:01 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:45:03 | ERROR | [BTCUSDT_BUY_1750077903] BUY order failed!
+2025-06-16 12:45:05 | ERROR | [ETHUSDT_BUY_1750077905] BUY order failed!
+2025-06-16 12:45:07 | ERROR | [BNBUSDT_SELL_1750077907] SELL order failed!
+2025-06-16 12:45:08 | ERROR | [SOLUSDT_BUY_1750077908] BUY order failed!
+2025-06-16 12:45:10 | ERROR | [ADAUSDT_SELL_1750077910] SELL order failed!
+2025-06-16 12:45:16 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:45:16 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:45:18 | ERROR | [BTCUSDT_BUY_1750077918] BUY order failed!
+2025-06-16 12:45:20 | ERROR | [ETHUSDT_BUY_1750077920] BUY order failed!
+2025-06-16 12:45:21 | ERROR | [BNBUSDT_SELL_1750077921] SELL order failed!
+2025-06-16 12:45:22 | ERROR | [SOLUSDT_BUY_1750077922] BUY order failed!
+2025-06-16 12:45:23 | ERROR | [ADAUSDT_SELL_1750077923] SELL order failed!
+2025-06-16 12:45:31 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:45:31 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:45:32 | ERROR | [BTCUSDT_BUY_1750077932] BUY order failed!
+2025-06-16 12:45:33 | ERROR | [ETHUSDT_BUY_1750077933] BUY order failed!
+2025-06-16 12:45:35 | ERROR | [BNBUSDT_SELL_1750077935] SELL order failed!
+2025-06-16 12:45:37 | ERROR | [SOLUSDT_BUY_1750077937] BUY order failed!
+2025-06-16 12:45:38 | ERROR | [ADAUSDT_SELL_1750077938] SELL order failed!
+2025-06-16 12:45:44 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:45:44 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:45:46 | ERROR | [BTCUSDT_BUY_1750077946] BUY order failed!
+2025-06-16 12:45:48 | ERROR | [ETHUSDT_BUY_1750077948] BUY order failed!
+2025-06-16 12:45:49 | ERROR | [BNBUSDT_SELL_1750077949] SELL order failed!
+2025-06-16 12:45:51 | ERROR | [SOLUSDT_BUY_1750077951] BUY order failed!
+2025-06-16 12:45:52 | ERROR | [ADAUSDT_SELL_1750077952] SELL order failed!
+2025-06-16 12:45:59 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:45:59 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:46:00 | ERROR | [BTCUSDT_BUY_1750077960] BUY order failed!
+2025-06-16 12:46:03 | ERROR | [ETHUSDT_BUY_1750077963] BUY order failed!
+2025-06-16 12:46:05 | ERROR | [BNBUSDT_SELL_1750077965] SELL order failed!
+2025-06-16 12:46:07 | ERROR | [SOLUSDT_BUY_1750077967] BUY order failed!
+2025-06-16 12:46:08 | ERROR | [ADAUSDT_SELL_1750077968] SELL order failed!
+2025-06-16 12:46:14 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:46:14 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:46:15 | ERROR | [BTCUSDT_BUY_1750077975] BUY order failed!
+2025-06-16 12:46:17 | ERROR | [ETHUSDT_BUY_1750077977] BUY order failed!
+2025-06-16 12:46:19 | ERROR | [BNBUSDT_SELL_1750077979] SELL order failed!
+2025-06-16 12:46:20 | ERROR | [SOLUSDT_BUY_1750077980] BUY order failed!
+2025-06-16 12:46:21 | ERROR | [ADAUSDT_SELL_1750077981] SELL order failed!
+2025-06-16 12:46:30 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:46:30 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:46:32 | ERROR | [BTCUSDT_BUY_1750077992] BUY order failed!
+2025-06-16 12:46:33 | ERROR | [ETHUSDT_BUY_1750077993] BUY order failed!
+2025-06-16 12:46:34 | ERROR | [BNBUSDT_SELL_1750077994] SELL order failed!
+2025-06-16 12:46:36 | ERROR | [SOLUSDT_BUY_1750077996] BUY order failed!
+2025-06-16 12:46:37 | ERROR | [ADAUSDT_SELL_1750077997] SELL order failed!
+2025-06-16 12:46:43 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:46:43 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:46:44 | ERROR | [BTCUSDT_BUY_1750078004] BUY order failed!
+2025-06-16 12:46:46 | ERROR | [ETHUSDT_BUY_1750078006] BUY order failed!
+2025-06-16 12:46:48 | ERROR | [BNBUSDT_SELL_1750078008] SELL order failed!
+2025-06-16 12:46:50 | ERROR | [SOLUSDT_BUY_1750078010] BUY order failed!
+2025-06-16 12:46:51 | ERROR | [ADAUSDT_SELL_1750078011] SELL order failed!
+2025-06-16 12:46:59 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:46:59 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:47:01 | ERROR | [BTCUSDT_BUY_1750078021] BUY order failed!
+2025-06-16 12:47:02 | ERROR | [ETHUSDT_BUY_1750078022] BUY order failed!
+2025-06-16 12:47:04 | ERROR | [BNBUSDT_SELL_1750078024] SELL order failed!
+2025-06-16 12:47:05 | ERROR | [SOLUSDT_BUY_1750078025] BUY order failed!
+2025-06-16 12:47:06 | ERROR | [ADAUSDT_SELL_1750078026] SELL order failed!
+2025-06-16 12:47:12 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:47:12 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:47:13 | ERROR | [BTCUSDT_BUY_1750078033] BUY order failed!
+2025-06-16 12:47:14 | ERROR | [ETHUSDT_BUY_1750078034] BUY order failed!
+2025-06-16 12:47:15 | ERROR | [BNBUSDT_SELL_1750078035] SELL order failed!
+2025-06-16 12:47:18 | ERROR | [SOLUSDT_BUY_1750078038] BUY order failed!
+2025-06-16 12:47:19 | ERROR | [ADAUSDT_SELL_1750078039] SELL order failed!
+2025-06-16 12:47:26 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:47:26 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:47:28 | ERROR | [BTCUSDT_BUY_1750078048] BUY order failed!
+2025-06-16 12:47:29 | ERROR | [ETHUSDT_BUY_1750078049] BUY order failed!
+2025-06-16 12:47:30 | ERROR | [BNBUSDT_SELL_1750078050] SELL order failed!
+2025-06-16 12:47:31 | ERROR | [SOLUSDT_BUY_1750078051] BUY order failed!
+2025-06-16 12:47:33 | ERROR | [ADAUSDT_SELL_1750078053] SELL order failed!
+2025-06-16 12:47:41 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:47:41 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:47:43 | ERROR | [BTCUSDT_BUY_1750078063] BUY order failed!
+2025-06-16 12:47:44 | ERROR | [ETHUSDT_BUY_1750078064] BUY order failed!
+2025-06-16 12:47:46 | ERROR | [BNBUSDT_SELL_1750078066] SELL order failed!
+2025-06-16 12:47:48 | ERROR | [SOLUSDT_BUY_1750078068] BUY order failed!
+2025-06-16 12:47:49 | ERROR | [ADAUSDT_SELL_1750078069] SELL order failed!
+2025-06-16 12:47:56 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:47:56 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:47:57 | ERROR | [BTCUSDT_BUY_1750078077] BUY order failed!
+2025-06-16 12:47:58 | ERROR | [ETHUSDT_BUY_1750078078] BUY order failed!
+2025-06-16 12:47:59 | ERROR | [BNBUSDT_SELL_1750078079] SELL order failed!
+2025-06-16 12:48:01 | ERROR | [SOLUSDT_BUY_1750078081] BUY order failed!
+2025-06-16 12:48:02 | ERROR | [ADAUSDT_SELL_1750078082] SELL order failed!
+2025-06-16 12:48:09 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:48:09 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:48:10 | ERROR | [BTCUSDT_BUY_1750078090] BUY order failed!
+2025-06-16 12:48:12 | ERROR | [ETHUSDT_BUY_1750078092] BUY order failed!
+2025-06-16 12:48:13 | ERROR | [BNBUSDT_SELL_1750078093] SELL order failed!
+2025-06-16 12:48:14 | ERROR | [SOLUSDT_BUY_1750078094] BUY order failed!
+2025-06-16 12:48:16 | ERROR | [ADAUSDT_SELL_1750078096] SELL order failed!
+2025-06-16 12:48:21 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:48:21 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:48:22 | ERROR | [BTCUSDT_BUY_1750078102] BUY order failed!
+2025-06-16 12:48:24 | ERROR | [ETHUSDT_BUY_1750078104] BUY order failed!
+2025-06-16 12:48:25 | ERROR | [BNBUSDT_SELL_1750078105] SELL order failed!
+2025-06-16 12:48:27 | ERROR | [SOLUSDT_BUY_1750078107] BUY order failed!
+2025-06-16 12:48:28 | ERROR | [ADAUSDT_SELL_1750078108] SELL order failed!
+2025-06-16 12:48:35 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:48:35 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:48:37 | ERROR | [BTCUSDT_BUY_1750078117] BUY order failed!
+2025-06-16 12:48:38 | ERROR | [ETHUSDT_BUY_1750078118] BUY order failed!
+2025-06-16 12:48:40 | ERROR | [BNBUSDT_SELL_1750078120] SELL order failed!
+2025-06-16 12:48:41 | ERROR | [SOLUSDT_BUY_1750078121] BUY order failed!
+2025-06-16 12:48:42 | ERROR | [ADAUSDT_SELL_1750078122] SELL order failed!
+2025-06-16 12:48:49 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:48:49 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:48:50 | ERROR | [BTCUSDT_BUY_1750078130] BUY order failed!
+2025-06-16 12:48:52 | ERROR | [ETHUSDT_BUY_1750078132] BUY order failed!
+2025-06-16 12:48:54 | ERROR | [BNBUSDT_SELL_1750078134] SELL order failed!
+2025-06-16 12:48:55 | ERROR | [SOLUSDT_BUY_1750078135] BUY order failed!
+2025-06-16 12:48:57 | ERROR | [ADAUSDT_SELL_1750078137] SELL order failed!
+2025-06-16 12:49:04 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:49:04 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:49:06 | ERROR | [BTCUSDT_BUY_1750078146] BUY order failed!
+2025-06-16 12:49:07 | ERROR | [ETHUSDT_BUY_1750078147] BUY order failed!
+2025-06-16 12:49:09 | ERROR | [BNBUSDT_SELL_1750078149] SELL order failed!
+2025-06-16 12:49:10 | ERROR | [SOLUSDT_BUY_1750078150] BUY order failed!
+2025-06-16 12:49:11 | ERROR | [ADAUSDT_SELL_1750078151] SELL order failed!
+2025-06-16 12:49:17 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:49:17 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:49:18 | ERROR | [BTCUSDT_BUY_1750078158] BUY order failed!
+2025-06-16 12:49:20 | ERROR | [ETHUSDT_BUY_1750078160] BUY order failed!
+2025-06-16 12:49:22 | ERROR | [BNBUSDT_SELL_1750078162] SELL order failed!
+2025-06-16 12:49:23 | ERROR | [SOLUSDT_BUY_1750078163] BUY order failed!
+2025-06-16 12:49:25 | ERROR | [ADAUSDT_SELL_1750078165] SELL order failed!
+2025-06-16 12:49:31 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:49:31 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:49:33 | ERROR | [BTCUSDT_BUY_1750078173] BUY order failed!
+2025-06-16 12:49:35 | ERROR | [ETHUSDT_BUY_1750078175] BUY order failed!
+2025-06-16 12:49:37 | ERROR | [BNBUSDT_SELL_1750078177] SELL order failed!
+2025-06-16 12:49:38 | ERROR | [SOLUSDT_BUY_1750078178] BUY order failed!
+2025-06-16 12:49:40 | ERROR | [ADAUSDT_SELL_1750078180] SELL order failed!
+2025-06-16 12:49:47 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:49:47 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:49:48 | ERROR | [BTCUSDT_BUY_1750078188] BUY order failed!
+2025-06-16 12:49:50 | ERROR | [ETHUSDT_BUY_1750078190] BUY order failed!
+2025-06-16 12:49:51 | ERROR | [BNBUSDT_SELL_1750078191] SELL order failed!
+2025-06-16 12:49:53 | ERROR | [SOLUSDT_BUY_1750078193] BUY order failed!
+2025-06-16 12:49:54 | ERROR | [ADAUSDT_SELL_1750078194] SELL order failed!
+2025-06-16 12:50:00 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:50:00 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:50:02 | ERROR | [BTCUSDT_BUY_1750078202] BUY order failed!
+2025-06-16 12:50:05 | ERROR | [ETHUSDT_BUY_1750078205] BUY order failed!
+2025-06-16 12:50:07 | ERROR | [BNBUSDT_SELL_1750078207] SELL order failed!
+2025-06-16 12:50:09 | ERROR | [SOLUSDT_BUY_1750078209] BUY order failed!
+2025-06-16 12:50:10 | ERROR | [ADAUSDT_SELL_1750078210] SELL order failed!
+2025-06-16 12:50:17 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:50:17 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:50:19 | ERROR | [BTCUSDT_BUY_1750078219] BUY order failed!
+2025-06-16 12:50:21 | ERROR | [ETHUSDT_BUY_1750078221] BUY order failed!
+2025-06-16 12:50:21 | ERROR | [BNBUSDT_SELL_1750078221] SELL order failed!
+2025-06-16 12:50:23 | ERROR | [SOLUSDT_BUY_1750078223] BUY order failed!
+2025-06-16 12:50:24 | ERROR | [ADAUSDT_SELL_1750078224] SELL order failed!
+2025-06-16 12:50:33 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:50:33 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:50:35 | ERROR | [BTCUSDT_BUY_1750078235] BUY order failed!
+2025-06-16 12:50:36 | ERROR | [ETHUSDT_BUY_1750078236] BUY order failed!
+2025-06-16 12:50:38 | ERROR | [BNBUSDT_SELL_1750078238] SELL order failed!
+2025-06-16 12:50:39 | ERROR | [SOLUSDT_BUY_1750078239] BUY order failed!
+2025-06-16 12:50:40 | ERROR | [ADAUSDT_SELL_1750078240] SELL order failed!
+2025-06-16 12:50:48 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:50:48 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:50:49 | ERROR | [BTCUSDT_BUY_1750078249] BUY order failed!
+2025-06-16 12:50:50 | ERROR | [ETHUSDT_BUY_1750078250] BUY order failed!
+2025-06-16 12:50:52 | ERROR | [BNBUSDT_SELL_1750078252] SELL order failed!
+2025-06-16 12:50:53 | ERROR | [SOLUSDT_BUY_1750078253] BUY order failed!
+2025-06-16 12:50:55 | ERROR | [ADAUSDT_SELL_1750078255] SELL order failed!
+2025-06-16 12:51:01 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:51:01 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:51:03 | ERROR | [BTCUSDT_BUY_1750078263] BUY order failed!
+2025-06-16 12:51:05 | ERROR | [ETHUSDT_BUY_1750078265] BUY order failed!
+2025-06-16 12:51:07 | ERROR | [BNBUSDT_SELL_1750078267] SELL order failed!
+2025-06-16 12:51:08 | ERROR | [SOLUSDT_BUY_1750078268] BUY order failed!
+2025-06-16 12:51:11 | ERROR | [ADAUSDT_SELL_1750078271] SELL order failed!
+2025-06-16 12:51:18 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:51:18 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:51:19 | ERROR | [BTCUSDT_BUY_1750078279] BUY order failed!
+2025-06-16 12:51:20 | ERROR | [ETHUSDT_BUY_1750078280] BUY order failed!
+2025-06-16 12:51:21 | ERROR | [BNBUSDT_SELL_1750078281] SELL order failed!
+2025-06-16 12:51:22 | ERROR | [SOLUSDT_BUY_1750078282] BUY order failed!
+2025-06-16 12:51:23 | ERROR | [ADAUSDT_SELL_1750078283] SELL order failed!
+2025-06-16 12:51:32 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:51:32 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:51:33 | ERROR | [BTCUSDT_BUY_1750078293] BUY order failed!
+2025-06-16 12:51:35 | ERROR | [ETHUSDT_BUY_1750078295] BUY order failed!
+2025-06-16 12:51:35 | ERROR | [BNBUSDT_SELL_1750078295] SELL order failed!
+2025-06-16 12:51:36 | ERROR | [SOLUSDT_BUY_1750078296] BUY order failed!
+2025-06-16 12:51:38 | ERROR | [ADAUSDT_SELL_1750078298] SELL order failed!
+2025-06-16 12:51:44 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:51:44 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:51:46 | ERROR | [BTCUSDT_BUY_1750078306] BUY order failed!
+2025-06-16 12:51:48 | ERROR | [ETHUSDT_BUY_1750078308] BUY order failed!
+2025-06-16 12:51:49 | ERROR | [BNBUSDT_SELL_1750078309] SELL order failed!
+2025-06-16 12:51:51 | ERROR | [SOLUSDT_BUY_1750078311] BUY order failed!
+2025-06-16 12:51:52 | ERROR | [ADAUSDT_SELL_1750078312] SELL order failed!
+2025-06-16 12:51:59 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:51:59 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:52:01 | ERROR | [BTCUSDT_BUY_1750078321] BUY order failed!
+2025-06-16 12:52:02 | ERROR | [ETHUSDT_BUY_1750078322] BUY order failed!
+2025-06-16 12:52:03 | ERROR | [BNBUSDT_SELL_1750078323] SELL order failed!
+2025-06-16 12:52:04 | ERROR | [SOLUSDT_BUY_1750078324] BUY order failed!
+2025-06-16 12:52:06 | ERROR | [ADAUSDT_SELL_1750078326] SELL order failed!
+2025-06-16 12:52:14 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:52:14 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:52:15 | ERROR | [BTCUSDT_BUY_1750078335] BUY order failed!
+2025-06-16 12:52:17 | ERROR | [ETHUSDT_BUY_1750078337] BUY order failed!
+2025-06-16 12:52:18 | ERROR | [BNBUSDT_SELL_1750078338] SELL order failed!
+2025-06-16 12:52:21 | ERROR | [SOLUSDT_BUY_1750078341] BUY order failed!
+2025-06-16 12:52:22 | ERROR | [ADAUSDT_SELL_1750078342] SELL order failed!
+2025-06-16 12:52:30 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:52:30 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:52:31 | ERROR | [BTCUSDT_BUY_1750078351] BUY order failed!
+2025-06-16 12:52:33 | ERROR | [ETHUSDT_BUY_1750078353] BUY order failed!
+2025-06-16 12:52:35 | ERROR | [BNBUSDT_SELL_1750078355] SELL order failed!
+2025-06-16 12:52:37 | ERROR | [SOLUSDT_BUY_1750078357] BUY order failed!
+2025-06-16 12:52:38 | ERROR | [ADAUSDT_SELL_1750078358] SELL order failed!
+2025-06-16 12:52:44 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:52:44 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:52:46 | ERROR | [BTCUSDT_BUY_1750078366] BUY order failed!
+2025-06-16 12:52:48 | ERROR | [ETHUSDT_BUY_1750078368] BUY order failed!
+2025-06-16 12:52:50 | ERROR | [BNBUSDT_SELL_1750078370] SELL order failed!
+2025-06-16 12:52:51 | ERROR | [SOLUSDT_BUY_1750078371] BUY order failed!
+2025-06-16 12:52:52 | ERROR | [ADAUSDT_SELL_1750078372] SELL order failed!
+2025-06-16 12:52:59 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:52:59 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:53:00 | ERROR | [BTCUSDT_BUY_1750078380] BUY order failed!
+2025-06-16 12:53:01 | ERROR | [ETHUSDT_BUY_1750078381] BUY order failed!
+2025-06-16 12:53:03 | ERROR | [BNBUSDT_SELL_1750078383] SELL order failed!
+2025-06-16 12:53:04 | ERROR | [SOLUSDT_BUY_1750078384] BUY order failed!
+2025-06-16 12:53:06 | ERROR | [ADAUSDT_SELL_1750078386] SELL order failed!
+2025-06-16 12:53:13 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:53:13 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:53:14 | ERROR | [BTCUSDT_BUY_1750078394] BUY order failed!
+2025-06-16 12:53:15 | ERROR | [ETHUSDT_BUY_1750078395] BUY order failed!
+2025-06-16 12:53:16 | ERROR | [BNBUSDT_SELL_1750078396] SELL order failed!
+2025-06-16 12:53:17 | ERROR | [SOLUSDT_BUY_1750078397] BUY order failed!
+2025-06-16 12:53:18 | ERROR | [ADAUSDT_SELL_1750078398] SELL order failed!
+2025-06-16 12:53:24 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:53:24 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:53:25 | ERROR | [BTCUSDT_BUY_1750078405] BUY order failed!
+2025-06-16 12:53:26 | ERROR | [ETHUSDT_BUY_1750078406] BUY order failed!
+2025-06-16 12:53:28 | ERROR | [BNBUSDT_SELL_1750078408] SELL order failed!
+2025-06-16 12:53:30 | ERROR | [SOLUSDT_BUY_1750078410] BUY order failed!
+2025-06-16 12:53:32 | ERROR | [ADAUSDT_SELL_1750078412] SELL order failed!
+2025-06-16 12:53:39 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:53:39 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:53:40 | ERROR | [BTCUSDT_BUY_1750078420] BUY order failed!
+2025-06-16 12:53:41 | ERROR | [ETHUSDT_BUY_1750078421] BUY order failed!
+2025-06-16 12:53:43 | ERROR | [BNBUSDT_SELL_1750078423] SELL order failed!
+2025-06-16 12:53:45 | ERROR | [SOLUSDT_BUY_1750078425] BUY order failed!
+2025-06-16 12:53:47 | ERROR | [ADAUSDT_SELL_1750078427] SELL order failed!
+2025-06-16 12:53:53 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:53:53 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:53:55 | ERROR | [BTCUSDT_BUY_1750078435] BUY order failed!
+2025-06-16 12:53:56 | ERROR | [ETHUSDT_BUY_1750078436] BUY order failed!
+2025-06-16 12:53:58 | ERROR | [BNBUSDT_SELL_1750078438] SELL order failed!
+2025-06-16 12:53:59 | ERROR | [SOLUSDT_BUY_1750078439] BUY order failed!
+2025-06-16 12:53:59 | ERROR | [ADAUSDT_SELL_1750078439] SELL order failed!
+2025-06-16 12:54:08 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:54:08 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:54:09 | ERROR | [BTCUSDT_BUY_1750078449] BUY order failed!
+2025-06-16 12:54:11 | ERROR | [ETHUSDT_BUY_1750078451] BUY order failed!
+2025-06-16 12:54:13 | ERROR | [BNBUSDT_SELL_1750078453] SELL order failed!
+2025-06-16 12:54:15 | ERROR | [SOLUSDT_BUY_1750078455] BUY order failed!
+2025-06-16 12:54:16 | ERROR | [ADAUSDT_SELL_1750078456] SELL order failed!
+2025-06-16 12:54:22 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:54:22 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:54:24 | ERROR | [BTCUSDT_BUY_1750078464] BUY order failed!
+2025-06-16 12:54:25 | ERROR | [ETHUSDT_BUY_1750078465] BUY order failed!
+2025-06-16 12:54:27 | ERROR | [BNBUSDT_SELL_1750078467] SELL order failed!
+2025-06-16 12:54:28 | ERROR | [SOLUSDT_BUY_1750078468] BUY order failed!
+2025-06-16 12:54:29 | ERROR | [ADAUSDT_SELL_1750078469] SELL order failed!
+2025-06-16 12:54:36 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:54:36 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:54:37 | ERROR | [BTCUSDT_BUY_1750078477] BUY order failed!
+2025-06-16 12:54:40 | ERROR | [ETHUSDT_BUY_1750078480] BUY order failed!
+2025-06-16 12:54:41 | ERROR | [BNBUSDT_SELL_1750078481] SELL order failed!
+2025-06-16 12:54:43 | ERROR | [SOLUSDT_BUY_1750078483] BUY order failed!
+2025-06-16 12:54:44 | ERROR | [ADAUSDT_SELL_1750078484] SELL order failed!
+2025-06-16 12:54:52 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:54:52 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:54:53 | ERROR | [BTCUSDT_BUY_1750078493] BUY order failed!
+2025-06-16 12:54:54 | ERROR | [ETHUSDT_BUY_1750078494] BUY order failed!
+2025-06-16 12:54:55 | ERROR | [BNBUSDT_SELL_1750078495] SELL order failed!
+2025-06-16 12:54:58 | ERROR | [SOLUSDT_BUY_1750078498] BUY order failed!
+2025-06-16 12:54:59 | ERROR | [ADAUSDT_SELL_1750078499] SELL order failed!
+2025-06-16 12:55:06 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:55:06 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:55:07 | ERROR | [BTCUSDT_BUY_1750078507] BUY order failed!
+2025-06-16 12:55:09 | ERROR | [ETHUSDT_BUY_1750078509] BUY order failed!
+2025-06-16 12:55:11 | ERROR | [BNBUSDT_SELL_1750078511] SELL order failed!
+2025-06-16 12:55:13 | ERROR | [SOLUSDT_BUY_1750078513] BUY order failed!
+2025-06-16 12:55:15 | ERROR | [ADAUSDT_SELL_1750078515] SELL order failed!
+2025-06-16 12:55:21 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:55:21 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:55:22 | ERROR | [BTCUSDT_BUY_1750078522] BUY order failed!
+2025-06-16 12:55:23 | ERROR | [ETHUSDT_BUY_1750078523] BUY order failed!
+2025-06-16 12:55:25 | ERROR | [BNBUSDT_SELL_1750078525] SELL order failed!
+2025-06-16 12:55:26 | ERROR | [SOLUSDT_BUY_1750078526] BUY order failed!
+2025-06-16 12:55:28 | ERROR | [ADAUSDT_SELL_1750078528] SELL order failed!
+2025-06-16 12:55:35 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:55:35 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:55:36 | ERROR | [BTCUSDT_BUY_1750078536] BUY order failed!
+2025-06-16 12:55:38 | ERROR | [ETHUSDT_BUY_1750078538] BUY order failed!
+2025-06-16 12:55:39 | ERROR | [BNBUSDT_SELL_1750078539] SELL order failed!
+2025-06-16 12:55:41 | ERROR | [SOLUSDT_BUY_1750078541] BUY order failed!
+2025-06-16 12:55:42 | ERROR | [ADAUSDT_SELL_1750078542] SELL order failed!
+2025-06-16 12:55:49 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:55:49 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:55:50 | ERROR | [BTCUSDT_BUY_1750078550] BUY order failed!
+2025-06-16 12:55:51 | ERROR | [ETHUSDT_BUY_1750078551] BUY order failed!
+2025-06-16 12:55:52 | ERROR | [BNBUSDT_SELL_1750078552] SELL order failed!
+2025-06-16 12:55:54 | ERROR | [SOLUSDT_BUY_1750078554] BUY order failed!
+2025-06-16 12:55:56 | ERROR | [ADAUSDT_SELL_1750078556] SELL order failed!
+2025-06-16 12:56:03 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:56:03 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:56:07 | ERROR | [BTCUSDT_BUY_1750078567] BUY order failed!
+2025-06-16 12:56:08 | ERROR | [ETHUSDT_BUY_1750078568] BUY order failed!
+2025-06-16 12:56:09 | ERROR | [BNBUSDT_SELL_1750078569] SELL order failed!
+2025-06-16 12:56:10 | ERROR | [SOLUSDT_BUY_1750078570] BUY order failed!
+2025-06-16 12:56:12 | ERROR | [ADAUSDT_SELL_1750078572] SELL order failed!
+2025-06-16 12:56:18 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:56:18 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:56:19 | ERROR | [BTCUSDT_BUY_1750078579] BUY order failed!
+2025-06-16 12:56:21 | ERROR | [ETHUSDT_BUY_1750078581] BUY order failed!
+2025-06-16 12:56:23 | ERROR | [BNBUSDT_SELL_1750078583] SELL order failed!
+2025-06-16 12:56:24 | ERROR | [SOLUSDT_BUY_1750078584] BUY order failed!
+2025-06-16 12:56:26 | ERROR | [ADAUSDT_SELL_1750078586] SELL order failed!
+2025-06-16 12:56:31 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:56:31 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:56:33 | ERROR | [BTCUSDT_BUY_1750078593] BUY order failed!
+2025-06-16 12:56:37 | ERROR | [ETHUSDT_BUY_1750078597] BUY order failed!
+2025-06-16 12:56:38 | ERROR | [BNBUSDT_SELL_1750078598] SELL order failed!
+2025-06-16 12:56:39 | ERROR | [SOLUSDT_BUY_1750078599] BUY order failed!
+2025-06-16 12:56:39 | ERROR | [ADAUSDT_SELL_1750078599] SELL order failed!
+2025-06-16 12:56:46 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:56:46 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:56:48 | ERROR | [BTCUSDT_BUY_1750078608] BUY order failed!
+2025-06-16 12:56:49 | ERROR | [ETHUSDT_BUY_1750078609] BUY order failed!
+2025-06-16 12:56:50 | ERROR | [BNBUSDT_SELL_1750078610] SELL order failed!
+2025-06-16 12:56:52 | ERROR | [SOLUSDT_BUY_1750078612] BUY order failed!
+2025-06-16 12:56:53 | ERROR | [ADAUSDT_SELL_1750078613] SELL order failed!
+2025-06-16 12:57:01 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:57:01 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:57:03 | ERROR | [BTCUSDT_BUY_1750078623] BUY order failed!
+2025-06-16 12:57:05 | ERROR | [ETHUSDT_BUY_1750078625] BUY order failed!
+2025-06-16 12:57:05 | ERROR | [BNBUSDT_SELL_1750078625] SELL order failed!
+2025-06-16 12:57:07 | ERROR | [SOLUSDT_BUY_1750078627] BUY order failed!
+2025-06-16 12:57:08 | ERROR | [ADAUSDT_SELL_1750078628] SELL order failed!
+2025-06-16 12:57:16 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:57:16 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:57:18 | ERROR | [BTCUSDT_BUY_1750078638] BUY order failed!
+2025-06-16 12:57:20 | ERROR | [ETHUSDT_BUY_1750078640] BUY order failed!
+2025-06-16 12:57:21 | ERROR | [BNBUSDT_SELL_1750078641] SELL order failed!
+2025-06-16 12:57:22 | ERROR | [SOLUSDT_BUY_1750078642] BUY order failed!
+2025-06-16 12:57:23 | ERROR | [ADAUSDT_SELL_1750078643] SELL order failed!
+2025-06-16 12:57:30 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:57:30 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:57:31 | ERROR | [BTCUSDT_BUY_1750078651] BUY order failed!
+2025-06-16 12:57:32 | ERROR | [ETHUSDT_BUY_1750078652] BUY order failed!
+2025-06-16 12:57:33 | ERROR | [BNBUSDT_SELL_1750078653] SELL order failed!
+2025-06-16 12:57:35 | ERROR | [SOLUSDT_BUY_1750078655] BUY order failed!
+2025-06-16 12:57:36 | ERROR | [ADAUSDT_SELL_1750078656] SELL order failed!
+2025-06-16 12:57:43 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:57:43 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:57:45 | ERROR | [BTCUSDT_BUY_1750078665] BUY order failed!
+2025-06-16 12:57:46 | ERROR | [ETHUSDT_BUY_1750078666] BUY order failed!
+2025-06-16 12:57:48 | ERROR | [BNBUSDT_SELL_1750078668] SELL order failed!
+2025-06-16 12:57:50 | ERROR | [SOLUSDT_BUY_1750078670] BUY order failed!
+2025-06-16 12:57:51 | ERROR | [ADAUSDT_SELL_1750078671] SELL order failed!
+2025-06-16 12:57:59 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:57:59 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:58:00 | ERROR | [BTCUSDT_BUY_1750078680] BUY order failed!
+2025-06-16 12:58:03 | ERROR | [ETHUSDT_BUY_1750078683] BUY order failed!
+2025-06-16 12:58:04 | ERROR | [BNBUSDT_SELL_1750078684] SELL order failed!
+2025-06-16 12:58:05 | ERROR | [SOLUSDT_BUY_1750078685] BUY order failed!
+2025-06-16 12:58:07 | ERROR | [ADAUSDT_SELL_1750078687] SELL order failed!
+2025-06-16 12:58:15 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:58:15 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:58:16 | ERROR | [BTCUSDT_BUY_1750078696] BUY order failed!
+2025-06-16 12:58:18 | ERROR | [ETHUSDT_BUY_1750078698] BUY order failed!
+2025-06-16 12:58:20 | ERROR | [BNBUSDT_SELL_1750078700] SELL order failed!
+2025-06-16 12:58:21 | ERROR | [SOLUSDT_BUY_1750078701] BUY order failed!
+2025-06-16 12:58:23 | ERROR | [ADAUSDT_SELL_1750078703] SELL order failed!
+2025-06-16 12:58:31 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:58:31 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:58:32 | ERROR | [BTCUSDT_BUY_1750078712] BUY order failed!
+2025-06-16 12:58:34 | ERROR | [ETHUSDT_BUY_1750078714] BUY order failed!
+2025-06-16 12:58:36 | ERROR | [BNBUSDT_SELL_1750078716] SELL order failed!
+2025-06-16 12:58:37 | ERROR | [SOLUSDT_BUY_1750078717] BUY order failed!
+2025-06-16 12:58:39 | ERROR | [ADAUSDT_SELL_1750078719] SELL order failed!
+2025-06-16 12:58:46 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:58:46 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:58:49 | ERROR | [BTCUSDT_BUY_1750078729] BUY order failed!
+2025-06-16 12:58:50 | ERROR | [ETHUSDT_BUY_1750078730] BUY order failed!
+2025-06-16 12:58:51 | ERROR | [BNBUSDT_SELL_1750078731] SELL order failed!
+2025-06-16 12:58:53 | ERROR | [SOLUSDT_BUY_1750078733] BUY order failed!
+2025-06-16 12:58:54 | ERROR | [ADAUSDT_SELL_1750078734] SELL order failed!
+2025-06-16 12:59:01 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:59:01 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:59:02 | ERROR | [BTCUSDT_BUY_1750078742] BUY order failed!
+2025-06-16 12:59:03 | ERROR | [ETHUSDT_BUY_1750078743] BUY order failed!
+2025-06-16 12:59:04 | ERROR | [BNBUSDT_SELL_1750078744] SELL order failed!
+2025-06-16 12:59:06 | ERROR | [SOLUSDT_BUY_1750078746] BUY order failed!
+2025-06-16 12:59:07 | ERROR | [ADAUSDT_SELL_1750078747] SELL order failed!
+2025-06-16 12:59:12 | ERROR | Error during market analysis loop: 'TradingLogic' object has no attribute 'get_open_positions'
+2025-06-16 12:59:12 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 282, in main
+    trading_logic.check_closed_trades()
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/trading_logic.py", line 244, in check_closed_trades
+    logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
+        ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'TradingLogic' object has no attribute 'get_open_positions'
+
+2025-06-16 12:59:14 | ERROR | [BTCUSDT_BUY_1750078754] BUY order failed!
+2025-06-16 12:59:15 | ERROR | [ETHUSDT_BUY_1750078755] BUY order failed!
+2025-06-16 12:59:17 | ERROR | [BNBUSDT_SELL_1750078757] SELL order failed!
+2025-06-16 12:59:19 | ERROR | [SOLUSDT_BUY_1750078759] BUY order failed!
+2025-06-16 12:59:20 | ERROR | [ADAUSDT_SELL_1750078760] SELL order failed!
+2025-06-16 13:00:47 | INFO | Starting Binance Futures Trading Bot...
+2025-06-16 13:00:47 | INFO | Configuration file loaded successfully.
+2025-06-16 13:00:48 | INFO | Binance client initialized (testnet=True)
+2025-06-16 13:00:48 | INFO | Testing API key...
+2025-06-16 13:00:48 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-16 13:00:48 | INFO | Fetched balance for USDT: 775.03858303 USDT
+2025-06-16 13:00:48 | ERROR | Error initializing components: RiskManagement.__init__() takes from 2 to 3 positional arguments but 4 were given
+2025-06-16 13:00:48 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 92, in initialize_components
+    risk_management = RiskManagement(client, risk_per_trade, max_drawdown)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.__init__() takes from 2 to 3 positional arguments but 4 were given
+
+2025-06-16 13:00:48 | ERROR | Critical error: RiskManagement.__init__() takes from 2 to 3 positional arguments but 4 were given
+2025-06-16 13:00:48 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 179, in main
+    client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 92, in initialize_components
+    risk_management = RiskManagement(client, risk_per_trade, max_drawdown)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.__init__() takes from 2 to 3 positional arguments but 4 were given
+
+2025-06-16 13:21:55 | INFO | Starting Binance Futures Trading Bot...
+2025-06-16 13:21:55 | INFO | Configuration file loaded successfully.
+2025-06-16 13:21:55 | INFO | Binance client initialized (testnet=True)
+2025-06-16 13:21:55 | INFO | Testing API key...
+2025-06-16 13:21:56 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-16 13:21:56 | INFO | Fetched balance for USDT: 775.03858303 USDT
+2025-06-16 13:21:57 | DEBUG | All components initialized successfully.
+2025-06-16 13:21:58 | INFO | Fetched balance for USDT: 775.03858303 USDT
+2025-06-16 13:21:59 | ERROR | Error fetching/generating signal for BTCUSDT: RiskManagement.calculate_position_size() missing 2 required positional arguments: 'current_price' and 'stop_loss_price'
+2025-06-16 13:21:59 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 231, in main
+    position_size = risk_management.calculate_position_size(stop_loss_distance)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.calculate_position_size() missing 2 required positional arguments: 'current_price' and 'stop_loss_price'
+
+2025-06-16 13:22:00 | ERROR | Error fetching/generating signal for ETHUSDT: RiskManagement.calculate_position_size() missing 2 required positional arguments: 'current_price' and 'stop_loss_price'
+2025-06-16 13:22:00 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 231, in main
+    position_size = risk_management.calculate_position_size(stop_loss_distance)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.calculate_position_size() missing 2 required positional arguments: 'current_price' and 'stop_loss_price'
+
+2025-06-16 13:22:01 | ERROR | Error fetching/generating signal for BNBUSDT: RiskManagement.calculate_position_size() missing 2 required positional arguments: 'current_price' and 'stop_loss_price'
+2025-06-16 13:22:01 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 238, in main
+    position_size = risk_management.calculate_position_size(stop_loss_distance)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.calculate_position_size() missing 2 required positional arguments: 'current_price' and 'stop_loss_price'
+
+2025-06-16 13:22:02 | ERROR | Error fetching/generating signal for SOLUSDT: RiskManagement.calculate_position_size() missing 2 required positional arguments: 'current_price' and 'stop_loss_price'
+2025-06-16 13:22:02 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 231, in main
+    position_size = risk_management.calculate_position_size(stop_loss_distance)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.calculate_position_size() missing 2 required positional arguments: 'current_price' and 'stop_loss_price'
+
+2025-06-16 13:22:02 | ERROR | Error fetching/generating signal for ADAUSDT: RiskManagement.calculate_position_size() missing 2 required positional arguments: 'current_price' and 'stop_loss_price'
+2025-06-16 13:22:02 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 238, in main
+    position_size = risk_management.calculate_position_size(stop_loss_distance)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: RiskManagement.calculate_position_size() missing 2 required positional arguments: 'current_price' and 'stop_loss_price'
+
+2025-06-16 13:22:42 | INFO | Bot stopped manually by user.
+2025-06-16 13:32:24 | INFO | Starting Binance Futures Trading Bot...
+2025-06-16 13:32:24 | INFO | Configuration file loaded successfully.
+2025-06-16 13:32:25 | INFO | Binance client initialized (testnet=True)
+2025-06-16 13:32:25 | INFO | Testing API key...
+2025-06-16 13:32:25 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-16 13:32:26 | INFO | Fetched balance for USDT: 775.03858303 USDT
+2025-06-16 13:32:26 | DEBUG | All components initialized successfully.
+2025-06-16 13:32:27 | INFO | Fetched balance for USDT: 775.03858303 USDT
+2025-06-16 13:32:29 | ERROR | [BTCUSDT_BUY_1750080749] BUY order failed!
+2025-06-16 13:32:30 | ERROR | [ETHUSDT_BUY_1750080750] BUY order failed!
+2025-06-16 13:32:32 | ERROR | [BNBUSDT_SELL_1750080752] SELL order failed!
+2025-06-16 13:32:34 | ERROR | [SOLUSDT_BUY_1750080754] BUY order failed!
+2025-06-16 13:32:35 | ERROR | [ADAUSDT_SELL_1750080755] SELL order failed!
+2025-06-16 13:33:07 | INFO | Bot stopped manually by user.
