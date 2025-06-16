@@ -97,7 +97,7 @@ class TechnicalAnalysis:
 
     # ... (інші імпорти і код залишити без змін)
 
-    def generate_optimized_signals(self, data: pd.DataFrame) -> pd.DataFrame:
+    def generate_optimized_signals(self, data: pd.DataFrame, symbol: str) -> pd.DataFrame:
         # EMA Short/Long
         data["EMA_Short"] = self.calculate_ema(data, 12)
         data["EMA_Long"] = self.calculate_ema(data, 26)
@@ -130,11 +130,17 @@ class TechnicalAnalysis:
 
         # === Діагностика NaN для головних колонок ===
         required_cols = ['EMA_Short', 'EMA_Long', 'RSI', 'ADX', 'Upper_Band', 'Lower_Band']
-        print("NaN count in required columns for ADAUSDT:")
+        print(f"NaN count in required columns for {symbol}:")
         print(data[required_cols].isna().sum())
         print("Rows with NaN in required columns:")
         print(data[data[required_cols].isna().any(axis=1)])
         # === /Діагностика ===
+
+        # Перевіряємо лише останній рядок!
+        last_row = data.iloc[-1]
+        if last_row[required_cols].isna().any():
+            logging.error(f"Missing or NaN in columns: {required_cols} for {symbol}. Skipping.")
+            return None
 
         # Додано перевірку на наявність NaN у Close та Stop_Loss (за бажанням, можна залишити)
         print(data[["Close", "Stop_Loss"]].isna().sum())  # покаже кількість NaN у кожній колонці

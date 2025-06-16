@@ -18796,3 +18796,130 @@
 2025-06-16 07:09:55 | ERROR | [SOLUSDT_BUY_1750057795] BUY order failed!
 2025-06-16 07:09:56 | ERROR | Missing or NaN in columns: ['EMA_Short', 'EMA_Long', 'RSI', 'ADX', 'Upper_Band', 'Lower_Band'] for ADAUSDT. Skipping.
 2025-06-16 07:10:46 | INFO | Bot stopped manually by user.
+2025-06-16 07:29:50 | INFO | Starting Binance Futures Trading Bot...
+2025-06-16 07:29:50 | INFO | Configuration file loaded successfully.
+2025-06-16 07:29:50 | INFO | Binance client initialized (testnet=True)
+2025-06-16 07:29:50 | INFO | Testing API key...
+2025-06-16 07:29:51 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-16 07:29:51 | INFO | Fetched balance for USDT: 831.89345202 USDT
+2025-06-16 07:29:51 | DEBUG | All components initialized successfully.
+2025-06-16 07:29:52 | INFO | Fetched balance for USDT: 831.89345202 USDT
+2025-06-16 07:29:57 | INFO | [BTCUSDT_BUY_1750058994] BUY order placed: {'order': {'orderId': 4536378368, 'symbol': 'BTCUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ9ee215d5f9663f25a02e6c', 'price': '0.00', 'avgPrice': '0.00', 'origQty': '0.008', 'executedQty': '0.000', 'cumQty': '0.000', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'BUY', 'positionSide': 'LONG', 'stopPrice': '0.00', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750058995469}, 'stop_loss_order': {'orderId': 4536378419, 'symbol': 'BTCUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ1c15d607573e34d666a1c6', 'price': '0.00', 'avgPrice': '0.00', 'origQty': '0.008', 'executedQty': '0.000', 'cumQty': '0.000', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '102544.50', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750058996769}, 'take_profit_order': {'orderId': 4536378574, 'symbol': 'BTCUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ2e87b56a651b6adf8ed5f3', 'price': '0.00', 'avgPrice': '0.00', 'origQty': '0.008', 'executedQty': '0.000', 'cumQty': '0.000', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '111692.20', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750058997798}}
+2025-06-16 07:30:02 | INFO | [ETHUSDT_BUY_1750058998] BUY order placed: {'order': {'orderId': 1852164003, 'symbol': 'ETHUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ9c53a84b4ca1589b3dae81', 'price': '0.00', 'avgPrice': '0.00', 'origQty': '0.298', 'executedQty': '0.000', 'cumQty': '0.000', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'BUY', 'positionSide': 'LONG', 'stopPrice': '0.00', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750059000146}, 'stop_loss_order': {'orderId': 1852164024, 'symbol': 'ETHUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ9d9c5d27f6ecaa50815b36', 'price': '0.00', 'avgPrice': '0.00', 'origQty': '0.298', 'executedQty': '0.000', 'cumQty': '0.000', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '2517.83', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750059000968}, 'take_profit_order': {'orderId': 1852164075, 'symbol': 'ETHUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ80698147d01963e4409c43', 'price': '0.00', 'avgPrice': '0.00', 'origQty': '0.298', 'executedQty': '0.000', 'cumQty': '0.000', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '2847.11', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750059002546}}
+2025-06-16 07:30:08 | INFO | [BNBUSDT_SELL_1750059004] SELL order placed: {'order': {'orderId': 527798496, 'symbol': 'BNBUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ2250fae292a398f37d8fd3', 'price': '0.000', 'avgPrice': '0.00', 'origQty': '1.29', 'executedQty': '0.00', 'cumQty': '0.00', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'SHORT', 'stopPrice': '0.000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750059005659}, 'stop_loss_order': {'orderId': 527798503, 'symbol': 'BNBUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ383b2a8a5dcdf09ba87c20', 'price': '0.000', 'avgPrice': '0.00', 'origQty': '1.29', 'executedQty': '0.00', 'cumQty': '0.00', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'BUY', 'positionSide': 'SHORT', 'stopPrice': '681.116', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750059007448}, 'take_profit_order': {'orderId': 527798506, 'symbol': 'BNBUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ8321afa6af292045e3c26e', 'price': '0.000', 'avgPrice': '0.00', 'origQty': '1.29', 'executedQty': '0.00', 'cumQty': '0.00', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'BUY', 'positionSide': 'SHORT', 'stopPrice': '628.723', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750059008475}}
+2025-06-16 07:30:12 | INFO | [SOLUSDT_BUY_1750059010] BUY order placed: {'order': {'orderId': 160261356, 'symbol': 'SOLUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJe757e60ce09b84a4097d4d', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '6', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000', 'timeInForce': 'GTC', 'type': 'MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'BUY', 'positionSide': 'LONG', 'stopPrice': '0.0000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750059011092}, 'stop_loss_order': {'orderId': 160261363, 'symbol': 'SOLUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ4482c20da7d1151ae43450', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '6', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000', 'timeInForce': 'GTC', 'type': 'STOP_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '143.7000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'STOP_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750059011908}, 'take_profit_order': {'orderId': 160261376, 'symbol': 'SOLUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ8d4a0446f53ebd8e78905f', 'price': '0.0000', 'avgPrice': '0.00', 'origQty': '6', 'executedQty': '0', 'cumQty': '0', 'cumQuote': '0.0000', 'timeInForce': 'GTC', 'type': 'TAKE_PROFIT_MARKET', 'reduceOnly': True, 'closePosition': False, 'side': 'SELL', 'positionSide': 'LONG', 'stopPrice': '163.5000', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'TAKE_PROFIT_MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1750059012455}}
+2025-06-16 07:30:13 | ERROR | Missing or NaN in columns: ['EMA_Short', 'EMA_Long', 'RSI', 'ADX', 'Upper_Band', 'Lower_Band'] for ADAUSDT. Skipping.
+2025-06-16 07:31:14 | ERROR | [BTCUSDT_BUY_1750059074] BUY order failed!
+2025-06-16 07:31:15 | ERROR | [ETHUSDT_BUY_1750059075] BUY order failed!
+2025-06-16 07:31:16 | ERROR | [BNBUSDT_SELL_1750059076] SELL order failed!
+2025-06-16 07:31:17 | ERROR | [SOLUSDT_BUY_1750059077] BUY order failed!
+2025-06-16 07:31:18 | ERROR | Missing or NaN in columns: ['EMA_Short', 'EMA_Long', 'RSI', 'ADX', 'Upper_Band', 'Lower_Band'] for ADAUSDT. Skipping.
+2025-06-16 07:32:19 | ERROR | [BTCUSDT_BUY_1750059139] BUY order failed!
+2025-06-16 07:32:20 | ERROR | [ETHUSDT_BUY_1750059140] BUY order failed!
+2025-06-16 07:32:22 | ERROR | [BNBUSDT_SELL_1750059142] SELL order failed!
+2025-06-16 07:32:23 | ERROR | [SOLUSDT_BUY_1750059143] BUY order failed!
+2025-06-16 07:32:23 | ERROR | Missing or NaN in columns: ['EMA_Short', 'EMA_Long', 'RSI', 'ADX', 'Upper_Band', 'Lower_Band'] for ADAUSDT. Skipping.
+2025-06-16 07:33:19 | INFO | Bot stopped manually by user.
+2025-06-16 07:55:57 | INFO | Starting Binance Futures Trading Bot...
+2025-06-16 07:55:57 | INFO | Configuration file loaded successfully.
+2025-06-16 07:55:57 | INFO | Binance client initialized (testnet=True)
+2025-06-16 07:55:57 | INFO | Testing API key...
+2025-06-16 07:55:58 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-16 07:55:59 | INFO | Fetched balance for USDT: 828.51358394 USDT
+2025-06-16 07:56:00 | DEBUG | All components initialized successfully.
+2025-06-16 07:56:00 | INFO | Fetched balance for USDT: 828.51358394 USDT
+2025-06-16 07:56:01 | ERROR | Error fetching/generating signal for BTCUSDT: name 'symbol' is not defined
+2025-06-16 07:56:01 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 207, in main
+    df = technical_analysis.generate_optimized_signals(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/technical_analysis.py", line 133, in generate_optimized_signals
+    print(f"NaN count in required columns for {symbol}:")
+                                               ^^^^^^
+NameError: name 'symbol' is not defined
+
+2025-06-16 07:56:01 | ERROR | Error fetching/generating signal for ETHUSDT: name 'symbol' is not defined
+2025-06-16 07:56:01 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 207, in main
+    df = technical_analysis.generate_optimized_signals(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/technical_analysis.py", line 133, in generate_optimized_signals
+    print(f"NaN count in required columns for {symbol}:")
+                                               ^^^^^^
+NameError: name 'symbol' is not defined
+
+2025-06-16 07:56:02 | ERROR | Error fetching/generating signal for BNBUSDT: name 'symbol' is not defined
+2025-06-16 07:56:02 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 207, in main
+    df = technical_analysis.generate_optimized_signals(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/technical_analysis.py", line 133, in generate_optimized_signals
+    print(f"NaN count in required columns for {symbol}:")
+                                               ^^^^^^
+NameError: name 'symbol' is not defined
+
+2025-06-16 07:56:02 | ERROR | Error fetching/generating signal for SOLUSDT: name 'symbol' is not defined
+2025-06-16 07:56:02 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 207, in main
+    df = technical_analysis.generate_optimized_signals(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/technical_analysis.py", line 133, in generate_optimized_signals
+    print(f"NaN count in required columns for {symbol}:")
+                                               ^^^^^^
+NameError: name 'symbol' is not defined
+
+2025-06-16 07:56:03 | ERROR | Error fetching/generating signal for ADAUSDT: name 'symbol' is not defined
+2025-06-16 07:56:03 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 207, in main
+    df = technical_analysis.generate_optimized_signals(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/oleksandr_agro81/binance_futures_bot/strategy/technical_analysis.py", line 133, in generate_optimized_signals
+    print(f"NaN count in required columns for {symbol}:")
+                                               ^^^^^^
+NameError: name 'symbol' is not defined
+
+2025-06-16 07:56:29 | INFO | Bot stopped manually by user.
+2025-06-16 08:00:49 | INFO | Starting Binance Futures Trading Bot...
+2025-06-16 08:00:49 | INFO | Configuration file loaded successfully.
+2025-06-16 08:00:49 | INFO | Binance client initialized (testnet=True)
+2025-06-16 08:00:49 | INFO | Testing API key...
+2025-06-16 08:00:49 | INFO | API Key is valid. Account info fetched successfully.
+2025-06-16 08:00:50 | INFO | Fetched balance for USDT: 828.51358394 USDT
+2025-06-16 08:00:50 | DEBUG | All components initialized successfully.
+2025-06-16 08:00:51 | INFO | Fetched balance for USDT: 828.51358394 USDT
+2025-06-16 08:00:51 | ERROR | Error fetching/generating signal for BTCUSDT: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'symbol'
+2025-06-16 08:00:51 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 207, in main
+    df = technical_analysis.generate_optimized_signals(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'symbol'
+
+2025-06-16 08:00:52 | ERROR | Error fetching/generating signal for ETHUSDT: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'symbol'
+2025-06-16 08:00:52 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 207, in main
+    df = technical_analysis.generate_optimized_signals(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'symbol'
+
+2025-06-16 08:00:52 | ERROR | Error fetching/generating signal for BNBUSDT: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'symbol'
+2025-06-16 08:00:52 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 207, in main
+    df = technical_analysis.generate_optimized_signals(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'symbol'
+
+2025-06-16 08:00:52 | ERROR | Error fetching/generating signal for SOLUSDT: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'symbol'
+2025-06-16 08:00:52 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 207, in main
+    df = technical_analysis.generate_optimized_signals(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'symbol'
+
+2025-06-16 08:00:53 | ERROR | Error fetching/generating signal for ADAUSDT: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'symbol'
+2025-06-16 08:00:53 | DEBUG | Traceback (most recent call last):
+  File "/home/oleksandr_agro81/binance_futures_bot/main.py", line 207, in main
+    df = technical_analysis.generate_optimized_signals(df)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: TechnicalAnalysis.generate_optimized_signals() missing 1 required positional argument: 'symbol'
+
+2025-06-16 08:01:14 | INFO | Bot stopped manually by user.
