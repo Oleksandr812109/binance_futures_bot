@@ -278,7 +278,8 @@ def main():
                     now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                     telegram_notifier.send_message(f"[{now_str}] Баланс: {account_balance:.2f} USDT")
                     last_balance_time = time.time()
-
+                
+                trading_logic.check_closed_trades()
                 process_closed_trades(active_trades, ai_signal_generator)
                 time.sleep(60)
 

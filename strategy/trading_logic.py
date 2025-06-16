@@ -61,6 +61,17 @@ class TradingLogic:
         # Реалізуй за потреби
         return None
 
+    def get_open_positions(self, symbol):
+        """
+        Повертає список відкритих позицій по символу (Binance Futures).
+        """
+        try:
+            positions = self.client.futures_position_information(symbol=symbol)
+            return positions
+        except Exception as e:
+            logging.error(f"Error getting open positions for {symbol}: {e}")
+            return []
+
     def cancel_order(self, symbol, order_id, max_retries=3, retry_delay=2):
         """
         Скасувати ордер на біржі Binance Futures, з повторними спробами у разі помилки.
