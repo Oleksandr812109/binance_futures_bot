@@ -209,7 +209,11 @@ class TradingLogic:
                 positions = self.client.futures_position_information(symbol=trade['symbol'])
                 for pos in positions:
                     if float(pos['positionAmt']) != 0 and pos['positionSide'] == trade['positionSide']:
-                        pnl = float(pos['unrealizedProfit'])
+                        if 'unRealizedProfit' in pos:
+                            pnl = float(pos['unRealizedProfit'])
+                        else:
+                            logging.error(f"Position info without 'unRealizedProfit': {pos}")
+                            pnl = 0
                         if pnl >= pnl_threshold:
                             self.close_position(
                                 trade['symbol'],

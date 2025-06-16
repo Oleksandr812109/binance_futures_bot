@@ -181,6 +181,7 @@ def main():
         # --- Відправляємо баланс у Telegram при старті ---
         now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         account_balance = get_account_balance(client, asset="USDT")
+        risk_management.update_account_balance(account_balance)
         telegram_notifier.send_message(f"[{now_str}] Старт бота. Баланс: {account_balance:.2f} USDT")
 
         symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
@@ -275,6 +276,7 @@ def main():
                 # --- Щогодинна відправка балансу ---
                 if time.time() - last_balance_time > 3600:
                     account_balance = get_account_balance(client, asset="USDT")
+                    risk_management.update_account_balance(account_balance)
                     now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                     telegram_notifier.send_message(f"[{now_str}] Баланс: {account_balance:.2f} USDT")
                     last_balance_time = time.time()
