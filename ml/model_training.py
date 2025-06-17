@@ -72,7 +72,7 @@ if __name__ == "__main__":
 
     model = build_model(input_dim=X_train.shape[1], output_dim=output_dim)
     checkpoint = ModelCheckpoint(filepath=model_save_path, save_best_only=True, monitor='val_losepochs=20, batch_size=32, callbacks=[checkpos', mode='min')  
-    model.fit(X_train, y_train, validation_data=(X_val, y_val), int])
+    model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=20, batch_size=32, callbacks=[checkpoint])
 
 
     with open(scaler_save_path, "wb") as f:
