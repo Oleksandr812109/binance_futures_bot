@@ -32,10 +32,11 @@ class AISignalGenerator:
 
         # Завантаження моделі з обробкою помилок
         try:
-            self.model = load_model(MODEL_PATH)
-            logger.info(f"Model loaded successfully from {MODEL_PATH}")
+            self.model = load_model("ml/models/model.keras")
+            logger.info(f"Model loaded successfully from ml/models/model.keras")
         except Exception as e:
-            logger.error(f"Failed to load model from {MODEL_PATH}: {e}")
+            logger.error(f"Failed to load model from ml/models/model.keras: {e}")
+
 
     def extract_features(self, df):
         """

@@ -2,7 +2,7 @@ from enum import Enum
 
 # Файли моделі та скейлера
 SCALER_PATH = "ml/models/scaler.pkl"
-MODEL_PATH = "ml/models/model.h5"
+MODEL_PATH = "ml/models/model.keras"
 
 # Назви фічей (підлаштуйте під свій датасет)
 FEATURE_NAMES = [

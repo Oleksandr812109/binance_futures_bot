@@ -58,7 +58,7 @@ def save_metadata(metadata_path, input_shape, output_classes):
 if __name__ == "__main__":
     data_path = "ml/data/dataset.csv"
     target_column = "target"
-    model_save_path = "ml/models/model.h5"
+    model_save_path = "ml/models/model.keras"
     metadata_save_path = "ml/models/metadata.json"
     scaler_save_path = "ml/models/scaler.pkl"
 
@@ -71,8 +71,9 @@ if __name__ == "__main__":
     X_train, X_val, y_train, y_val = train_test_split(X_scaled, y_preprocessed, test_size=0.2, random_state=42)
 
     model = build_model(input_dim=X_train.shape[1], output_dim=output_dim)
-    checkpoint = ModelCheckpoint(filepath=model_save_path, save_best_only=True, monitor='val_loss', mode='min')
-    model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=20, batch_size=32, callbacks=[checkpoint])
+    checkpoint = ModelCheckpoint(filepath=model_save_path, save_best_only=True, monitor='val_losepochs=20, batch_size=32, callbacks=[checkpos', mode='min')  
+    model.fit(X_train, y_train, validation_data=(X_val, y_val), int])
+
 
     with open(scaler_save_path, "wb") as f:
         pickle.dump(scaler, f)

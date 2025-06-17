@@ -132,6 +132,13 @@ class TradingLogic:
             stop_loss_price = self._round_step(stop_loss_price, price_step)
             take_profit_price = self._round_step(take_profit_price, price_step)
 
+            logging.info(f"{symbol} | Take profit price: {take_profit_price} | Stop loss price: {stop_loss_price}")
+            if side == "BUY":
+                potential_profit = (take_profit_price - entry_price) * quantity
+            else:
+                potential_profit = (entry_price - take_profit_price) * quantity
+            logging.info(f"{symbol} | Potential profit at TP: {potential_profit:.2f} USDT")
+
             stop_loss_params = dict(
                 symbol=symbol,
                 side="SELL" if side == "BUY" else "BUY",

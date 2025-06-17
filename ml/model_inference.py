@@ -82,7 +82,7 @@ def make_prediction(model, input_data):
 if __name__ == "__main__":
     # Example usage
     metadata_path = "ml/models/metadata.json"
-    model_path = "ml/models/model.h5"
+    model_path = "ml/models/model.keras"
     input_data = [[0.1, 0.2, 0.3, 0.4]]  # Example input data
 
     # Load metadata
