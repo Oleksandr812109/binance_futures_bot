@@ -65,15 +65,16 @@ if __name__ == "__main__":
     X, y = load_data(data_path, target_column)
     X_scaled, y_preprocessed, scaler = preprocess_data(X, y)
 
-    # ГОЛОВНЕ ВИПРАВЛЕННЯ:
     output_dim = int(np.max(y_preprocessed)) + 1
 
     X_train, X_val, y_train, y_val = train_test_split(X_scaled, y_preprocessed, test_size=0.2, random_state=42)
 
     model = build_model(input_dim=X_train.shape[1], output_dim=output_dim)
-    checkpoint = ModelCheckpoint(filepath=model_save_path, save_best_only=True, monitor='val_losepochs=20, batch_size=32, callbacks=[checkpos', mode='min')  
+    checkpoint = ModelCheckpoint(filepath=model_save_path, save_best_only=True, monitor='val_loss', mode='min')
     model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=20, batch_size=32, callbacks=[checkpoint])
 
+    # Гарантовано зберегти модель у .keras (опціонально)
+    model.save(model_save_path)
 
     with open(scaler_save_path, "wb") as f:
         pickle.dump(scaler, f)
@@ -82,4 +83,3 @@ if __name__ == "__main__":
     save_metadata(metadata_save_path, input_shape=X_train.shape[1:], output_classes=output_dim)
 
     print("Model training and saving completed.")
-

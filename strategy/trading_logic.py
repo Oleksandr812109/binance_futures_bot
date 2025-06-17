@@ -211,16 +211,15 @@ class TradingLogic:
         Видаляти неактуальні ордери після закриття позиції.
         """
         pnl_threshold = 5.0  # у USDT
+
         for trade in self.active_trades[:]:
+            removed = False
+            # 1. Перевірка PNL threshold (ранній вихід)
             try:
                 positions = self.client.futures_position_information(symbol=trade['symbol'])
                 for pos in positions:
                     if float(pos['positionAmt']) != 0 and pos['positionSide'] == trade['positionSide']:
-                        if 'unRealizedProfit' in pos:
-                            pnl = float(pos['unRealizedProfit'])
-                        else:
-                            logging.error(f"Position info without 'unRealizedProfit': {pos}")
-                            pnl = 0
+                        pnl = float(pos.get('unRealizedProfit', 0))
                         if pnl >= pnl_threshold:
                             self.close_position(
                                 trade['symbol'],
@@ -229,52 +228,52 @@ class TradingLogic:
                             )
                             logging.info(f"Position {trade['symbol']} closed early by PNL threshold: {pnl} USDT")
                             self.active_trades.remove(trade)
+                            removed = True
                             break
+                if removed:
+                    continue  # Якщо вже видалили trade, до наступного
             except Exception as e:
                 logging.error(f"Error checking/closing by PNL: {e}")
+                continue
 
-        for trade in self.active_trades[:]:
-            # Перевіряємо тейк-профіт
+            # 2. Перевірка TP ордера
             try:
                 tp_order = self.client.futures_get_order(symbol=trade['symbol'], orderId=trade['tp_order_id'])
                 if tp_order['status'] == 'FILLED':
                     close_price = float(tp_order['avgPrice']) if tp_order['avgPrice'] else None
                     logging.info(f"[TP FILL] symbol={trade['symbol']} | TP avgPrice={tp_order.get('avgPrice')} | orderId={trade['tp_order_id']}")
                     self.learn_ai(trade, close_price, 'TAKE_PROFIT')
-                    # --- Скасування SL ордера ---
                     self.cancel_order(trade['symbol'], trade['sl_order_id'])
                     self.active_trades.remove(trade)
                     continue
             except Exception as e:
                 logging.error(f"Error checking TP order status: {e}")
-            # Перевіряємо стоп-лосс
+
+            # 3. Перевірка SL ордера
             try:
                 sl_order = self.client.futures_get_order(symbol=trade['symbol'], orderId=trade['sl_order_id'])
                 if sl_order['status'] == 'FILLED':
                     close_price = float(sl_order['avgPrice']) if sl_order['avgPrice'] else None
                     logging.info(f"[SL FILL] symbol={trade['symbol']} | SL avgPrice={sl_order.get('avgPrice')} | orderId={trade['sl_order_id']}")
                     self.learn_ai(trade, close_price, 'STOP_LOSS')
-                    # --- Скасування TP ордера ---
                     self.cancel_order(trade['symbol'], trade['tp_order_id'])
                     self.active_trades.remove(trade)
                     continue
             except Exception as e:
                 logging.error(f"Error checking SL order status: {e}")
 
-        # --- Додаємо перевірку ручного закриття позиції ---
-        for trade in self.active_trades[:]:
-            positions = self.get_open_positions(trade['symbol'])
-            side = trade['side']
-            if not any(float(pos['positionAmt']) != 0 and pos['positionSide'] == trade['positionSide'] for pos in positions):
-                close_price = self.get_manual_close_price(trade)
-                if close_price is None:
-                    logging.warning(f"Cannot update AI: missing close price for {trade['symbol']}. Trade skipped for training.")
-                else:
-                    self.learn_ai(trade, close_price, 'MANUAL_CLOSE')
-                    # При ручному закритті бажано скасувати обидва ордери
-                    self.cancel_order(trade['symbol'], trade['tp_order_id'])
-                    self.cancel_order(trade['symbol'], trade['sl_order_id'])
-                self.active_trades.remove(trade)
-        # --------------------------------------------------
-
-
+            # 4. Перевірка ручного закриття
+            try:
+                positions = self.get_open_positions(trade['symbol'])
+                if not any(float(pos['positionAmt']) != 0 and pos['positionSide'] == trade['positionSide'] for pos in positions):
+                    close_price = self.get_manual_close_price(trade)
+                    if close_price is None:
+                        logging.warning(f"Cannot update AI: missing close price for {trade['symbol']}. Trade skipped for training.")
+                    else:
+                        self.learn_ai(trade, close_price, 'MANUAL_CLOSE')
+                        self.cancel_order(trade['symbol'], trade['tp_order_id'])
+                        self.cancel_order(trade['symbol'], trade['sl_order_id'])
+                    self.active_trades.remove(trade)
+                    continue
+            except Exception as e:
+                logging.error(f"Error checking manual close: {e}")
