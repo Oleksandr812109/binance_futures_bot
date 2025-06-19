@@ -86,5 +86,27 @@
     "tp_order_id": 138984118,
     "sl_order_id": 138984114,
     "opened_at": 1750326315.7677126
+  },
+  {
+    "features": {
+      "Close": 148.32,
+      "EMA_Short": 148.1824442629544,
+      "EMA_Long": 149.44378271434,
+      "RSI": 25.619834710743817,
+      "ADX": 92.21960066436216,
+      "Upper_Band": 151.50157850868865,
+      "Lower_Band": 145.81842149131134,
+      "Volume": 3271082.0
+    },
+    "symbol": "SOLUSDT",
+    "entry_price": 144.79,
+    "side": "BUY",
+    "status": "OPEN",
+    "trade_id": "SOLUSDT_BUY_1750334975",
+    "qty": 14.0,
+    "positionSide": "LONG",
+    "tp_order_id": 167702901,
+    "sl_order_id": 167702885,
+    "opened_at": 1750334978.9006698
   }
 ]
