@@ -17,20 +17,7 @@ from loguru import logger
 from core.telegram_signal_listener import TelegramSignalListener
 from utils.binance_precision import get_precision, round_quantity, round_price
 from typing import Dict, Any
-from utils.trade_history_logger import save_trade
-from utils.dumb_strategy import dumb_strategy_signal
 from datetime import datetime
-
-def get_symbol_info(client, symbol):
-    try:
-        info = client.futures_exchange_info()
-        for s in info['symbols']:
-            if s['symbol'] == symbol:
-                return s
-        logger.error(f"Symbol info for {symbol} not found in exchange info.")
-    except Exception as e:
-        logger.error(f"Error fetching symbol info for {symbol}: {e}")
-    return None
 
 def setup_logging(log_file="bot.log"):
     logger.remove()
@@ -89,6 +76,9 @@ def initialize_components(config):
         risk_per_trade = config.getfloat("TRADING", "risk_per_trade", fallback=0.01)
         max_drawdown = config.getfloat("TRADING", "max_drawdown", fallback=0.2)
 
+        # ---- КЕШ символів ----
+        exchange_info = client.futures_exchange_info()
+        symbol_info_map = {s['symbol']: s for s in exchange_info['symbols']}
         risk_management = RiskManagement(client, "risk_config.json")
         technical_analysis = TechnicalAnalysis(client)
         ai_signal_generator = AISignalGenerator()
@@ -97,7 +87,7 @@ def initialize_components(config):
         telegram_notifier = TelegramNotifier(bot_token, chat_id)
 
         logger.debug("All components initialized successfully.")
-        return client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier
+        return client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier, symbol_info_map
     except Exception as e:
         logger.error(f"Error initializing components: {e}")
         logger.debug(traceback.format_exc())
@@ -123,60 +113,13 @@ async def run_telegram_listener():
     listener = TelegramSignalListener('config/config.ini', handle_tradingruhal_signal)
     await listener.start()
 
-def is_position_closed(trade_info: Dict[str, Any]) -> bool:
-    return trade_info.get("status") == "CLOSED" or trade_info.get("closed", False)
-
-def get_trade_profit(trade_info: Dict[str, Any]) -> float:
-    open_price = trade_info.get("entry_price")
-    close_price = trade_info.get("close_price")
-    side = trade_info.get("side", "BUY")
-    if open_price is None or close_price is None:
-        logger.warning(f"Trade info missing open/close price: {trade_info.get('trade_id')}")
-        return 0.0
-    if side == "BUY":
-        return close_price - open_price
-    elif side == "SELL":
-        return open_price - close_price
-    return 0.0
-
-def process_closed_trades(active_trades: Dict[str, Dict[str, Any]], ai_signal_generator: Any) -> None:
-    trades_to_remove = []
-    for trade_id, trade_info in active_trades.items():
-        try:
-            if not is_position_closed(trade_info):
-                continue
-
-            features_dict = trade_info.get("features")
-            if not features_dict:
-                logger.warning(f"Trade {trade_id}: No 'features' found in trade_info. Skipping update.")
-                trades_to_remove.append(trade_id)
-                continue
-
-            profit = get_trade_profit(trade_info)
-            target = 1 if profit > 0 else 0
-
-            ai_signal_generator.partial_fit(features_dict, target)
-            logger.info(f"AI model updated for trade {trade_id}. Profit: {profit:.4f}, Target: {target}")
-
-            trades_to_remove.append(trade_id)
-            logger.info(f"[{trade_id}] Trade closed. Side: {trade_info.get('side')}, Entry: {trade_info.get('entry_price')}, Close: {trade_info.get('close_price')}, Profit: {profit:.4f}, Target: {target}")
-        except KeyError as e:
-            logger.error(f"Trade {trade_id}: Missing expected key in trade_info: {e}. Skipping trade.")
-        except Exception as e:
-            logger.error(f"Error processing trade {trade_id}: {e}. Skipping trade.")
-
-    for trade_id in trades_to_remove:
-        if trade_id in active_trades:
-            del active_trades[trade_id]
-            logger.info(f"Trade {trade_id} removed from active_trades.")
-
 def main():
     setup_logging()
     logger.info("Starting Binance Futures Trading Bot...")
     try:
         config_path = "config/config.ini"
         config = load_config(config_path)
-        client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier = initialize_components(config)
+        client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier, symbol_info_map = initialize_components(config)
         
         # --- Відправляємо баланс у Telegram при старті ---
         now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -186,14 +129,9 @@ def main():
 
         symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
         interval = config.get("TRADING", "INTERVAL", fallback="1h")
-        active_trades = {}
         loop = asyncio.get_event_loop()
         loop.create_task(run_telegram_listener())
 
-        TP_PCT = 1.03
-        SL_PCT = 0.98
-
-        # --- Для щогодинної відправки балансу ---
         last_balance_time = time.time()
 
         while True:
@@ -239,7 +177,8 @@ def main():
                             position_size = risk_management.calculate_position_size(symbol, entry_price, stop_loss_price)
                             side = "SELL"
 
-                        symbol_info = get_symbol_info(client, symbol)
+                        # --- Використовуємо кеш ---
+                        symbol_info = symbol_info_map.get(symbol)
                         if symbol_info is None:
                             logger.error(f"Cannot trade {symbol} because symbol_info is missing!")
                             continue
@@ -253,20 +192,19 @@ def main():
                             logger.warning(f"Position size {position_size} > max for {symbol}: {max_position_size}. Зменшую до ліміту.")
                             position_size = max_position_size
 
-                        features_for_save = features
-
                         trade_id = f"{symbol}_{side}_{int(time.time())}"
-                        active_trades[trade_id] = {
-                            "features": features_for_save,
+                        trade_info = {
+                            "features": features,
                             "symbol": symbol,
                             "entry_price": entry_price,
                             "side": side,
-                            "status": "OPEN"
+                            "status": "OPEN",
+                            "trade_id": trade_id,
                         }
-                        order = trading_logic.place_order(symbol, side, position_size, stop_loss_price, take_profit_price)
+                        # --- Новий place_order приймає trade_info цілком ---
+                        order = trading_logic.place_order(trade_info, position_size, stop_loss_price, take_profit_price)
                         if order:
                             logger.info(f"[{trade_id}] {side} order placed: {order}")
-                            active_trades[trade_id]["order"] = order
                         else:
                             logger.error(f"[{trade_id}] {side} order failed!")
                     except Exception as e:
@@ -282,7 +220,6 @@ def main():
                     last_balance_time = time.time()
                 
                 trading_logic.check_closed_trades()
-                process_closed_trades(active_trades, ai_signal_generator)
                 time.sleep(60)
 
             except Exception as e:
@@ -295,7 +232,22 @@ def main():
         logger.error(f"Critical error: {e}")
         logger.debug(traceback.format_exc())
 
+
+def is_position_closed(trade_info: Dict[str, Any]) -> bool:
+    return trade_info.get("status") == "CLOSED" or trade_info.get("closed", False)
+
+def get_trade_profit(trade_info: Dict[str, Any]) -> float:
+    open_price = trade_info.get("entry_price")
+    close_price = trade_info.get("close_price")
+    side = trade_info.get("side", "BUY")
+    if open_price is None or close_price is None:
+        logger.warning(f"Trade info missing open/close price: {trade_info.get('trade_id')}")
+        return 0.0
+    if side == "BUY":
+        return close_price - open_price
+    elif side == "SELL":
+        return open_price - close_price
+    return 0.0
+
 if __name__ == "__main__":
     main()
-
-

@@ -1,11 +1,22 @@
 import time
-import logging 
-from binance.client import Client 
-from utils.check_margin_and_quantity import can_close_position 
-import decimal 
-import time
+import logging
+from binance.client import Client
+from utils.check_margin_and_quantity import can_close_position
+import decimal
+import json
+import os
 
-MIN_TP_SL_GAP = 0.04  # 0.3% (можна підвищити до 0.005 чи 0.01)
+MIN_TP_SL_GAP = 0.04  # 0.4%
+
+PAIR_ROI_THRESHOLD = {
+    "BTCUSDT": 0.2,
+    "ETHUSDT": 0.15,
+    "BNBUSDT": 0.1,
+    # ...
+}
+DEFAULT_ROI_THRESHOLD = 0.2
+
+TRADES_STATE_FILE = "active_trades.json"
 
 class TradingLogic:
     def __init__(self, client: Client, risk_management, technical_analysis, ai_model):
@@ -14,16 +25,31 @@ class TradingLogic:
         self.technical_analysis = technical_analysis
         self.ai_model = ai_model
         self._symbol_precision_cache = {}
-        self.active_trades = []  # Список всіх відкритих угод
+        self.active_trades = []
+        self._load_active_trades()
 
+    # ---------- State persistence ----------
+    def _save_active_trades(self):
+        try:
+            with open(TRADES_STATE_FILE, "w") as f:
+                json.dump(self.active_trades, f, indent=2)
+        except Exception as e:
+            logging.error(f"Couldn't save active_trades: {e}")
+
+    def _load_active_trades(self):
+        if os.path.exists(TRADES_STATE_FILE):
+            try:
+                with open(TRADES_STATE_FILE, "r") as f:
+                    self.active_trades = json.load(f)
+            except Exception as e:
+                logging.error(f"Couldn't load active_trades: {e}")
+        else:
+            self.active_trades = []
+
+    # ---------- Binance utils ----------
     def _get_symbol_precisions(self, symbol):
-        """
-        Отримати stepSize для quantity і tickSize для ціни для конкретного symbol.
-        Кешується в _symbol_precision_cache.
-        """
         if symbol in self._symbol_precision_cache:
             return self._symbol_precision_cache[symbol]
-
         exchange_info = self.client.futures_exchange_info()
         symbol_info = next(s for s in exchange_info['symbols'] if s['symbol'] == symbol)
         quantity_step = float([f for f in symbol_info['filters'] if f['filterType'] == 'LOT_SIZE'][0]['stepSize'])
@@ -33,15 +59,9 @@ class TradingLogic:
 
     @staticmethod
     def _round_step(value, step):
-        """
-        Округлити value до precision step (stepSize або tickSize)
-        """
         return float(decimal.Decimal(str(value)).quantize(decimal.Decimal(str(step)), rounding=decimal.ROUND_DOWN))
 
     def safe_tp_sl(self, entry_price, tp_price, sl_price, side, min_gap=MIN_TP_SL_GAP):
-        """
-        Гарантує, що TP/SL не занадто близько до ціни входу (entry_price).
-        """
         if side == "BUY":
             min_tp = entry_price * (1 + min_gap)
             max_sl = entry_price * (1 - min_gap)
@@ -54,42 +74,7 @@ class TradingLogic:
             sl_price = max(sl_price, min_sl)
         return tp_price, sl_price
 
-    def get_manual_close_price(self, trade):
-        """
-        Спробувати отримати ціну закриття з історії угод або останньої ціни для ручного закриття.
-        """
-        # Реалізуй за потреби
-        return None
-
-    def get_open_positions(self, symbol):
-        """
-        Повертає список відкритих позицій по символу (Binance Futures).
-        """
-        try:
-            positions = self.client.futures_position_information(symbol=symbol)
-            return positions
-        except Exception as e:
-            logging.error(f"Error getting open positions for {symbol}: {e}")
-            return []
-
-    def cancel_order(self, symbol, order_id, max_retries=3, retry_delay=2):
-        """
-        Скасувати ордер на біржі Binance Futures, з повторними спробами у разі помилки.
-        """
-        for attempt in range(1, max_retries + 1):
-            try:
-                logging.info(f"Trying to cancel order {order_id} on {symbol}, attempt {attempt}")
-                result = self.client.futures_cancel_order(symbol=symbol, orderId=order_id)
-                logging.info(f"Order {order_id} cancelled on {symbol} | Binance response: {result}")
-                return result
-            except Exception as e:
-                logging.warning(f"Error cancelling order {order_id} on {symbol}, attempt {attempt}: {e}")
-                if attempt < max_retries:
-                    time.sleep(retry_delay)
-                else:
-                    logging.error(f"Failed to cancel order {order_id} on {symbol} after {max_retries} attempts.")
-        return None
-
+    # ---------- Trade placement/close ----------
     def place_order(self, symbol: str, side: str, quantity: float, stop_loss_price: float, take_profit_price: float):
         """
         Place a market order on Binance Futures AND immediately set stop-loss and take-profit.
@@ -116,28 +101,21 @@ class TradingLogic:
             )
             logging.info(f"Market order placed: {order}")
 
-            entry_price = float(order.get('avgPrice', 0)) if order.get('avgPrice', '0.00') != '0.00' else None
+            # Покращене отримання entry_price через trade history
+            trades = self.client.futures_account_trades(symbol=symbol)
+            entry_price = None
+            for t in reversed(trades):
+                if int(t["orderId"]) == int(order["orderId"]):
+                    entry_price = float(t["price"])
+                    break
             if not entry_price:
-                for _ in range(3):
-                    positions = self.client.futures_position_information()
-                    for pos in positions:
-                        if pos['symbol'] == symbol and float(pos['positionAmt']) != 0 and pos['positionSide'] == positionSide:
-                            entry_price = float(pos['entryPrice'])
-                            break
-                    if entry_price:
-                        break
-                    time.sleep(1)
+                entry_price = float(order.get('avgPrice', 0)) if order.get('avgPrice', '0.00') != '0.00' else None
 
             take_profit_price, stop_loss_price = self.safe_tp_sl(entry_price, take_profit_price, stop_loss_price, side)
             stop_loss_price = self._round_step(stop_loss_price, price_step)
             take_profit_price = self._round_step(take_profit_price, price_step)
 
             logging.info(f"{symbol} | Take profit price: {take_profit_price} | Stop loss price: {stop_loss_price}")
-            if side == "BUY":
-                potential_profit = (take_profit_price - entry_price) * quantity
-            else:
-                potential_profit = (entry_price - take_profit_price) * quantity
-            logging.info(f"{symbol} | Potential profit at TP: {potential_profit:.2f} USDT")
 
             stop_loss_params = dict(
                 symbol=symbol,
@@ -146,6 +124,7 @@ class TradingLogic:
                 stopPrice=stop_loss_price,
                 quantity=quantity,
                 positionSide=positionSide,
+                reduceOnly=True,
             )
             take_profit_params = dict(
                 symbol=symbol,
@@ -154,13 +133,13 @@ class TradingLogic:
                 stopPrice=take_profit_price,
                 quantity=quantity,
                 positionSide=positionSide,
+                reduceOnly=True,
             )
 
             stop_loss_order = None
             take_profit_order = None
 
             try:
-                stop_loss_params['reduceOnly'] = True
                 stop_loss_order = self.client.futures_create_order(**stop_loss_params)
             except Exception as e:
                 if "Parameter 'reduceonly' sent when not required" in str(e):
@@ -171,7 +150,6 @@ class TradingLogic:
                     raise
 
             try:
-                take_profit_params['reduceOnly'] = True
                 take_profit_order = self.client.futures_create_order(**take_profit_params)
             except Exception as e:
                 if "Parameter 'reduceonly' sent when not required" in str(e):
@@ -195,6 +173,7 @@ class TradingLogic:
                 "opened_at": time.time()
             }
             self.active_trades.append(trade_info)
+            self._save_active_trades()
 
             return {
                 "order": order,
@@ -205,38 +184,116 @@ class TradingLogic:
             logging.error(f"Error placing bracket orders: {e}")
             return None
 
-    def check_closed_trades(self):
-        """
-        Перевірити виконання стоп-лосс/тейк-профіт ордерів та навчити AI на реальних результатах.
-        Видаляти неактуальні ордери після закриття позиції.
-        """
-        pnl_threshold = 5.0  # у USDT
+    def close_position(self, symbol, qty, side, positionSide="BOTH"):
+        try:
+            order = self.client.futures_create_order(
+                symbol=symbol,
+                side=side,
+                type="MARKET",
+                quantity=qty,
+                positionSide=positionSide,
+                reduceOnly=True
+            )
+            logging.info(f"Position closed: {symbol}, qty={qty}, side={side}, positionSide={positionSide}. Order: {order}")
+            return order
+        except Exception as e:
+            logging.error(f"close_position error for {symbol}: {e}")
+            return None
 
+    def cancel_order(self, symbol, order_id, max_retries=3, retry_delay=2):
+        for attempt in range(1, max_retries + 1):
+            try:
+                logging.info(f"Trying to cancel order {order_id} on {symbol}, attempt {attempt}")
+                result = self.client.futures_cancel_order(symbol=symbol, orderId=order_id)
+                logging.info(f"Order {order_id} cancelled on {symbol} | Binance response: {result}")
+                return result
+            except Exception as e:
+                logging.warning(f"Error cancelling order {order_id} on {symbol}, attempt {attempt}: {e}")
+                if attempt < max_retries:
+                    time.sleep(retry_delay)
+                else:
+                    logging.error(f"Failed to cancel order {order_id} on {symbol} after {max_retries} attempts.")
+        return None
+
+    def learn_ai(self, trade, close_price, close_type):
+        # TODO: реалізуйте навчання AI
+        logging.info(f"AI learn: {trade['symbol']} closed at {close_price} by {close_type}")
+
+    # ---------- Trade state queries ----------
+    def get_open_positions(self, symbol):
+        try:
+            positions = self.client.futures_position_information(symbol=symbol)
+            return positions
+        except Exception as e:
+            logging.error(f"Error getting open positions for {symbol}: {e}")
+            return []
+
+    def get_manual_close_price(self, trade):
+        try:
+            trades = self.client.futures_account_trades(symbol=trade['symbol'])
+            side_closed = "SELL" if trade['side'] == "BUY" else "BUY"
+            positionSide = trade.get('positionSide', "BOTH")
+            opened_at = trade.get('opened_at', 0)
+            # Пошук першої угоди, що протилежна до відкритої, після opened_at
+            for t in reversed(trades):
+                if (
+                    t['side'] == side_closed
+                    and t.get('positionSide', positionSide) == positionSide
+                    and float(t['time'])/1000 > opened_at
+                ):
+                    return float(t['price'])
+        except Exception as e:
+            logging.error(f"get_manual_close_price error for {trade['symbol']}: {e}")
+        return None
+
+    # ---------- Main trading logic ----------
+    def check_closed_trades(self):
+        self._check_roi_close()
+        self._check_tp_sl_close()
+        self._check_manual_close()
+
+    def _check_roi_close(self):
         for trade in self.active_trades[:]:
             removed = False
-            # 1. Перевірка PNL threshold (ранній вихід)
             try:
                 positions = self.client.futures_position_information(symbol=trade['symbol'])
                 for pos in positions:
                     if float(pos['positionAmt']) != 0 and pos['positionSide'] == trade['positionSide']:
+                        entry_price = float(trade.get('entry_price', 0))
+                        position_amt = abs(float(pos['positionAmt']))
                         pnl = float(pos.get('unRealizedProfit', 0))
-                        if pnl >= pnl_threshold:
-                            self.close_position(
+                        roi = pnl / (entry_price * position_amt) if entry_price and position_amt else 0
+
+                        roi_threshold = PAIR_ROI_THRESHOLD.get(trade['symbol'], DEFAULT_ROI_THRESHOLD)
+                        logging.info(f"[ROI_CHECK] {trade['symbol']} | entry={entry_price} | amt={position_amt} | PNL={pnl} | ROI={roi*100:.2f}% | threshold={roi_threshold*100:.2f}%")
+                        if roi >= roi_threshold:
+                            close_result = self.close_position(
                                 trade['symbol'],
-                                abs(float(pos['positionAmt'])),
-                                "SELL" if pos['positionSide'] == "LONG" else "BUY"
+                                position_amt,
+                                "SELL" if pos['positionSide'] == "LONG" else "BUY",
+                                pos['positionSide']
                             )
-                            logging.info(f"Position {trade['symbol']} closed early by PNL threshold: {pnl} USDT")
-                            self.active_trades.remove(trade)
-                            removed = True
+                            if close_result and 'orderId' in close_result:
+                                close_price = None
+                                trades = self.client.futures_account_trades(symbol=trade['symbol'])
+                                for t in reversed(trades):
+                                    if int(t["orderId"]) == int(close_result["orderId"]):
+                                        close_price = float(t["price"])
+                                        break
+                                self.learn_ai(trade, close_price, 'ROI')
+                                self.active_trades.remove(trade)
+                                self._save_active_trades()
+                                removed = True
+                            else:
+                                logging.error("Failed to close position by ROI!")
                             break
                 if removed:
-                    continue  # Якщо вже видалили trade, до наступного
+                    continue
             except Exception as e:
-                logging.error(f"Error checking/closing by PNL: {e}")
-                continue
+                logging.error(f"[ROI_CHECK ERROR] {trade.get('symbol', '')}: {e}", exc_info=True)
 
-            # 2. Перевірка TP ордера
+    def _check_tp_sl_close(self):
+        for trade in self.active_trades[:]:
             try:
                 tp_order = self.client.futures_get_order(symbol=trade['symbol'], orderId=trade['tp_order_id'])
                 if tp_order['status'] == 'FILLED':
@@ -245,11 +302,10 @@ class TradingLogic:
                     self.learn_ai(trade, close_price, 'TAKE_PROFIT')
                     self.cancel_order(trade['symbol'], trade['sl_order_id'])
                     self.active_trades.remove(trade)
+                    self._save_active_trades()
                     continue
             except Exception as e:
-                logging.error(f"Error checking TP order status: {e}")
-
-            # 3. Перевірка SL ордера
+                logging.error(f"Error checking TP order status: {e}", exc_info=True)
             try:
                 sl_order = self.client.futures_get_order(symbol=trade['symbol'], orderId=trade['sl_order_id'])
                 if sl_order['status'] == 'FILLED':
@@ -258,11 +314,13 @@ class TradingLogic:
                     self.learn_ai(trade, close_price, 'STOP_LOSS')
                     self.cancel_order(trade['symbol'], trade['tp_order_id'])
                     self.active_trades.remove(trade)
+                    self._save_active_trades()
                     continue
             except Exception as e:
-                logging.error(f"Error checking SL order status: {e}")
+                logging.error(f"Error checking SL order status: {e}", exc_info=True)
 
-            # 4. Перевірка ручного закриття
+    def _check_manual_close(self):
+        for trade in self.active_trades[:]:
             try:
                 positions = self.get_open_positions(trade['symbol'])
                 if not any(float(pos['positionAmt']) != 0 and pos['positionSide'] == trade['positionSide'] for pos in positions):
@@ -274,6 +332,28 @@ class TradingLogic:
                         self.cancel_order(trade['symbol'], trade['tp_order_id'])
                         self.cancel_order(trade['symbol'], trade['sl_order_id'])
                     self.active_trades.remove(trade)
+                    self._save_active_trades()
                     continue
             except Exception as e:
-                logging.error(f"Error checking manual close: {e}")
+                logging.error(f"Error checking manual close: {e}", exc_info=True)
+
+    # --- Перевірка на "голої" позиції (без SL/TP) при запуску ---
+    def check_naked_positions(self):
+        """
+        Перевіряє всі відкриті позиції на акаунті, знаходить ті, які не мають SL/TP у self.active_trades,
+        і виставляє для них SL/TP ордери.
+        """
+        positions = self.client.futures_position_information()
+        for pos in positions:
+            symbol = pos['symbol']
+            amt = float(pos['positionAmt'])
+            if amt == 0:
+                continue
+            # Перевіряємо, чи є така позиція в self.active_trades
+            if not any(t['symbol'] == symbol and t['positionSide'] == pos['positionSide'] for t in self.active_trades):
+                entry_price = float(pos['entryPrice'])
+                side = "BUY" if amt > 0 else "SELL"
+                qty = abs(amt)
+                tp_price, sl_price = self.safe_tp_sl(entry_price, entry_price * (1.02 if amt > 0 else 0.98), entry_price * (0.98 if amt > 0 else 1.02), side)
+                self.place_order(symbol, side, qty, sl_price, tp_price)
+                logging.warning(f"Detected naked position for {symbol} ({side}). Placed SL/TP for recovery.")
