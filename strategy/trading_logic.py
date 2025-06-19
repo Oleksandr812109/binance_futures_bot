@@ -63,10 +63,23 @@ class TradingLogic:
             sl_price = max(sl_price, min_sl)
         return tp_price, sl_price
 
+    # ===== ДОДАНО: перевірка наявності відкритого трейду по парі =====
+    def has_active_trade(self, symbol):
+        """Перевіряє, чи є вже відкритий трейд по символу (парі)"""
+        for trade in self.active_trades:
+            if trade.get("symbol") == symbol:
+                return True
+        return False
+
     def place_order(self, trade_info, quantity, stop_loss_price, take_profit_price):
         symbol = trade_info["symbol"]
         side = trade_info["side"]
         positionSide = "LONG" if side == "BUY" else "SHORT"
+
+        # --- ДОДАНО: Перевірка наявності відкритого трейду по цій парі ---
+        if self.has_active_trade(symbol):
+            logging.warning(f"Active trade already exists for {symbol}. Skipping new order.")
+            return None
 
         try:
             quantity_step, price_step = self._get_symbol_precisions(symbol)
@@ -268,4 +281,3 @@ class TradingLogic:
                     self._save_active_trades()
             except Exception as e:
                 logging.error(f"Error in check_closed_trades for {trade.get('symbol', '?')}: {e}", exc_info=True)
-

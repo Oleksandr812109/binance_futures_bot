@@ -201,6 +201,10 @@ def main():
                             "status": "OPEN",
                             "trade_id": trade_id,
                         }
+                        # --- ДОДАНО: перевірка наявності відкритого трейду по парі ---
+                        if trading_logic.has_active_trade(symbol):
+                            logger.info(f"Вже є відкритий трейд по {symbol}. Новий ордер не створюється.")
+                            continue
                         # --- Новий place_order приймає trade_info цілком ---
                         order = trading_logic.place_order(trade_info, position_size, stop_loss_price, take_profit_price)
                         if order:
@@ -231,7 +235,6 @@ def main():
     except Exception as e:
         logger.error(f"Critical error: {e}")
         logger.debug(traceback.format_exc())
-
 
 def is_position_closed(trade_info: Dict[str, Any]) -> bool:
     return trade_info.get("status") == "CLOSED" or trade_info.get("closed", False)

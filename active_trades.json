@@ -1,0 +1,90 @@
+[
+  {
+    "features": {
+      "Close": 104690.5,
+      "EMA_Short": 104761.7502602158,
+      "EMA_Long": 105309.07029329434,
+      "RSI": 16.33930123413863,
+      "ADX": 43.63975028119877,
+      "Upper_Band": 106544.99851235237,
+      "Lower_Band": 103537.13148764761,
+      "Volume": 0.0
+    },
+    "symbol": "BTCUSDT",
+    "entry_price": 104883.5,
+    "side": "SELL",
+    "status": "OPEN",
+    "trade_id": "BTCUSDT_SELL_1750325790",
+    "qty": 0.017,
+    "positionSide": "SHORT",
+    "tp_order_id": 4562542854,
+    "sl_order_id": 4562542666,
+    "opened_at": 1750325793.8509443
+  },
+  {
+    "features": {
+      "Close": 2791.29,
+      "EMA_Short": 2782.5556312620774,
+      "EMA_Long": 2751.1250923372713,
+      "RSI": 70.96847186604319,
+      "ADX": 45.31036823685815,
+      "Upper_Band": 2824.119005045106,
+      "Lower_Band": 2718.586994954894,
+      "Volume": 15575.377
+    },
+    "symbol": "ETHUSDT",
+    "entry_price": 2531.58,
+    "side": "BUY",
+    "status": "OPEN",
+    "trade_id": "ETHUSDT_BUY_1750325794",
+    "qty": 0.502,
+    "positionSide": "LONG",
+    "tp_order_id": 4561859791,
+    "sl_order_id": 4561859499,
+    "opened_at": 1750325797.5339077
+  },
+  {
+    "features": {
+      "Close": 639.17,
+      "EMA_Short": 641.3018620719579,
+      "EMA_Long": 642.9546974362723,
+      "RSI": 22.971383771070123,
+      "ADX": 52.13190894642329,
+      "Upper_Band": 676.5677241512822,
+      "Lower_Band": 602.5852758487179,
+      "Volume": 5316.47
+    },
+    "symbol": "BNBUSDT",
+    "entry_price": 645.24,
+    "side": "SELL",
+    "status": "OPEN",
+    "trade_id": "BNBUSDT_SELL_1750325798",
+    "qty": 2.74,
+    "positionSide": "SHORT",
+    "tp_order_id": 530049620,
+    "sl_order_id": 530049614,
+    "opened_at": 1750325801.8534997
+  },
+  {
+    "features": {
+      "Close": 0.6,
+      "EMA_Short": 0.606563899900066,
+      "EMA_Long": 0.6103361865872198,
+      "RSI": 29.952830188679272,
+      "ADX": 43.92927012493781,
+      "Upper_Band": 0.6206163169250994,
+      "Lower_Band": 0.5943336830749005,
+      "Volume": 13732097.0
+    },
+    "symbol": "ADAUSDT",
+    "entry_price": 0.65,
+    "side": "BUY",
+    "status": "OPEN",
+    "trade_id": "ADAUSDT_BUY_1750326313",
+    "qty": 3506.0,
+    "positionSide": "LONG",
+    "tp_order_id": 138984118,
+    "sl_order_id": 138984114,
+    "opened_at": 1750326315.7677126
+  }
+]
