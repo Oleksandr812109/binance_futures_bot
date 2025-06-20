@@ -55,7 +55,7 @@ for symbol in SYMBOLS:
     df['macd'] = macd.macd()
     df['macdsignal'] = macd.macd_signal()
     df['macdhist'] = macd.macd_diff()
-    df['ema_20'] = ta.trend.EMAIndicator(df['close'], window=20).ema_indicator()
+    df['ema20'] = ta.trend.EMAIndicator(df['close'], window=20).ema_indicator()
     df['ema_50'] = ta.trend.EMAIndicator(df['close'], window=50).ema_indicator()
     df['atr'] = ta.volatility.AverageTrueRange(
         df['high'], df['low'], df['close'], window=14
@@ -69,7 +69,7 @@ for symbol in SYMBOLS:
     # Видаляємо рядки з NaN у фічах
     feature_columns = [
         'close', 'volume', 'rsi', 'macd', 'macdsignal', 'macdhist',
-        'ema_20', 'ema_50', 'atr', 'hour', 'price_change',
+        'ema20', 'ema_50', 'atr', 'hour', 'price_change',
         'rsi_delta', 'macdhist_delta', 'volatility'
     ]
     df = df.dropna(subset=feature_columns)

@@ -43,7 +43,7 @@ class AISignalGenerator:
             return np.array([])
 
         df = df.copy()
-        for col in ['close', 'volume', 'rsi', 'macd', 'macdsignal', 'macdhist', 'ema_20', 'ema_50', 'atr']:
+        for col in ['close', 'volume', 'rsi', 'macd', 'macdsignal', 'macdhist', 'ema20', 'ema50', 'atr']:
             if col not in df.columns:
                 df[col] = 0.0
 
@@ -55,7 +55,7 @@ class AISignalGenerator:
 
         features = [
             'close', 'volume', 'rsi', 'macd', 'macdsignal', 'macdhist',
-            'ema_20', 'ema_50', 'atr', 'hour', 'price_change',
+            'ema20', 'ema50', 'atr', 'hour', 'price_change',
             'rsi_delta', 'macdhist_delta', 'volatility'
         ]
         features_df = df[features].fillna(0)
@@ -78,7 +78,7 @@ class AISignalGenerator:
         return idx
 
     def rule_based_filter(self, row: pd.Series) -> bool:
-        for col in ['close', 'ema_20', 'volatility']:
+        for col in ['close', 'ema20', 'volatility']:
             if col not in row:
                 logging.warning(f"rule_based_filter: Відсутня колонка {col} у вхідному рядку.")
                 return False
@@ -122,6 +122,8 @@ class AISignalGenerator:
             ml_decision = Decision.HOLD
 
         last_row = df.iloc[-1]
+        print("last_row index перед rule_based_filter:", last_row.index)
+        print("last_row значення:", last_row.to_dict())
         rule_ok = self.rule_based_filter(last_row)
 
         if rule_ok:
@@ -163,4 +165,5 @@ class AISignalGenerator:
             return self.model.partial_fit(X, y)
         else:
             raise NotImplementedError("Модель не підтримує partial_fit")
+
 

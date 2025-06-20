@@ -51,7 +51,7 @@ class TechnicalAnalysis:
         logging.info(f"Calculated {period}-period RSI.")
         return rsi
 
-    def calculate_macd(self, data: pd.DataFrame, fast_period: int = 12, slow_period: int = 26, signal_period: int = 9, column: str = "Close") -> pd.DataFrame:
+    def calculate_macd(self, data: pd.DataFrame, fast_period: int = 12, slow_period: int = 26, signal_period: int = 9, column: str = "close") -> pd.DataFrame:
         fast_ema = self.calculate_ema(data, fast_period, column)
         slow_ema = self.calculate_ema(data, slow_period, column)
         macd = fast_ema - slow_ema
@@ -96,11 +96,9 @@ class TechnicalAnalysis:
         logging.info(f"Calculated {period}-period Bollinger Bands.")
         return upper_band, lower_band
 
-    # ... (інші імпорти і код залишити без змін)
-
     def generate_optimized_signals(self, data: pd.DataFrame, symbol: str) -> pd.DataFrame:
         # EMA Short/Long
-        data["ema__short"] = self.calculate_ema(data, 12)
+        data["ema_short"] = self.calculate_ema(data, 12)
         data["ema_long"] = self.calculate_ema(data, 26)
         # RSI
         data["rsi"] = self.calculate_rsi(data, 14)
@@ -123,7 +121,7 @@ class TechnicalAnalysis:
         data.loc[(data["ema20"] > data["sma20"]) & (data["rsi14"] < 30), "signalflag"] = 1
         data.loc[(data["ema20"] < data["sma20"]) & (data["rsi14"] > 70), "signalflag"] = -1
 
-        # Додаємо стовпець Stop_Loss для коректної роботи головного циклу
+        # Додаємо стовпець stop_loss для коректної роботи головного циклу
         data["stop_loss"] = np.where(
             data["signalflag"] == 1, data["close"] * 0.99,
             np.where(data["signalflag"] == -1, data["close"] * 1.01, np.nan)
@@ -143,7 +141,7 @@ class TechnicalAnalysis:
             logging.error(f"Missing or NaN in columns: {required_cols} for {symbol}. Skipping.")
             return None
 
-        # Додано перевірку на наявність NaN у Close та Stop_Loss (за бажанням, можна залишити)
+        # Додано перевірку на наявність NaN у close та stop_loss (за бажанням, можна залишити)
         print(data[["close", "stop_loss"]].isna().sum())  # покаже кількість NaN у кожній колонці
         print(data[data[["close", "stop_loss"]].isna().any(axis=1)])  # покаже рядки з NaN
 
