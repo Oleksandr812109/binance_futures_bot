@@ -47,8 +47,15 @@ class RiskManagement:
         try:
             balance_list = self.client.futures_account_balance()
             for balance in balance_list:
-                if balance['asset'] == asset:
-                    return float(balance['walletBalance'])
+                if balance.get('asset') == asset:
+                    value = balance.get('walletBalance')
+                    if value is None:
+                        value = balance.get('balance')
+                if value is not None:
+                    return float(value)
+                else:
+                    logging.error(f"Neither 'walletBalance' nor 'balance' found for asset {asset}: {balance}")
+                    return 0.0
             logging.warning(f"Asset '{asset}' not found in futures account balance.")
             return 0.0
         except Exception as e:

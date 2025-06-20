@@ -71,7 +71,28 @@ def load_model_and_scaler(symbol, model_dir="ml/models"):
         logger.error(f"Failed to load model/scaler for {symbol}: {e}")
         raise
 
-def initialize_components(config):
+def get_account_balance(client, asset="USDT"):
+    try:
+        balance = client.futures_account_balance()
+        logger.debug(f"Raw balance response: {balance}")
+        for item in balance:
+            if item.get("asset") == asset:
+                value = item.get("balance")
+                # Деякі версії API можуть повертати walletBalance
+                if value is None:
+                    value = item.get("walletBalance")
+                if value is not None:
+                    logger.info(f"Fetched balance for {asset}: {value} USDT")
+                    return float(value)
+                else:
+                    logger.error(f"Balance field not found for {asset} in item: {item}")
+    except Exception as e:
+        logger.error(f"Error fetching balance for {asset}: {e}")
+        logger.debug(traceback.format_exc())
+    return 0.0
+
+
+def initialize_components(config, symbols):
     try:
         api_key = config.get("BINANCE", "API_KEY")
         api_secret = config.get("BINANCE", "API_SECRET")
@@ -97,40 +118,21 @@ def initialize_components(config):
         symbol_info_map = {s['symbol']: s for s in exchange_info['symbols']}
         risk_management = RiskManagement(client, "risk_config.json")
         technical_analysis = TechnicalAnalysis(client)
-        # --- Завантаження моделі і скейлера для AISignalGenerator ---
-        model, scaler = load_model_and_scaler()
-        ai_signal_generator = AISignalGenerator(model, scaler)
+        # --- Завантаження моделей і скейлерів для кожного symbol ---
+        ai_signal_generators = {}
+        for symbol in symbols:
+            model, scaler = load_model_and_scaler(symbol)
+            ai_signal_generators[symbol] = AISignalGenerator(model, scaler)
         ai_model = AIModel("ml/models/model.h5")
         trading_logic = TradingLogic(client, risk_management, technical_analysis, ai_model)
         telegram_notifier = TelegramNotifier(bot_token, chat_id)
 
         logger.debug("All components initialized successfully.")
-        return client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier, symbol_info_map
+        return client, risk_management, technical_analysis, ai_signal_generators, trading_logic, telegram_notifier, symbol_info_map
     except Exception as e:
         logger.error(f"Error initializing components: {e}")
         logger.debug(traceback.format_exc())
         raise
-
-def get_account_balance(client, asset="USDT"):
-    try:
-        balance = client.futures_account_balance()
-        logger.debug(f"Raw balance response: {balance}")
-        for item in balance:
-            # Спроба взяти balance, якщо нема — спроба взяти walletBalance
-            if item.get("asset") == asset:
-                value = item.get("balance")
-                # Деякі версії API можуть повертати walletBalance
-                if value is None and "walletBalance" in item:
-                    value = item["walletBalance"]
-                if value is not None:
-                    logger.info(f"Fetched balance for {asset}: {value} USDT")
-                    return float(value)
-                else:
-                    logger.error(f"Balance field not found for {asset} in item: {item}")
-    except Exception as e:
-        logger.error(f"Error fetching balance for {asset}: {e}")
-        logger.debug(traceback.format_exc())
-    return 0.0
 
 def handle_tradingruhal_signal(signal_text):
     logger.info(f"Отримано tradingruhal: {signal_text}")
@@ -146,7 +148,8 @@ def main():
     try:
         config_path = "config/config.ini"
         config = load_config(config_path)
-        client, risk_management, technical_analysis, ai_signal_generator, trading_logic, telegram_notifier, symbol_info_map = initialize_components(config)
+        symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
+        client, risk_management, technical_analysis, ai_signal_generators, trading_logic, telegram_notifier, symbol_info_map = initialize_components(config, symbols)
         
         # --- Відправляємо баланс у Telegram при старті ---
         now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -154,12 +157,12 @@ def main():
         risk_management.update_account_balance(account_balance)
         telegram_notifier.send_message(f"[{now_str}] Старт бота. Баланс: {account_balance:.2f} USDT")
 
-        symbols = config.get("TRADING", "SYMBOLS", fallback="BTCUSDT").split(",")
         interval = config.get("TRADING", "INTERVAL", fallback="1h")
         loop = asyncio.get_event_loop()
         loop.create_task(run_telegram_listener())
 
         last_balance_time = time.time()
+
 
         while True:
             try:
@@ -174,8 +177,8 @@ def main():
                         if df is None:
                             continue
 
-                        # --- отримуємо рішення і ціни одразу через predict ---
-                        ai_decision, price_info = ai_signal_generator.predict(df)
+                        # --- отримуємо рішення і ціни --- (тепер для symbol)
+                        ai_decision, price_info = ai_signal_generators[symbol].predict(df)
 
                         if ai_decision not in [Decision.BUY, Decision.SELL]:
                             logger.info(f"AI decision: HOLD for {symbol}. No action taken.")
@@ -220,7 +223,7 @@ def main():
 
                         trade_id = f"{symbol}_{side}_{int(time.time())}"
                         trade_info = {
-                            "features": None,    # features окремо не використовуються, якщо треба -- можна додати
+                            "features": None,
                             "symbol": symbol,
                             "entry_price": entry_price,
                             "side": side,
@@ -278,4 +281,3 @@ def get_trade_profit(trade_info: Dict[str, Any]) -> float:
 
 if __name__ == "__main__":
     main()
-
