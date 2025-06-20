@@ -250,6 +250,34 @@ def main():
                     last_balance_time = time.time()
                 
                 trading_logic.check_closed_trades()
+
+                # === АВТОМАТИЧНЕ ЗАКРИТТЯ ПОЗИЦІЇ ПО ROI ===
+                for trade in trading_logic.active_trades.values():
+                    if trade.get("status") != "OPEN":
+                        continue
+                    symbol = trade["symbol"]
+                    entry_price = trade["entry_price"]
+                    side = trade["side"]
+                    position_size = trade.get("position_size")
+                    leverage = trade.get("leverage", 1)  # Якщо не використовуєш плече, залиш 1
+
+                    # Отримуємо поточну ціну з Binance
+                    try:
+                        ticker = client.futures_symbol_ticker(symbol=symbol)
+                        last_price = float(ticker["price"])
+                    except Exception as e:
+                        logger.error(f"Can't fetch price for {symbol}: {e}")
+                        continue
+
+                    if side == "BUY":
+                        roi = ((last_price - entry_price) / entry_price) * leverage
+                    else:  # SELL/SHORT
+                        roi = ((entry_price - last_price) / entry_price) * leverage
+
+                    if roi >= 0.1:  # 10% ROI
+                        logger.info(f"ROI for {symbol} reached {roi*100:.2f}%. Closing position!")
+                        trading_logic.close_position(trade["trade_id"])
+                        telegram_notifier.send_message(f"🚀 ROI для {symbol} досяг {roi*100:.2f}%. Позицію закрито автоматично.")
                 time.sleep(60)
 
             except Exception as e:

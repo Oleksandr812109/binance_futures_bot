@@ -8,13 +8,13 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 # === Додаємо словник параметрів для різних пар ===
 INDICATOR_PARAMS = {
-    "BTCUSDT": {"ema_short": 12, "ema_long": 26, "rsi": 14, "sma": 20, "bb": 20},
-    "ETHUSDT": {"ema_short": 10, "ema_long": 21, "rsi": 10, "sma": 20, "bb": 20},
-    "SOLUSDT": {"ema_short": 8, "ema_long": 18, "rsi": 8, "sma": 15, "bb": 15},
-    "ADAUSDT": {"ema_short": 7, "ema_long": 15, "rsi": 7, "sma": 14, "bb": 14},
+    "BTCUSDT": {"ema_short": 12, "ema_long": 26, "rsi": 14, "sma": 20, "bb": 20, "atr": 14},
+    "ETHUSDT": {"ema_short": 10, "ema_long": 21, "rsi": 10, "sma": 20, "bb": 20, "atr": 14},
+    "SOLUSDT": {"ema_short": 8, "ema_long": 18, "rsi": 8, "sma": 15, "bb": 15, "atr": 10},
+    "ADAUSDT": {"ema_short": 7, "ema_long": 15, "rsi": 7, "sma": 14, "bb": 14, "atr": 10},
     # Додайте інші пари за потреби
 }
-DEFAULT_PARAMS = {"ema_short": 12, "ema_long": 26, "rsi": 14, "sma": 20, "bb": 20}
+DEFAULT_PARAMS = {"ema_short": 12, "ema_long": 26, "rsi": 14, "sma": 20, "bb": 20, "atr": 14}
 
 def get_params_for_symbol(symbol):
     return INDICATOR_PARAMS.get(symbol, DEFAULT_PARAMS)
@@ -122,6 +122,16 @@ class TechnicalAnalysis:
         logging.info(f"Calculated {period}-period Bollinger Bands.")
         return upper_band, lower_band
 
+    def get_latest_atr(self, symbol, interval='1h'):
+        params = get_params_for_symbol(symbol)
+        period = params.get("atr", 14)
+        df = self.fetch_binance_data(symbol, interval=interval, limit=period+10)
+        if df.empty or len(df) < period:
+            logging.error(f"Not enough data to calculate ATR for {symbol} on {interval}")
+            return None
+        atr_series = self.calculate_atr(df, period)
+        return atr_series.iloc[-1]
+
     def generate_optimized_signals(self, data: pd.DataFrame, symbol: str) -> pd.DataFrame:
         # --- Отримуємо параметри для поточної пари ---
         params = get_params_for_symbol(symbol)
@@ -158,7 +168,7 @@ class TechnicalAnalysis:
 
         # Додаємо volatility для ML
         if "atr" not in data.columns:
-            data["atr"] = self.calculate_atr(data)
+            data["atr"] = self.calculate_atr(data, params["atr"])
         data["volatility"] = np.where(data["close"] != 0, data["atr"] / data["close"], 0)
 
         # === Діагностика NaN для головних колонок ===

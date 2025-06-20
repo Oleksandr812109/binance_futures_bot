@@ -15,6 +15,7 @@ from ml.config import FEATURE_NAMES
 
 def load_data(file_path, target_column):
     data = pd.read_csv(file_path)
+    print("Колонки у датасеті:", data.columns.tolist())
     missing = set(FEATURE_NAMES) - set(data.columns)
     if missing:
         raise ValueError(f"Dataset is missing required features: {missing}")
@@ -56,8 +57,9 @@ def save_metadata(metadata_path, input_shape, output_classes):
     print(f"Metadata saved to {metadata_path}")
 
 if __name__ == "__main__":
-    data_path = "ml/data/dataset.csv"
-    target_column = "target"
+    # !!! Вкажи тут потрібний файл для навчання та цільову колонку 'signal'
+    data_path = "ml/processed/training_data_BNBUSDTUSDT.csv"
+    target_column = "signal"
     model_save_path = "ml/models/model.keras"
     metadata_save_path = "ml/models/metadata.json"
     scaler_save_path = "ml/models/scaler.pkl"
@@ -73,7 +75,7 @@ if __name__ == "__main__":
     checkpoint = ModelCheckpoint(filepath=model_save_path, save_best_only=True, monitor='val_loss', mode='min')
     model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=20, batch_size=32, callbacks=[checkpoint])
 
-    # Гарантовано зберегти модель у .keras (опціонально)
+    # Гарантовано зберегти модель у .keras
     model.save(model_save_path)
 
     with open(scaler_save_path, "wb") as f:

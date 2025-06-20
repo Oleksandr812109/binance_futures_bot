@@ -1,1 +1,15 @@
-[]
+[
+  {
+    "features": null,
+    "symbol": "SOLUSDT",
+    "entry_price": 139.22,
+    "side": "BUY",
+    "status": "OPEN",
+    "trade_id": "SOLUSDT_BUY_1750447971",
+    "qty": 3.0,
+    "positionSide": "LONG",
+    "tp_order_id": 171788019,
+    "sl_order_id": 171787969,
+    "opened_at": 1750447974.1884122
+  }
+]
