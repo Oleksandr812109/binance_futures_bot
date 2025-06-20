@@ -10,13 +10,13 @@
     ],
     "output_classes": 3,
     "feature_names": [
-        "Close",
-        "EMA_Short",
-        "EMA_Long",
-        "RSI",
-        "ADX",
-        "Upper_Band",
-        "Lower_Band",
-        "Volume"
+        "close",
+        "ema_short",
+        "ema_long",
+        "rsi",
+        "adx",
+        "upper_band",
+        "lower_band",
+        "volume"
     ]
 }

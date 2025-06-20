@@ -54,8 +54,8 @@ class AISignalGenerator:
             return None
         row = df.iloc[-1]
         features = {key: row.get(key, 0.0) for key in self.feature_names}
-        if not np.isfinite(features.get("Close", np.nan)):
-            logger.error("Feature 'Close' is missing or non-numeric.")
+        if not np.isfinite(features.get("close", np.nan)):
+            logger.error("Feature 'close' is missing or non-numeric.")
             return None
         return features
 
@@ -85,7 +85,7 @@ class AISignalGenerator:
             else:
                 decision = Decision.HOLD
 
-            entry = features["Close"]
+            entry = features["close"]
             if decision == Decision.BUY:
                 stop_loss = entry * SL_MULTIPLIER_BUY
                 take_profit = entry * TP_MULTIPLIER_BUY

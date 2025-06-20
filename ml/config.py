@@ -6,8 +6,8 @@ MODEL_PATH = "ml/models/model.keras"
 
 # Назви фічей (підлаштуйте під свій датасет)
 FEATURE_NAMES = [
-    "Close", "EMA_Short", "EMA_Long", "RSI",
-    "ADX", "Upper_Band", "Lower_Band", "Volume"
+    "close", "ema_short", "ema_long", "rsi",
+    "adx", "upper_band", "lower_band", "volume"
 ]
 
 # Множники для розрахунку SL та TP

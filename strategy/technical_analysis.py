@@ -18,30 +18,31 @@ class TechnicalAnalysis:
                 'Close time', 'Quote asset volume', 'Number of trades',
                 'Taker buy base asset volume', 'Taker buy quote asset volume', 'Ignore'
             ])
-            df['Open'] = df['Open'].astype(float)
-            df['High'] = df['High'].astype(float)
-            df['Low'] = df['Low'].astype(float)
-            df['Close'] = df['Close'].astype(float)
-            df['Volume'] = df['Volume'].astype(float)
-            df['Open time'] = pd.to_datetime(df['Open time'], unit='ms')
-            df['Close time'] = pd.to_datetime(df['Close time'], unit='ms')
+            df.columns = [c.lower() for c in df.columns]
+            df['open'] = df['open'].astype(float)
+            df['high'] = df['high'].astype(float)
+            df['low'] = df['low'].astype(float)
+            df['close'] = df['close'].astype(float)
+            df['volume'] = df['volume'].astype(float)
+            df['open time'] = pd.to_datetime(df['open time'], unit='ms')
+            df['close time'] = pd.to_datetime(df['close time'], unit='ms')
             logging.info(f"Fetched {len(df)} klines for {symbol} ({interval}) from Binance.")
             return df
         except Exception as e:
             logging.error(f"Error fetching Binance data for {symbol}: {e}")
             return pd.DataFrame()
 
-    def calculate_sma(self, data: pd.DataFrame, period: int = 20, column: str = "Close") -> pd.Series:
+    def calculate_sma(self, data: pd.DataFrame, period: int = 20, column: str = "close") -> pd.Series:
         sma = data[column].rolling(window=period).mean()
         logging.info(f"Calculated {period}-period SMA.")
         return sma
 
-    def calculate_ema(self, data: pd.DataFrame, period: int = 20, column: str = "Close") -> pd.Series:
+    def calculate_ema(self, data: pd.DataFrame, period: int = 20, column: str = "close") -> pd.Series:
         ema = data[column].ewm(span=period, adjust=False).mean()
         logging.info(f"Calculated {period}-period EMA.")
         return ema
 
-    def calculate_rsi(self, data: pd.DataFrame, period: int = 14, column: str = "Close") -> pd.Series:
+    def calculate_rsi(self, data: pd.DataFrame, period: int = 14, column: str = "close") -> pd.Series:
         delta = data[column].diff()
         gain = (delta.where(delta > 0, 0)).rolling(window=period).mean()
         loss = (-delta.where(delta < 0, 0)).rolling(window=period).mean()
@@ -57,16 +58,16 @@ class TechnicalAnalysis:
         signal = macd.ewm(span=signal_period, adjust=False).mean()
         histogram = macd - signal
         result = data.copy()
-        result["MACD"] = macd
-        result["Signal"] = signal
-        result["Histogram"] = histogram
-        logging.info("Calculated MACD, Signal, and Histogram.")
+        result["macd"] = macd
+        result["signal"] = signal
+        result["histogram"] = histogram
+        logging.info("Calculated MACD, signal, and histogram.")
         return result
 
     def calculate_adx(self, data: pd.DataFrame, period: int = 14) -> pd.Series:
-        high = data["High"]
-        low = data["Low"]
-        close = data["Close"]
+        high = data["high"]
+        low = data["low"]
+        close = data["close"]
         plus_dm = high.diff()
         minus_dm = low.diff().abs()
         plus_dm[plus_dm < 0] = 0
@@ -87,7 +88,7 @@ class TechnicalAnalysis:
         logging.info(f"Calculated {period}-period ADX.")
         return adx
 
-    def calculate_bollinger_bands(self, data: pd.DataFrame, period: int = 20, column: str = "Close") -> (pd.Series, pd.Series):
+    def calculate_bollinger_bands(self, data: pd.DataFrame, period: int = 20, column: str = "close") -> (pd.Series, pd.Series):
         sma = self.calculate_sma(data, period, column)
         std = data[column].rolling(window=period).std()
         upper_band = sma + 2 * std
@@ -99,37 +100,37 @@ class TechnicalAnalysis:
 
     def generate_optimized_signals(self, data: pd.DataFrame, symbol: str) -> pd.DataFrame:
         # EMA Short/Long
-        data["EMA_Short"] = self.calculate_ema(data, 12)
-        data["EMA_Long"] = self.calculate_ema(data, 26)
+        data["ema__short"] = self.calculate_ema(data, 12)
+        data["ema_long"] = self.calculate_ema(data, 26)
         # RSI
-        data["RSI"] = self.calculate_rsi(data, 14)
+        data["rsi"] = self.calculate_rsi(data, 14)
         # ADX
-        data["ADX"] = self.calculate_adx(data, 14)
+        data["adx"] = self.calculate_adx(data, 14)
         # Bollinger Bands
-        data["Upper_Band"], data["Lower_Band"] = self.calculate_bollinger_bands(data, 20)
+        data["upper_band"], data["lower_band"] = self.calculate_bollinger_bands(data, 20)
 
         # Можна додати стандартні індикатори для backward compatibility
-        data["SMA20"] = self.calculate_sma(data, 20)
-        data["EMA20"] = self.calculate_ema(data, 20)
-        data["RSI14"] = self.calculate_rsi(data, 14)
+        data["sma20"] = self.calculate_sma(data, 20)
+        data["ema20"] = self.calculate_ema(data, 20)
+        data["rsi14"] = self.calculate_rsi(data, 14)
         macd_df = self.calculate_macd(data)
-        data["MACD"] = macd_df["MACD"]
-        data["Signal"] = macd_df["Signal"]
-        data["Histogram"] = macd_df["Histogram"]
+        data["macd"] = macd_df["macd"]
+        data["signal"] = macd_df["signal"]
+        data["histogram"] = macd_df["histogram"]
 
         # Проста логіка для прикладу
-        data["SignalFlag"] = 0
-        data.loc[(data["EMA20"] > data["SMA20"]) & (data["RSI14"] < 30), "SignalFlag"] = 1
-        data.loc[(data["EMA20"] < data["SMA20"]) & (data["RSI14"] > 70), "SignalFlag"] = -1
+        data["signalflag"] = 0
+        data.loc[(data["ema20"] > data["sma20"]) & (data["rsi14"] < 30), "signalflag"] = 1
+        data.loc[(data["ema20"] < data["sma20"]) & (data["rsi14"] > 70), "signalflag"] = -1
 
         # Додаємо стовпець Stop_Loss для коректної роботи головного циклу
-        data["Stop_Loss"] = np.where(
-            data["SignalFlag"] == 1, data["Close"] * 0.99,
-            np.where(data["SignalFlag"] == -1, data["Close"] * 1.01, np.nan)
+        data["stop_loss"] = np.where(
+            data["signalflag"] == 1, data["close"] * 0.99,
+            np.where(data["signalflag"] == -1, data["close"] * 1.01, np.nan)
         )
 
         # === Діагностика NaN для головних колонок ===
-        required_cols = ['EMA_Short', 'EMA_Long', 'RSI', 'ADX', 'Upper_Band', 'Lower_Band']
+        required_cols = ['ema_short', 'ema_long', 'rsi', 'adx', 'upper_band', 'lower_band']
         print(f"NaN count in required columns for {symbol}:")
         print(data[required_cols].isna().sum())
         print("Rows with NaN in required columns:")
@@ -143,11 +144,11 @@ class TechnicalAnalysis:
             return None
 
         # Додано перевірку на наявність NaN у Close та Stop_Loss (за бажанням, можна залишити)
-        print(data[["Close", "Stop_Loss"]].isna().sum())  # покаже кількість NaN у кожній колонці
-        print(data[data[["Close", "Stop_Loss"]].isna().any(axis=1)])  # покаже рядки з NaN
+        print(data[["close", "stop_loss"]].isna().sum())  # покаже кількість NaN у кожній колонці
+        print(data[data[["close", "stop_loss"]].isna().any(axis=1)])  # покаже рядки з NaN
 
         # Ось сюди додай фільтрацію:
-        data = data.dropna(subset=["Close", "Stop_Loss"])
+        data = data.dropna(subset=["close", "stop_loss"])
 
         logging.info("Generated optimized trading signals with all required columns.")
         return data

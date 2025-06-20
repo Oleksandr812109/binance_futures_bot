@@ -11,12 +11,8 @@ class RiskManagement:
         self.client = client
         self.config_path = config_path
         self._load_config()
-        self.account_balance = self.get_account_balance()
-        if self.account_balance == 0.0:
-            logging.warning("Initial account balance is 0.0. Please check API key/permissions or network.")
-        self.initial_balance = self.account_balance if self.account_balance > 0 else 1.0
-        if self.initial_balance == 1.0 and self.account_balance == 0.0:
-            logging.warning("Initial balance set to 1.0 to avoid division by zero. Please ensure proper balance fetching.")
+        self.account_balance = 0.0  # Ініціалізуємо, значення встановить update_account_balance
+        self.initial_balance = 1.0  # Значення також оновиться після першого оновлення балансу
 
     def _load_config(self):
         try:
@@ -43,24 +39,7 @@ class RiskManagement:
             self.default_risk_per_trade_percent = 0.01
             self.max_drawdown = 0.2
 
-    def get_account_balance(self, asset="USDT"):
-        try:
-            balance_list = self.client.futures_account_balance()
-            for balance in balance_list:
-                if balance.get('asset') == asset:
-                    value = balance.get('walletBalance')
-                    if value is None:
-                        value = balance.get('balance')
-                if value is not None:
-                    return float(value)
-                else:
-                    logging.error(f"Neither 'walletBalance' nor 'balance' found for asset {asset}: {balance}")
-                    return 0.0
-            logging.warning(f"Asset '{asset}' not found in futures account balance.")
-            return 0.0
-        except Exception as e:
-            logging.error(f"Error fetching balance for {asset}: {e}")
-            return 0.0
+    # Видалено get_account_balance, бо баланс оновлюється зовні
 
     def calculate_atr(self, high: List[float], low: List[float], close: List[float], window: int = 14) -> float:
         """
@@ -125,6 +104,11 @@ class RiskManagement:
         if new_balance != self.account_balance:
             logging.info(f"Account balance updated from {self.account_balance:.2f} to {new_balance:.2f}")
         self.account_balance = new_balance
+        # Оновлюємо initial_balance, якщо це перше оновлення
+        if self.initial_balance == 1.0 or self.initial_balance == 0.0:
+            self.initial_balance = new_balance if new_balance > 0 else 1.0
+            if self.initial_balance == 1.0 and self.account_balance == 0.0:
+                logging.warning("Initial balance set to 1.0 to avoid division by zero. Please ensure proper balance fetching.")
 
 # === MAIN ТЕСТ ===
 if __name__ == "__main__":
@@ -147,6 +131,8 @@ if __name__ == "__main__":
     with open('risk_config.json', 'w') as f:
         json.dump(test_config, f, indent=4)
     rm = RiskManagement(mock_client, config_path='risk_config.json')
+    # Тестове оновлення балансу
+    rm.update_account_balance(1000.0)
     print("\n--- Тестування ATR ---")
     # Для прикладу, дані по BTC (14 барів)
     btc_high = [69000, 70000, 70500, 71000, 70000, 69000, 69500, 70000, 69800, 70200, 70100, 70300, 70500, 70700, 70800]

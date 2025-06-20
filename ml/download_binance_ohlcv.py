@@ -15,13 +15,13 @@ klines = client.get_historical_klines(symbol, interval, start_str)
 
 # Формуємо DataFrame
 df = pd.DataFrame(klines, columns=[
-    'open_time', 'Open', 'High', 'Low', 'Close', 'Volume',
+    'open_time', 'open', 'high', 'low', 'close', 'volume',
     'close_time', 'qav', 'trades', 'taker_base_vol', 'taker_quote_vol', 'ignore'
 ])
-df = df[['Open', 'High', 'Low', 'Close', 'Volume']]  # Інші колонки не потрібні
+df = df[['open', 'high', 'low', 'close', 'volume']]  # Інші колонки не потрібні
 
 # Конвертуємо всі ці дані у float
-for col in ['Open', 'High', 'Low', 'Close', 'Volume']:
+for col in ['open', 'high', 'low', 'close', 'volume']:
     df[col] = df[col].astype(float)
 
 # --- Додаємо створення директорії ---
