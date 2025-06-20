@@ -6,6 +6,19 @@ from binance.client import Client
 # Set up logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+# === Додаємо словник параметрів для різних пар ===
+INDICATOR_PARAMS = {
+    "BTCUSDT": {"ema_short": 12, "ema_long": 26, "rsi": 14, "sma": 20, "bb": 20},
+    "ETHUSDT": {"ema_short": 10, "ema_long": 21, "rsi": 10, "sma": 20, "bb": 20},
+    "SOLUSDT": {"ema_short": 8, "ema_long": 18, "rsi": 8, "sma": 15, "bb": 15},
+    "ADAUSDT": {"ema_short": 7, "ema_long": 15, "rsi": 7, "sma": 14, "bb": 14},
+    # Додайте інші пари за потреби
+}
+DEFAULT_PARAMS = {"ema_short": 12, "ema_long": 26, "rsi": 14, "sma": 20, "bb": 20}
+
+def get_params_for_symbol(symbol):
+    return INDICATOR_PARAMS.get(symbol, DEFAULT_PARAMS)
+
 class TechnicalAnalysis:
     def __init__(self, client: Client):
         self.client = client
@@ -110,19 +123,23 @@ class TechnicalAnalysis:
         return upper_band, lower_band
 
     def generate_optimized_signals(self, data: pd.DataFrame, symbol: str) -> pd.DataFrame:
+        # --- Отримуємо параметри для поточної пари ---
+        params = get_params_for_symbol(symbol)
         # EMA Short/Long
-        data["ema_short"] = self.calculate_ema(data, 12)
-        data["ema_long"] = self.calculate_ema(data, 26)
+        data["ema_short"] = self.calculate_ema(data, params["ema_short"])
+        data["ema_long"] = self.calculate_ema(data, params["ema_long"])
         # RSI
-        data["rsi"] = self.calculate_rsi(data, 14)
-        # ADX (додає atr у data)
+        data["rsi"] = self.calculate_rsi(data, params["rsi"])
+        # ADX (залишаємо дефолтний період, можна теж зробити кастомним)
         data["adx"] = self.calculate_adx(data, 14)
         # Bollinger Bands
-        data["upper_band"], data["lower_band"] = self.calculate_bollinger_bands(data, 20)
-        # Стандартні індикатори для backward compatibility
-        data["sma20"] = self.calculate_sma(data, 20)
+        data["upper_band"], data["lower_band"] = self.calculate_bollinger_bands(data, params["bb"])
+        # SMA для сигналу
+        data["sma20"] = self.calculate_sma(data, params["sma"])
+        # Стандартні EMA20 і RSI14 для сумісності, якщо треба
         data["ema20"] = self.calculate_ema(data, 20)
         data["rsi14"] = self.calculate_rsi(data, 14)
+        # MACD (залишаємо дефолтні параметри, якщо треба — аналогічно можна кастомізувати)
         macd_df = self.calculate_macd(data)
         data["macd"] = macd_df["macd"]
         data["signal"] = macd_df["signal"]

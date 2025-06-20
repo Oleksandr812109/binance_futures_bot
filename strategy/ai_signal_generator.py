@@ -20,7 +20,7 @@ class AISignalGenerator:
     Повертає рішення та price_info (entry, stop_loss, take_profit).
     """
 
-    def __init__(self, model, scaler, confidence_threshold=0.65, volatility_threshold=0.003):
+    def __init__(self, model, scaler, confidence_threshold=0.53, volatility_threshold=0.003):
         """
         :param model: Навчена ML-модель (наприклад, sklearn), має predict_proba, partial_fit і classes_.
         :param scaler: Навчений скейлер (StandardScaler), fit на тренувальних даних.
@@ -82,7 +82,7 @@ class AISignalGenerator:
             if col not in row:
                 logging.warning(f"rule_based_filter: Відсутня колонка {col} у вхідному рядку.")
                 return False
-        price_above_ema = row['close'] > row['ema20']
+        price_above_ema = True
         volatility_ok = row['volatility'] > self.volatility_threshold
         if not volatility_ok:
             logging.info(f"rule_based_filter: Волатильність {row['volatility']:.4f} нижче порогу {self.volatility_threshold}")
