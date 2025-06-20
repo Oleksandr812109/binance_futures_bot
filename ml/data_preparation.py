@@ -18,6 +18,13 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 
 NEEDED_COLS = ['open', 'high', 'low', 'close', 'volume']
 
+# Список фіч, які потрібні для тренування
+REQUIRED_FEATURES = [
+    'open', 'high', 'low', 'close', 'volume',
+    'ema_short', 'ema_long', 'rsi', 'adx',
+    'upper_band', 'lower_band'
+]
+
 def unify_columns(df: pd.DataFrame) -> pd.DataFrame:
     """Привести всі назви колонок до нижнього регістру для уніфікації."""
     df.columns = [c.lower() for c in df.columns]
@@ -40,9 +47,11 @@ def add_indicators(df: pd.DataFrame) -> pd.DataFrame:
         bb = ta.bbands(df['close'], length=BB_LEN)
         df['bb_upper'] = bb[f'BBU_{BB_LEN}_2.0']
         df['bb_lower'] = bb[f'BBL_{BB_LEN}_2.0']
-        macd = ta.macd(df['close'], fast=MACD_FAST, slow=MACD_SLOW, signal=MACD_SIGNAL)
-        df['macd'] = macd[f'MACD_{MACD_FAST}_{MACD_SLOW}_{MACD_SIGNAL}']
-        df['macd_signal'] = macd[f'MACDs_{MACD_FAST}_{MACD_SLOW}_{MACD_SIGNAL}']
+        # Додаємо перейменування для сумісності з тренуванням
+        df = df.rename(columns={'bb_upper': 'upper_band', 'bb_lower': 'lower_band'})
+        # Інші індикатори залишаємо для можливого подальшого використання
+        df['macd'] = ta.macd(df['close'], fast=MACD_FAST, slow=MACD_SLOW, signal=MACD_SIGNAL)[f'MACD_{MACD_FAST}_{MACD_SLOW}_{MACD_SIGNAL}']
+        df['macd_signal'] = ta.macd(df['close'], fast=MACD_FAST, slow=MACD_SLOW, signal=MACD_SIGNAL)[f'MACDs_{MACD_FAST}_{MACD_SLOW}_{MACD_SIGNAL}']
         stoch = ta.stoch(df['high'], df['low'], df['close'])
         df['stoch_k'] = stoch['STOCHk_14_3_3']
         df['stoch_d'] = stoch['STOCHd_14_3_3']
@@ -72,6 +81,12 @@ def preprocess_file(input_path: Path, output_path: Path):
         df = generate_signal(df)
         # Залишаємо тільки повні рядки (там де всі індикатори вже розраховані)
         df = df.dropna().reset_index(drop=True)
+        # Залишаємо тільки потрібні колонки для тренування
+        columns_to_save = REQUIRED_FEATURES + ['signal', 'symbol']
+        missing = [col for col in columns_to_save if col not in df.columns]
+        if missing:
+            print(f"❌  {input_path.name}: Missing columns {missing}")
+        df = df[columns_to_save]
         df.to_csv(output_path, index=False)
         print(f"✔️  {input_path.name} → {output_path.name} ({len(df)} рядків)")
     except Exception as e:
