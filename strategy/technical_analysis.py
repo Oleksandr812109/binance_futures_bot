@@ -79,6 +79,7 @@ class TechnicalAnalysis:
         tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
 
         atr = tr.rolling(window=period).mean()
+        data["atr"] = atr  # <--- додано для доступу до ATR в інших функціях
 
         plus_di = 100 * (plus_dm.rolling(window=period).mean() / atr)
         minus_di = 100 * (minus_dm.rolling(window=period).mean() / atr)
@@ -87,6 +88,18 @@ class TechnicalAnalysis:
         adx = dx.rolling(window=period).mean()
         logging.info(f"Calculated {period}-period ADX.")
         return adx
+
+    def calculate_atr(self, data: pd.DataFrame, period: int = 14) -> pd.Series:
+        high = data["high"]
+        low = data["low"]
+        close = data["close"]
+        tr1 = abs(high - low)
+        tr2 = abs(high - close.shift())
+        tr3 = abs(low - close.shift())
+        tr = pd.concat([tr1, tr2, tr3], axis=1).max(axis=1)
+        atr = tr.rolling(window=period).mean()
+        logging.info(f"Calculated {period}-period ATR.")
+        return atr
 
     def calculate_bollinger_bands(self, data: pd.DataFrame, period: int = 20, column: str = "close") -> (pd.Series, pd.Series):
         sma = self.calculate_sma(data, period, column)
@@ -102,12 +115,11 @@ class TechnicalAnalysis:
         data["ema_long"] = self.calculate_ema(data, 26)
         # RSI
         data["rsi"] = self.calculate_rsi(data, 14)
-        # ADX
+        # ADX (додає atr у data)
         data["adx"] = self.calculate_adx(data, 14)
         # Bollinger Bands
         data["upper_band"], data["lower_band"] = self.calculate_bollinger_bands(data, 20)
-
-        # Можна додати стандартні індикатори для backward compatibility
+        # Стандартні індикатори для backward compatibility
         data["sma20"] = self.calculate_sma(data, 20)
         data["ema20"] = self.calculate_ema(data, 20)
         data["rsi14"] = self.calculate_rsi(data, 14)
@@ -121,11 +133,16 @@ class TechnicalAnalysis:
         data.loc[(data["ema20"] > data["sma20"]) & (data["rsi14"] < 30), "signalflag"] = 1
         data.loc[(data["ema20"] < data["sma20"]) & (data["rsi14"] > 70), "signalflag"] = -1
 
-        # Додаємо стовпець stop_loss для коректної роботи головного циклу
+        # Додаємо стовпець Stop_Loss для коректної роботи головного циклу
         data["stop_loss"] = np.where(
             data["signalflag"] == 1, data["close"] * 0.99,
             np.where(data["signalflag"] == -1, data["close"] * 1.01, np.nan)
         )
+
+        # Додаємо volatility для ML
+        if "atr" not in data.columns:
+            data["atr"] = self.calculate_atr(data)
+        data["volatility"] = np.where(data["close"] != 0, data["atr"] / data["close"], 0)
 
         # === Діагностика NaN для головних колонок ===
         required_cols = ['ema_short', 'ema_long', 'rsi', 'adx', 'upper_band', 'lower_band']
@@ -141,7 +158,7 @@ class TechnicalAnalysis:
             logging.error(f"Missing or NaN in columns: {required_cols} for {symbol}. Skipping.")
             return None
 
-        # Додано перевірку на наявність NaN у close та stop_loss (за бажанням, можна залишити)
+        # Додано перевірку на наявність NaN у Close та Stop_Loss (за бажанням, можна залишити)
         print(data[["close", "stop_loss"]].isna().sum())  # покаже кількість NaN у кожній колонці
         print(data[data[["close", "stop_loss"]].isna().any(axis=1)])  # покаже рядки з NaN
 
